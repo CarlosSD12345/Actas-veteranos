@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actas - Liga Veteranos Vallès</title>
+<style>
+body { background-color: #0b1d15; color: white; font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+h1 { color: #2ecc71; }
+.login-box { background-color: #11291e; border: 1px solid #2ecc71; padding: 30px; border-radius: 12px; max-width: 400px; margin: 50px auto; }
+input { padding: 12px; width: 80%; margin: 10px 0; border-radius: 8px; border: 1px solid #1f4733; background: #0b1d15; color: white; font-size: 16px; }
+button { background-color: #2ecc71; color: #0b1d15; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+#panel-arbitro { display: none; margin-top: 50px; }
+</style>
+</head>
+<body>
+
+<h1>📋 Actas de Partido</h1>
+
+<!-- Pantalla de Login -->
+<div id="login-screen" class="login-box">
+    <h2>Acceso Árbitros</h2>
+    <p style="color: #a3b8af; font-size: 0.9rem;">Introduce la contraseña para rellenar el acta</p>
+    <input type="password" id="pass-arbitro" placeholder="Contraseña">
+    <br><br>
+    <button onclick="verificarAcceso()">Entrar</button>
+</div>
+
+<!-- Panel del Árbitro (Oculto al principio) -->
+<div id="panel-arbitro">
+    <h2>✅ Acceso Correcto</h2>
+    <p>Bienvenido al sistema de actas.</p>
+    <p style="color: #f39c12;">(Aquí cargaremos los partidos desde liga-pruebas en el siguiente paso)</p>
+    <br>
+    <button onclick="cerrarSesion()" style="background-color: #e74c3c; color: white;">Salir</button>
+</div>
+
+<script>
+function verificarAcceso() {
+    var pass = document.getElementById('pass-arbitro').value;
+    // Contraseña maestra para los árbitros
+    if(pass === 'arbitro2026') {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('panel-arbitro').style.display = 'block';
+    } else {
+        alert('❌ Contraseña incorrecta');
+    }
+}
+function cerrarSesion() {
+    document.getElementById('login-screen').style.display = 'block';
+    document.getElementById('panel-arbitro').style.display = 'none';
+    document.getElementById('pass-arbitro').value = '';
+}
+</script>
+
+</body>
+</html>
