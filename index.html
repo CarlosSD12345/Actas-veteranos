@@ -18,22 +18,18 @@ button { background-color: #2ecc71; color: #0b1d15; border: none; padding: 12px 
 <h1>📋 Actas de Partido</h1>
 
 <!-- Pantalla de Login -->
-<div id="login-screen" class="login-box">
-    <h2>Acceso Árbitros</h2>
-    <p style="color: #a3b8af; font-size: 0.9rem;">Introduce la contraseña para rellenar el acta</p>
-    <div style="display:flex; gap:8px; align-items:center;">
-    <input type="password" id="pass-arbitro" placeholder="Contraseña" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-    <button type="button" onclick="togglePassword()" id="btn-ver" style="background-color:#1f4733; color:#2ecc71; border:1px solid #2ecc71; padding:10px 14px; border-radius:8px; font-size:14px; cursor:pointer; white-space:nowrap;">👁️ Ver</button>
+<div class="login-box">
+  <h2>🚧 En Construcción</h2>
+  <p style="color: #f39c12; font-size: 1.3rem; font-weight: bold; margin-top: 20px;">
+    El sistema de actas estará disponible próximamente.
+  </p>
+  <p style="color: #a3b8af; font-size: 1rem; margin-top: 15px;">
+    Los árbitros podrán rellenar el acta digital desde aquí cuando esté activado.
+  </p>
+  <p style="color: #a3b8af; font-size: 0.9rem; margin-top: 20px;">
+    Mientras tanto, las actas se siguen rellenando en papel.
+  </p>
 </div>
-<br>
-<button onclick="verificarAcceso()" style="width:100%;">Entrar</button>
-</div>
-
-<!-- Panel del Árbitro (Oculto al principio) -->
-<div id="panel-arbitro">
-    <h2>✅ Acceso Correcto</h2>
-    <p>Bienvenido al sistema de actas.</p>
-    <p style="color: #f39c12; font-size: 1.5rem; font-weight: bold; margin-top: 20px;">🚧 Sección en construcción - Próximamente disponible</p>
     <br>
     <button onclick="cerrarSesion()" style="background-color: #e74c3c; color: white;">Salir</button>
 </div>
