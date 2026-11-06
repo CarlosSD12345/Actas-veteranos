@@ -50,7 +50,16 @@ function cerrarSesion() {
     document.getElementById('panel-arbitro').style.display = 'none';
     document.getElementById('pass-arbitro').value = '';
 }
-
+function volverAWebPrincipal() {
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from');
+  
+  if (from === 'valles') {
+    window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
+  } else {
+    window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
+  }
+}
 function togglePassword() {
     var input = document.getElementById('pass-arbitro');
     var btn = document.getElementById('btn-ver');
