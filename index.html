@@ -224,7 +224,7 @@
             
             if (jornada && jornada.partidos[partidoIdx]) {
                 var p = jornada.partidos[partidoIdx];
-                document.getElementById('dia').value = p.fecha || '';
+                document.getElementById('dia').value = jornada.fecha || '';
                 document.getElementById('camp').value = p.campo || '';
                 document.getElementById('hora').value = p.hora || '';
                 
