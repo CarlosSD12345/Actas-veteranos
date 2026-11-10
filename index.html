@@ -1,1 +1,486 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acta Digital - Veterans del Vallès</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #0b1d15; color: white; margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: 0 auto; background-color: #11291e; padding: 20px; border-radius: 12px; border: 2px solid #2ecc71; }
+        h1 { text-align: center; color: #2ecc71; margin-bottom: 10px; font-size: 1.5rem; }
+        .header-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #a3b8af; font-size: 0.85rem; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; }
+        .team-section { margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
+        .team-section.visitant { border-left-color: #e74c3c; }
+        .team-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 12px; color: #2ecc71; }
+        .team-section.visitant .team-title { color: #e74c3c; }
+        .player-row.header { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 8px; background-color: #1f4733; font-weight: bold; font-size: 0.85rem; text-align: center; border-radius: 6px; }
+        .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
+        .player-row input, .player-row select { padding: 8px; font-size: 0.9rem; }
+        .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
+        .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; accent-color: #2ecc71; }
+        .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .btn:hover { background-color: #27ae60; }
+        .btn-secondary { background-color: #3498db; margin-top: 10px; color: white; }
+        .observations { margin-top: 20px; }
+        .observations textarea { width: 100%; min-height: 100px; padding: 15px; border: 1px solid #2ecc71; border-radius: 8px; background-color: #0b1d15; color: white; font-size: 1rem; }
+        .legend { margin-top: 20px; padding: 15px; background-color: #1f4733; border-radius: 8px; font-size: 0.85rem; }
+        .legend h3 { margin-top: 0; color: #2ecc71; }
+        .legend ol { margin: 10px 0; padding-left: 20px; }
+        .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
+        
+        /* Sección de tarjetas */
+        .targetes-section { width: 100%; order: 4; margin-top: 8px; padding: 10px; background-color: #1f4733; border-radius: 6px; }
+        .targetes-label { display: block; font-size: 0.8rem; font-weight: bold; color: #f1c40f; margin-bottom: 8px; }
+        .targetes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+        .targeta-item { display: flex; gap: 8px; align-items: center; padding: 8px; background-color: #0b1d15; border-radius: 6px; border-left: 3px solid #f1c40f; flex-wrap: wrap; }
+        .targeta-item select, .targeta-item input { flex: 1; min-width: 80px; padding: 8px; font-size: 0.85rem; }
+        .targeta-tipus { min-width: 120px !important; font-weight: bold; }
+        .targeta-minut { max-width: 70px !important; text-align: center; }
+        .btn-add-targeta { background-color: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; width: 100%; }
+        .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
+        .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
+        
+        /* Motiu expulsión */
+        .motiu-expulsio { animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
+        
+        /* Acciones del jugador */
+        .player-actions { width: 100%; order: 5; display: flex; gap: 15px; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; }
+        .player-actions .checkbox-group { display: flex; align-items: center; gap: 8px; }
+        .player-actions .checkbox-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
+        .player-actions .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; }
+        
+        /* 📱 RESPONSIVE MÓVIL */
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .container { padding: 12px; }
+            h1 { font-size: 1.2rem; }
+            .header-info { grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+            .team-section { padding: 12px; }
+            .team-title { font-size: 1.1rem; }
+            .player-row.header { display: none; }
+            .player-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px solid #1f4733; margin-bottom: 12px; }
+            .player-row input[placeholder="DNI"] { width: 100%; order: 1; }
+            .player-row input[placeholder="NUM"] { width: 70px; order: 2; font-weight: bold; text-align: center; }
+            .player-row input[placeholder="NOM"] { flex: 1; min-width: 150px; order: 3; }
+            .targetes-section { order: 4; }
+            .targeta-item { flex-direction: column; align-items: stretch; }
+            .targeta-item select, .targeta-item input { width: 100%; min-width: auto; }
+            .player-actions { order: 5; flex-direction: column; gap: 10px; }
+            .btn { font-size: 1rem; padding: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
+        
+        <div class="header-info">
+            <div class="form-group">
+                <label>TEMPORADA:</label>
+                <input type="text" value="2026-2027" readonly>
+            </div>
+            <div class="form-group">
+                <label>JORNADA:</label>
+                <select id="jornada" onchange="cargarPartido()">
+                    <option value="">Selecciona...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>PARTIDO:</label>
+                <select id="partido" onchange="cargarDatosPartido()">
+                    <option value="">Primero selecciona jornada...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>DIA DEL PARTIT:</label>
+                <input type="text" id="dia" readonly>
+            </div>
+            <div class="form-group">
+                <label>CAMP:</label>
+                <input type="text" id="camp">
+            </div>
+            <div class="form-group">
+                <label>HORA PARTIT:</label>
+                <input type="text" id="hora">
+            </div>
+            <div class="form-group">
+                <label>R. LOCAL:</label>
+                <input type="number" id="resultatLocal" min="0" max="99">
+            </div>
+            <div class="form-group">
+                <label>R. VISITANT:</label>
+                <input type="number" id="resultatVisitant" min="0" max="99">
+            </div>
+            <div class="form-group">
+                <label>ARBITRE:</label>
+                <select id="arbitre">
+                    <option value="">Selecciona...</option>
+                </select>
+            </div>
+        </div>
 
+        <!-- Equipo Local -->
+        <div class="team-section">
+            <div class="team-title">🟢 EQUIP LOCAL</div>
+            <div class="player-row header">
+                <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+            </div>
+            <div id="jugadorsLocal"></div>
+            <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>SUPLENTS:</label>
+                <input type="text" id="suplentsLocal" placeholder="Noms dels suplents...">
+            </div>
+        </div>
+
+        <!-- Equipo Visitante -->
+        <div class="team-section visitant">
+            <div class="team-title">🔴 EQUIP VISITANT</div>
+            <div class="player-row header">
+                <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+            </div>
+            <div id="jugadorsVisitant"></div>
+            <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>SUPLENTS:</label>
+                <input type="text" id="suplentsVisitant" placeholder="Noms dels suplents...">
+            </div>
+        </div>
+
+        <div class="observations">
+            <label>OBSERVACIONS:</label>
+            <textarea id="observacions" placeholder="Incidències, lesions, expulsions..."></textarea>
+        </div>
+
+        <div class="legend">
+            <h3>MOTIUS DE TARGETA:</h3>
+            <ol>
+                <li>Subjectar</li><li>Empentar</li><li>Mans</li><li>Traveta</li><li>Protestar</li>
+                <li>Desconsiderar</li><li>Distancia</li><li>Perdre temps</li><li>Reincidir faltes</li>
+            </ol>
+        </div>
+
+        <button class="btn" onclick="guardarActa()">💾 GUARDAR ACTA</button>
+        <button class="btn-volver" onclick="volverAWebPrincipal()">← Volver a la web principal</button>
+    </div>
+
+    <script>
+        var calendario = [];
+        var listaArbitros = ["Duran", "Molina", "Humanes", "Portoles", "Utrera", "Julio", "Congost", "Fabregas", "Puibert", "Salva", "Lleixa", "Edu", "Exposito"];
+
+        window.onload = function() {
+            carregarCalendari();
+            carregarArbitres();
+            inicialitzarFormulari();
+        };
+
+        function carregarCalendari() {
+            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
+            .then(r => r.json())
+            .then(data => {
+                calendario = data;
+                omplirJornades();
+            })
+            .catch(function(error) {
+                console.error('Error cargando calendario:', error);
+                alert('Error al cargar el calendario. Recarga la página.');
+            });
+        }
+
+        function carregarArbitres() {
+            var select = document.getElementById('arbitre');
+            listaArbitros.forEach(function(arb) {
+                var opt = document.createElement('option');
+                opt.value = arb;
+                opt.text = arb;
+                select.appendChild(opt);
+            });
+        }
+
+        function omplirJornades() {
+            var select = document.getElementById('jornada');
+            calendario.forEach(function(j) {
+                var opt = document.createElement('option');
+                opt.value = j.jornada;
+                opt.text = 'Jornada ' + j.jornada;
+                select.appendChild(opt);
+            });
+        }
+
+        function cargarPartido() {
+            var jornadaNum = parseInt(document.getElementById('jornada').value);
+            var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
+            var selectPartido = document.getElementById('partido');
+            selectPartido.innerHTML = '<option value="">Selecciona...</option>';
+            document.getElementById('dia').value = '';
+            document.getElementById('camp').value = '';
+            document.getElementById('hora').value = '';
+            document.getElementById('jugadorsLocal').innerHTML = '';
+            document.getElementById('jugadorsVisitant').innerHTML = '';
+            
+            if (jornada) {
+                jornada.partidos.forEach(function(p, idx) {
+                    var opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.text = p.local + ' vs ' + p.visitante;
+                    selectPartido.appendChild(opt);
+                });
+            }
+        }
+
+        function cargarDatosPartido() {
+            var jornadaNum = parseInt(document.getElementById('jornada').value);
+            var partidoIdx = parseInt(document.getElementById('partido').value);
+            var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
+            
+            if (jornada && !isNaN(partidoIdx) && jornada.partidos[partidoIdx]) {
+                var p = jornada.partidos[partidoIdx];
+                document.getElementById('dia').value = jornada.fecha || '';
+                document.getElementById('camp').value = p.campo || '';
+                document.getElementById('hora').value = p.hora || '';
+                
+                carregarJugadorsEquip(p.local, 'local');
+                carregarJugadorsEquip(p.visitante, 'visitant');
+            }
+        }
+
+        function carregarJugadorsEquip(equip, tipus) {
+            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
+            .then(r => r.json())
+            .then(data => {
+                var jugadors = data[equip] || [];
+                var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+                container.innerHTML = '';
+                
+                jugadors.forEach(function(j) {
+                    afegirFilaJugador(tipus, j.dorsal, j.nombre);
+                });
+            })
+            .catch(function() {
+                // Si no hay datos, dejar vacío
+            });
+        }
+
+        function afegirJugador(tipus) {
+            afegirFilaJugador(tipus, '', '');
+        }
+
+        function afegirFilaJugador(tipus, dorsal, nom) {
+            var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+            var row = document.createElement('div');
+            row.className = 'player-row';
+            row.dataset.tipus = tipus;
+            
+            row.innerHTML = `
+                <input type="text" placeholder="DNI" class="player-dni">
+                <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
+                <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
+                
+                <div class="targetes-section">
+                    <label class="targetes-label">🟨 AMONESTACIONS:</label>
+                    <div class="targetes-list"></div>
+                    <button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button>
+                </div>
+                
+                <div class="player-actions">
+                    <div class="checkbox-group">
+                        <label>⚽ Gol:</label>
+                        <input type="checkbox" class="player-gol">
+                    </div>
+                    <div class="checkbox-group">
+                        <label>❌ No continua:</label>
+                        <input type="checkbox" class="player-no-continua" onchange="toggleNoContinua(this)">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(row);
+        }
+
+        function afegirTargeta(btn) {
+            var targetesList = btn.previousElementSibling;
+            var targeta = document.createElement('div');
+            targeta.className = 'targeta-item';
+            
+            targeta.innerHTML = `
+                <select class="targeta-tipus" onchange="canviarTipusTargeta(this)">
+                    <option value="groga">🟡 Groga</option>
+                    <option value="roja">🔴 Roja directa</option>
+                    <option value="segona-groga">🟡🟡 Segona groga</option>
+                </select>
+                <input type="number" placeholder="Min'" class="targeta-minut" min="0" max="120">
+                <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
+                
+                <div class="motiu-expulsio" style="display:none; margin-top:8px; padding:10px; background-color:#3d1f1f; border-radius:6px; border-left:3px solid #e74c3c; width:100%;">
+                    <label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label>
+                    <select class="targeta-motiu-expulsio">
+                        <option value="">Selecciona el motiu...</option>
+                        <option value="1">1-Subjectar</option>
+                        <option value="2">2-Empentar</option>
+                        <option value="3">3-Mans</option>
+                        <option value="4">4-Traveta</option>
+                        <option value="5">5-Protestar</option>
+                        <option value="6">6-Desconsiderar</option>
+                        <option value="7">7-Distancia</option>
+                        <option value="8">8-Perdre temps</option>
+                        <option value="9">9-Reincidir faltes</option>
+                    </select>
+                </div>
+            `;
+            
+            targetesList.appendChild(targeta);
+        }
+
+        function canviarTipusTargeta(select) {
+            var targeta = select.closest('.targeta-item');
+            var row = targeta.closest('.player-row');
+            var noContinuaCheckbox = row.querySelector('.player-no-continua');
+            var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
+            
+            if (select.value === 'roja') {
+                // SOLO roja directa pide motivo obligatorio
+                noContinuaCheckbox.checked = true;
+                noContinuaCheckbox.disabled = true;
+                targeta.style.borderLeft = '3px solid #e74c3c';
+                motiuExpulsio.style.display = 'block';
+                
+                var btnAdd = row.querySelector('.btn-add-targeta');
+                btnAdd.disabled = true;
+                btnAdd.textContent = 'Jugador expulsat';
+                
+                setTimeout(function() {
+                    motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                noContinuaCheckbox.checked = false;
+                noContinuaCheckbox.disabled = false;
+                targeta.style.borderLeft = '3px solid #f1c40f';
+                motiuExpulsio.style.display = 'none';
+                motiuExpulsio.querySelector('select').value = '';
+                
+                var btnAdd = row.querySelector('.btn-add-targeta');
+                btnAdd.disabled = false;
+                btnAdd.textContent = '+ Afegir targeta';
+            }
+        }
+
+        function eliminarTargeta(btn) {
+            var targeta = btn.closest('.targeta-item');
+            var row = targeta.closest('.player-row');
+            targeta.remove();
+            
+            var targetesRoges = row.querySelectorAll('.targeta-tipus[value="roja"]');
+            if (targetesRoges.length === 0) {
+                var noContinuaCheckbox = row.querySelector('.player-no-continua');
+                noContinuaCheckbox.checked = false;
+                noContinuaCheckbox.disabled = false;
+                
+                var btnAdd = row.querySelector('.btn-add-targeta');
+                btnAdd.disabled = false;
+                btnAdd.textContent = '+ Afegir targeta';
+            }
+        }
+
+        function toggleNoContinua(checkbox) {
+            var row = checkbox.closest('.player-row');
+            row.style.opacity = checkbox.checked ? '0.6' : '1';
+        }
+
+        function inicialitzarFormulari() {
+            for (var i = 0; i < 3; i++) {
+                afegirFilaJugador('local');
+                afegirFilaJugador('visitant');
+            }
+        }
+
+        function guardarActa() {
+            // Validar que todas las rojas directas tengan motivo
+            var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
+            var errorMotiu = false;
+            
+            targetesRoges.forEach(function(select) {
+                var targeta = select.closest('.targeta-item');
+                var selectMotiu = targeta.querySelector('.targeta-motiu-expulsio');
+                if (!selectMotiu.value) {
+                    errorMotiu = true;
+                    targeta.style.animation = 'shake 0.5s';
+                }
+            });
+            
+            if (errorMotiu) {
+                alert('⚠️ Totes les targetes roges directes han de tenir un motiu d\'expulsió!');
+                return;
+            }
+            
+            if (!confirm('¿Guardar esta acta? (Ahora mismo es una simulación)')) return;
+            
+            var acta = {
+                temporada: '2026-2027',
+                jornada: document.getElementById('jornada').value,
+                partido: document.getElementById('partido').value,
+                dia: document.getElementById('dia').value,
+                camp: document.getElementById('camp').value,
+                hora: document.getElementById('hora').value,
+                resultatLocal: document.getElementById('resultatLocal').value,
+                resultatVisitant: document.getElementById('resultatVisitant').value,
+                arbitre: document.getElementById('arbitre').value,
+                jugadorsLocal: recollirJugadors('local'),
+                jugadorsVisitant: recollirJugadors('visitant'),
+                suplentsLocal: document.getElementById('suplentsLocal').value,
+                suplentsVisitant: document.getElementById('suplentsVisitant').value,
+                observacions: document.getElementById('observacions').value,
+                dataCreacio: new Date().toISOString()
+            };
+            
+            alert('✅ Acta recopilada correctamente (Simulación).\n\nEn el próximo paso conectaremos esto con GitHub para guardar el archivo actas.json de verdad.');
+            console.log("Datos del acta a guardar:", acta);
+        }
+
+        function recollirJugadors(tipus) {
+            var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
+            var jugadors = [];
+            
+            rows.forEach(function(row) {
+                var dni = row.querySelector('.player-dni').value;
+                var dorsal = row.querySelector('.player-dorsal').value;
+                var nom = row.querySelector('.player-nom').value;
+                var gol = row.querySelector('.player-gol').checked;
+                var noContinua = row.querySelector('.player-no-continua').checked;
+                
+                var targetes = [];
+                row.querySelectorAll('.targeta-item').forEach(function(t) {
+                    targetes.push({
+                        tipus: t.querySelector('.targeta-tipus').value,
+                        minut: t.querySelector('.targeta-minut').value,
+                        motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
+                    });
+                });
+                
+                jugadors.push({
+                    dni: dni, dorsal: dorsal, nom: nom,
+                    gol: gol, noContinua: noContinua,
+                    targetes: targetes
+                });
+            });
+            
+            return jugadors;
+        }
+
+        function volverAWebPrincipal() {
+            var params = new URLSearchParams(window.location.search);
+            var from = params.get('from');
+            if (from === 'valles') {
+                window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
+            } else {
+                window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
+            }
+        }
+    </script>
+</body>
+</html>
