@@ -5,36 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acta Digital - Veterans del Vallès</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #0b1d15; color: white; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background-color: #11291e; padding: 30px; border-radius: 12px; border: 2px solid #2ecc71; }
-        h1 { text-align: center; color: #2ecc71; margin-bottom: 10px; }
-        .header-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; padding: 20px; background-color: #173827; border-radius: 8px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #a3b8af; font-size: 0.9rem; }
-        input, select { width: 100%; padding: 10px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; box-sizing: border-box; }
-        .team-section { margin-bottom: 30px; padding: 20px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
-        .team-section.visitant { border-left-color: #e74c3c; }
-        .team-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; color: #2ecc71; }
-        .team-section.visitant .team-title { color: #e74c3c; }
-        .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 100px 70px 100px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 8px; background-color: #0b1d15; border-radius: 6px; }
-        .player-row.header { background-color: #1f4733; font-weight: bold; font-size: 0.85rem; text-align: center; }
-        .player-row input, .player-row select { padding: 6px; font-size: 0.9rem; }
-        .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
-        .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-        .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
-        .btn:hover { background-color: #27ae60; }
-        .btn-secondary { background-color: #3498db; margin-top: 10px; }
-        .observations { margin-top: 20px; }
-        .observations textarea { width: 100%; min-height: 100px; padding: 15px; border: 1px solid #2ecc71; border-radius: 8px; background-color: #0b1d15; color: white; font-size: 1rem; box-sizing: border-box; }
-        .legend { margin-top: 20px; padding: 15px; background-color: #1f4733; border-radius: 8px; font-size: 0.85rem; }
-        .legend h3 { margin-top: 0; color: #2ecc71; }
-        .legend ol { margin: 10px 0; padding-left: 20px; }
-        .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
-        @media (max-width: 768px) {
-            .player-row { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .player-row > * { grid-column: span 1; }
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: #0b1d15; color: white; margin: 0; padding: 10px; }
+    .container { max-width: 900px; margin: 0 auto; background-color: #11291e; padding: 20px; border-radius: 12px; border: 2px solid #2ecc71; }
+    h1 { text-align: center; color: #2ecc71; margin-bottom: 10px; font-size: 1.5rem; }
+    .header-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; color: #a3b8af; font-size: 0.85rem; }
+    input, select, textarea { width: 100%; padding: 12px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; }
+    .team-section { margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
+    .team-section.visitant { border-left-color: #e74c3c; }
+    .team-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 12px; color: #2ecc71; }
+    .team-section.visitant .team-title { color: #e74c3c; }
+    
+    /* Cabecera de la tabla (solo visible en escritorio) */
+    .player-row.header { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 8px; background-color: #1f4733; font-weight: bold; font-size: 0.85rem; text-align: center; border-radius: 6px; }
+    
+    /* Fila de jugador en escritorio */
+    .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
+    .player-row input, .player-row select { padding: 8px; font-size: 0.9rem; }
+    .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
+    .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; accent-color: #2ecc71; }
+    
+    .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+    .btn:hover { background-color: #27ae60; }
+    .btn-secondary { background-color: #3498db; margin-top: 10px; }
+    .observations { margin-top: 20px; }
+    .observations textarea { width: 100%; min-height: 100px; padding: 15px; border: 1px solid #2ecc71; border-radius: 8px; background-color: #0b1d15; color: white; font-size: 1rem; }
+    .legend { margin-top: 20px; padding: 15px; background-color: #1f4733; border-radius: 8px; font-size: 0.85rem; }
+    .legend h3 { margin-top: 0; color: #2ecc71; }
+    .legend ol { margin: 10px 0; padding-left: 20px; }
+    .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
+    
+    /* 📱 RESPONSIVE MÓVIL */
+    @media (max-width: 768px) {
+        body { padding: 8px; }
+        .container { padding: 12px; }
+        h1 { font-size: 1.2rem; }
+        .header-info { grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+        .team-section { padding: 12px; }
+        .team-title { font-size: 1.1rem; }
+        
+        /* Ocultar cabecera de tabla en móvil */
+        .player-row.header { display: none; }
+        
+        /* Cada jugador se convierte en una TARJETA en móvil */
+        .player-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            padding: 12px; 
+            background-color: #0b1d15; 
+            border-radius: 8px; 
+            border: 1px solid #1f4733;
+            margin-bottom: 12px;
         }
-    </style>
+        
+        /* DNI: fila completa */
+        .player-row input[placeholder="DNI"] { 
+            width: 100%; 
+            order: 1; 
+        }
+        
+        /* Dorsal: pequeño a la izquierda */
+        .player-row input[placeholder="NUM"] { 
+            width: 70px; 
+            order: 2; 
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Nombre: ocupa el resto de la fila */
+        .player-row input[placeholder="NOM"] { 
+            flex: 1; 
+            min-width: 150px; 
+            order: 3; 
+        }
+        
+        /* Min entrada */
+        .player-row input[placeholder="Min"] { 
+            width: 70px; 
+            order: 4; 
+        }
+        
+        /* Motiu selects */
+        .player-row select { 
+            flex: 1; 
+            min-width: 120px; 
+            order: 5; 
+            padding: 10px;
+            font-size: 0.85rem;
+        }
+        
+        /* Checkbox de goles: más grande y visible */
+        .checkbox-group { 
+            order: 6; 
+            width: 100%; 
+            justify-content: flex-end; 
+            padding: 5px 0;
+        }
+        .checkbox-group input[type="checkbox"] { 
+            width: 30px; 
+            height: 30px; 
+        }
+        .checkbox-group::before {
+            content: "⚽ Gol:";
+            font-weight: bold;
+            color: #2ecc71;
+            margin-right: 8px;
+        }
+        
+        .btn { font-size: 1rem; padding: 14px; }
+    }
+</style>
 </head>
 <body>
     <div class="container">
