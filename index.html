@@ -169,16 +169,17 @@
         };
 
         function carregarCalendari() {
-            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/index.html')
-            .then(r => r.text())
-            .then(html => {
-                var match = html.match(/var calendario = (\[[\s\S]*?\]);/);
-                if (match) {
-                    calendario = JSON.parse(match[1]);
-                    omplirJornades();
-                }
-            });
-        }
+    fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+        calendario = data;
+        omplirJornades();
+    })
+    .catch(function(error) {
+        console.error('Error cargando calendario:', error);
+        alert('Error al cargar el calendario. Recarga la página.');
+    });
+}
 
         function carregarArbitres() {
             var select = document.getElementById('arbitre');
