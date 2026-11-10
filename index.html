@@ -1,77 +1,360 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actas - Liga Veteranos Vallès</title>
-<style>
-body { background-color: #0b1d15; color: white; font-family: Arial, sans-serif; padding: 20px; text-align: center; }
-h1 { color: #2ecc71; }
-.login-box { background-color: #11291e; border: 1px solid #2ecc71; padding: 30px; border-radius: 12px; max-width: 400px; margin: 50px auto; }
-input { padding: 12px; width: 80%; margin: 10px 0; border-radius: 8px; border: 1px solid #1f4733; background: #0b1d15; color: white; font-size: 16px; }
-button { background-color: #2ecc71; color: #0b1d15; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
-#panel-arbitro { display: none; margin-top: 50px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acta Digital - Veterans del Vallès</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #0b1d15; color: white; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background-color: #11291e; padding: 30px; border-radius: 12px; border: 2px solid #2ecc71; }
+        h1 { text-align: center; color: #2ecc71; margin-bottom: 10px; }
+        .header-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; padding: 20px; background-color: #173827; border-radius: 8px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #a3b8af; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; box-sizing: border-box; }
+        .team-section { margin-bottom: 30px; padding: 20px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
+        .team-section.visitant { border-left-color: #e74c3c; }
+        .team-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; color: #2ecc71; }
+        .team-section.visitant .team-title { color: #e74c3c; }
+        .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 100px 70px 100px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 8px; background-color: #0b1d15; border-radius: 6px; }
+        .player-row.header { background-color: #1f4733; font-weight: bold; font-size: 0.85rem; text-align: center; }
+        .player-row input, .player-row select { padding: 6px; font-size: 0.9rem; }
+        .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
+        .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+        .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .btn:hover { background-color: #27ae60; }
+        .btn-secondary { background-color: #3498db; margin-top: 10px; }
+        .observations { margin-top: 20px; }
+        .observations textarea { width: 100%; min-height: 100px; padding: 15px; border: 1px solid #2ecc71; border-radius: 8px; background-color: #0b1d15; color: white; font-size: 1rem; box-sizing: border-box; }
+        .legend { margin-top: 20px; padding: 15px; background-color: #1f4733; border-radius: 8px; font-size: 0.85rem; }
+        .legend h3 { margin-top: 0; color: #2ecc71; }
+        .legend ol { margin: 10px 0; padding-left: 20px; }
+        .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
+        @media (max-width: 768px) {
+            .player-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .player-row > * { grid-column: span 1; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
+        
+        <!-- Datos del partido -->
+        <div class="header-info">
+            <div class="form-group">
+                <label>TEMPORADA:</label>
+                <input type="text" value="2026-2027" readonly>
+            </div>
+            <div class="form-group">
+                <label>JORNADA:</label>
+                <select id="jornada" onchange="cargarPartido()">
+                    <option value="">Selecciona...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>PARTIDO:</label>
+                <select id="partido" onchange="cargarDatosPartido()">
+                    <option value="">Primero selecciona jornada...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>DIA DEL PARTIT:</label>
+                <input type="text" id="dia" readonly>
+            </div>
+            <div class="form-group">
+                <label>CAMP:</label>
+                <input type="text" id="camp">
+            </div>
+            <div class="form-group">
+                <label>HORA PARTIT:</label>
+                <input type="text" id="hora">
+            </div>
+            <div class="form-group">
+                <label>R. LOCAL:</label>
+                <input type="number" id="resultatLocal" min="0" max="99">
+            </div>
+            <div class="form-group">
+                <label>R. VISITANT:</label>
+                <input type="number" id="resultatVisitant" min="0" max="99">
+            </div>
+            <div class="form-group">
+                <label>ARBITRE:</label>
+                <select id="arbitre">
+                    <option value="">Selecciona...</option>
+                </select>
+            </div>
+        </div>
 
-<h1>📋 Actas de Partido</h1>
+        <!-- Equipo Local -->
+        <div class="team-section">
+            <div class="team-title">🟢 EQUIP LOCAL</div>
+            <div class="player-row header">
+                <div>DNI</div>
+                <div>NUM</div>
+                <div>NOM</div>
+                <div>Min</div>
+                <div>Motiu</div>
+                <div>Min</div>
+                <div>Motiu</div>
+                <div>Gols</div>
+            </div>
+            <div id="jugadorsLocal"></div>
+            <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>SUPLENTS:</label>
+                <input type="text" id="suplentsLocal" placeholder="Noms dels suplents...">
+            </div>
+        </div>
 
-<!-- Pantalla de Login -->
-<div class="login-box">
-  <h2>🚧 En Construcción</h2>
-  <p style="color: #f39c12; font-size: 1.3rem; font-weight: bold; margin-top: 20px;">
-    El sistema de actas estará disponible próximamente.
-  </p>
-  <p style="color: #a3b8af; font-size: 1rem; margin-top: 15px;">
-    Los árbitros podrán rellenar el acta digital desde aquí cuando esté activado.
-  </p>
-  <p style="color: #a3b8af; font-size: 0.9rem; margin-top: 20px;">
-    Mientras tanto, las actas se siguen rellenando en papel.
-  </p>
-</div>
-    <br>
-    <button onclick="volverAWebPrincipal()" style="background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer;">← Volver a la web principal</button>
-</div>
+        <!-- Equipo Visitante -->
+        <div class="team-section visitant">
+            <div class="team-title">🔴 EQUIP VISITANT</div>
+            <div class="player-row header">
+                <div>DNI</div>
+                <div>NUM</div>
+                <div>NOM</div>
+                <div>Min</div>
+                <div>Motiu</div>
+                <div>Min</div>
+                <div>Motiu</div>
+                <div>Gols</div>
+            </div>
+            <div id="jugadorsVisitant"></div>
+            <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>SUPLENTS:</label>
+                <input type="text" id="suplentsVisitant" placeholder="Noms dels suplents...">
+            </div>
+        </div>
 
-<script>
-function verificarAcceso() {
-    var pass = document.getElementById('pass-arbitro').value;
-    // Contraseña maestra para los árbitros
-    if(pass === 'arbitro2026') {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('panel-arbitro').style.display = 'block';
-    } else {
-        alert('❌ Contraseña incorrecta');
-    }
-}
-function cerrarSesion() {
-    document.getElementById('login-screen').style.display = 'block';
-    document.getElementById('panel-arbitro').style.display = 'none';
-    document.getElementById('pass-arbitro').value = '';
-}
-function volverAWebPrincipal() {
-  var params = new URLSearchParams(window.location.search);
-  var from = params.get('from');
-  
-  if (from === 'valles') {
-    window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
-  } else {
-    window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
-  }
-}
-function togglePassword() {
-    var input = document.getElementById('pass-arbitro');
-    var btn = document.getElementById('btn-ver');
-    if (input.type === 'password') {
-        input.type = 'text';
-        btn.textContent = '🙈 Ocultar';
-    } else {
-        input.type = 'password';
-        btn.textContent = '👁️ Ver';
-    }
-}
-</script>
+        <!-- Observaciones -->
+        <div class="observations">
+            <label>OBSERVACIONS:</label>
+            <textarea id="observacions" placeholder="Incidències, lesions, expulsions..."></textarea>
+        </div>
 
+        <!-- Leyenda -->
+        <div class="legend">
+            <h3>MOTIUS DE TARGETA:</h3>
+            <ol>
+                <li>Subjectar</li>
+                <li>Empentar</li>
+                <li>Mans</li>
+                <li>Traveta</li>
+                <li>Protestar</li>
+                <li>Desconsiderar</li>
+                <li>Distancia</li>
+                <li>Perdre temps</li>
+                <li>Reincidir faltes</li>
+            </ol>
+        </div>
+
+        <!-- Botón guardar -->
+        <button class="btn" onclick="guardarActa()">💾 GUARDAR ACTA (Simulación)</button>
+        
+        <!-- Botón Volver -->
+        <button class="btn-volver" onclick="volverAWebPrincipal()">← Volver a la web principal</button>
+    </div>
+
+    <script>
+        var calendario = [];
+        var actasJugadores = {};
+        var listaArbitros = ["Duran", "Molina", "Humanes", "Portoles", "Utrera", "Julio", "Congost", "Fabregas", "Puibert", "Salva", "Lleixa", "Edu", "Exposito"];
+
+        window.onload = function() {
+            carregarCalendari();
+            carregarArbitres();
+            inicialitzarFormulari();
+        };
+
+        function carregarCalendari() {
+            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/index.html')
+            .then(r => r.text())
+            .then(html => {
+                var match = html.match(/var calendario = (\[[\s\S]*?\]);/);
+                if (match) {
+                    calendario = JSON.parse(match[1]);
+                    omplirJornades();
+                }
+            });
+        }
+
+        function carregarArbitres() {
+            var select = document.getElementById('arbitre');
+            listaArbitros.forEach(function(arb) {
+                var opt = document.createElement('option');
+                opt.value = arb;
+                opt.text = arb;
+                select.appendChild(opt);
+            });
+        }
+
+        function omplirJornades() {
+            var select = document.getElementById('jornada');
+            calendario.forEach(function(j) {
+                var opt = document.createElement('option');
+                opt.value = j.jornada;
+                opt.text = 'Jornada ' + j.jornada;
+                select.appendChild(opt);
+            });
+        }
+
+        function cargarPartido() {
+            var jornadaNum = parseInt(document.getElementById('jornada').value);
+            var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
+            var selectPartido = document.getElementById('partido');
+            selectPartido.innerHTML = '<option value="">Selecciona...</option>';
+            
+            if (jornada) {
+                jornada.partidos.forEach(function(p, idx) {
+                    var opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.text = p.local + ' vs ' + p.visitante;
+                    selectPartido.appendChild(opt);
+                });
+            }
+        }
+
+        function cargarDatosPartido() {
+            var jornadaNum = parseInt(document.getElementById('jornada').value);
+            var partidoIdx = parseInt(document.getElementById('partido').value);
+            var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
+            
+            if (jornada && jornada.partidos[partidoIdx]) {
+                var p = jornada.partidos[partidoIdx];
+                document.getElementById('dia').value = p.fecha || '';
+                document.getElementById('camp').value = p.campo || '';
+                document.getElementById('hora').value = p.hora || '';
+                
+                carregarJugadorsEquip(p.local, 'local');
+                carregarJugadorsEquip(p.visitante, 'visitant');
+            }
+        }
+
+        function carregarJugadorsEquip(equip, tipus) {
+            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json')
+            .then(r => r.json())
+            .then(data => {
+                var jugadors = data[equip] || [];
+                var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+                container.innerHTML = '';
+                
+                jugadors.forEach(function(j) {
+                    afegirFilaJugador(tipus, j.dorsal, j.nombre);
+                });
+            })
+            .catch(function() {
+                // Si no hay datos, dejar vacío
+            });
+        }
+
+        function afegirJugador(tipus) {
+            afegirFilaJugador(tipus, '', '');
+        }
+
+        function afegirFilaJugador(tipus, dorsal, nom) {
+            var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+            var row = document.createElement('div');
+            row.className = 'player-row';
+            
+            row.innerHTML = `
+                <input type="text" placeholder="DNI" style="font-size:0.8rem;">
+                <input type="number" placeholder="NUM" value="${dorsal || ''}">
+                <input type="text" placeholder="NOM" value="${nom || ''}">
+                <input type="text" placeholder="Min" style="font-size:0.8rem;">
+                <select style="font-size:0.8rem;">
+                    <option value="">-</option>
+                    <option value="1">1-Subjectar</option>
+                    <option value="2">2-Empentar</option>
+                    <option value="3">3-Mans</option>
+                    <option value="4">4-Traveta</option>
+                    <option value="5">5-Protestar</option>
+                    <option value="6">6-Desconsiderar</option>
+                    <option value="7">7-Distancia</option>
+                    <option value="8">8-Perdre temps</option>
+                    <option value="9">9-Reincidir</option>
+                </select>
+                <input type="text" placeholder="Min" style="font-size:0.8rem;">
+                <select style="font-size:0.8rem;">
+                    <option value="">-</option>
+                    <option value="1">1-Subjectar</option>
+                    <option value="2">2-Empentar</option>
+                    <option value="3">3-Mans</option>
+                    <option value="4">4-Traveta</option>
+                    <option value="5">5-Protestar</option>
+                    <option value="6">6-Desconsiderar</option>
+                    <option value="7">7-Distancia</option>
+                    <option value="8">8-Perdre temps</option>
+                    <option value="9">9-Reincidir</option>
+                </select>
+                <div class="checkbox-group">
+                    <input type="checkbox" title="Gol">
+                </div>
+            `;
+            container.appendChild(row);
+        }
+
+        function inicialitzarFormulari() {
+            for (var i = 0; i < 3; i++) {
+                afegirFilaJugador('local');
+                afegirFilaJugador('visitant');
+            }
+        }
+
+        function guardarActa() {
+            if (!confirm('¿Guardar esta acta? (Ahora mismo es una simulación, no se guarda en GitHub aún)')) return;
+            
+            var acta = {
+                temporada: '2026-2027',
+                jornada: document.getElementById('jornada').value,
+                partido: document.getElementById('partido').value,
+                dia: document.getElementById('dia').value,
+                camp: document.getElementById('camp').value,
+                hora: document.getElementById('hora').value,
+                resultatLocal: document.getElementById('resultatLocal').value,
+                resultatVisitant: document.getElementById('resultatVisitant').value,
+                arbitre: document.getElementById('arbitre').value,
+                jugadorsLocal: recollirJugadors('local'),
+                jugadorsVisitant: recollirJugadors('visitant'),
+                suplentsLocal: document.getElementById('suplentsLocal').value,
+                suplentsVisitant: document.getElementById('suplentsVisitant').value,
+                observacions: document.getElementById('observacions').value,
+                dataCreacio: new Date().toISOString()
+            };
+            
+            alert('✅ Acta recopilada correctamente (Simulación).\n\nEn el próximo paso conectaremos esto con GitHub para guardar el archivo actas.json de verdad.');
+            console.log("Datos del acta a guardar:", acta);
+        }
+
+        function recollirJugadors(tipus) {
+            var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
+            var jugadors = [];
+            rows.forEach(function(row) {
+                var inputs = row.querySelectorAll('input, select');
+                jugadors.push({
+                    dni: inputs[0].value,
+                    dorsal: inputs[1].value,
+                    nom: inputs[2].value,
+                    min1: inputs[3].value,
+                    motiu1: inputs[4].value,
+                    min2: inputs[5].value,
+                    motiu2: inputs[6].value,
+                    gol: inputs[7].checked
+                });
+            });
+            return jugadors;
+        }
+
+        function volverAWebPrincipal() {
+            var params = new URLSearchParams(window.location.search);
+            var from = params.get('from');
+            if (from === 'valles') {
+                window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
+            } else {
+                window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
+            }
+        }
+    </script>
 </body>
 </html>
