@@ -19,8 +19,6 @@
         .team-section.visitant .team-title { color: #e74c3c; }
         .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
         .player-row input, .player-row select { padding: 8px; font-size: 0.9rem; }
-        .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
-        .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; accent-color: #2ecc71; }
         .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
         .btn:hover { background-color: #27ae60; }
         .btn-secondary { background-color: #3498db; margin-top: 10px; color: white; }
@@ -51,17 +49,27 @@
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
+        /* Motiu tarjeta (desplegable) */
+        .motiu-targeta { margin-top: 5px; width: 100%; }
+        .motiu-targeta select { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
+        
         /* Motiu expulsión (solo roja directa - texto libre) */
         .motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
         
-        /* Acciones del jugador */
-        .player-actions { width: 100%; order: 5; display: flex; gap: 15px; justify-content: space-around; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; }
-        .player-actions .checkbox-group { display: flex; align-items: center; gap: 8px; }
-        .player-actions .checkbox-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
-        .player-actions .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; }
+        /* Acciones del jugador (Gols + Titular/Suplent) */
+        .player-actions { width: 100%; order: 5; display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; flex-wrap: wrap; }
+        .player-actions .gol-group { display: flex; align-items: center; gap: 8px; }
+        .player-actions .gol-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
         .player-actions .gol-input { width: 60px; text-align: center; padding: 8px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; font-weight: bold; }
+        
+        /* Toggle Titular/Suplent */
+        .toggle-titular-suplent { display: flex; border-radius: 8px; overflow: hidden; border: 2px solid #2ecc71; }
+        .toggle-titular-suplent button { flex: 1; padding: 8px 16px; border: none; background-color: #0b1d15; color: #a3b8af; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+        .toggle-titular-suplent button.active-titular { background-color: #2ecc71; color: #0b1d15; }
+        .toggle-titular-suplent button.active-suplent { background-color: #3498db; color: white; }
+        .toggle-titular-suplent button:hover { opacity: 0.8; }
         
         /* Foto del jugador */
         .player-foto { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #2ecc71; flex-shrink: 0; }
@@ -353,18 +361,32 @@
                 </div>
                 
                 <div class="player-actions">
-                    <div class="checkbox-group">
+                    <div class="gol-group">
                         <label>⚽ Gols:</label>
                         <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
                     </div>
-                    <div class="checkbox-group">
-                        <label>❌ No continua:</label>
-                        <input type="checkbox" class="player-no-continua" onchange="toggleNoContinua(this)">
+                    <div class="toggle-titular-suplent">
+                        <button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button>
+                        <button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button>
                     </div>
                 </div>
             `;
             
             container.appendChild(row);
+        }
+
+        function marcarTitular(btn) {
+            var row = btn.closest('.player-row');
+            row.querySelector('.btn-titular').classList.add('active-titular');
+            row.querySelector('.btn-suplent').classList.remove('active-suplent');
+            row.dataset.condicio = 'titular';
+        }
+
+        function marcarSuplent(btn) {
+            var row = btn.closest('.player-row');
+            row.querySelector('.btn-suplent').classList.add('active-suplent');
+            row.querySelector('.btn-titular').classList.remove('active-titular');
+            row.dataset.condicio = 'suplent';
         }
 
         function afegirTargeta(btn) {
@@ -408,12 +430,10 @@
         function canviarTipusTargeta(select) {
             var targeta = select.closest('.targeta-item');
             var row = targeta.closest('.player-row');
-            var noContinuaCheckbox = row.querySelector('.player-no-continua');
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
             
             if (select.value === 'roja') {
-                noContinuaCheckbox.checked = true;
-                noContinuaCheckbox.disabled = true;
+                // Roja directa: pide motivo obligatorio en texto libre
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'block';
                 
@@ -425,8 +445,7 @@
                     motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
             } else if (select.value === 'segona-groga') {
-                noContinuaCheckbox.checked = true;
-                noContinuaCheckbox.disabled = true;
+                // Doble amarilla: NO pide motivo extra
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'none';
                 
@@ -434,8 +453,7 @@
                 btnAdd.disabled = true;
                 btnAdd.textContent = 'Jugador expulsat';
             } else {
-                noContinuaCheckbox.checked = false;
-                noContinuaCheckbox.disabled = false;
+                // Amarilla normal
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
                 motiuExpulsio.querySelector('input').value = '';
@@ -453,19 +471,10 @@
             
             var targetesRoges = row.querySelectorAll('.targeta-tipus[value="roja"]');
             if (targetesRoges.length === 0) {
-                var noContinuaCheckbox = row.querySelector('.player-no-continua');
-                noContinuaCheckbox.checked = false;
-                noContinuaCheckbox.disabled = false;
-                
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = false;
                 btnAdd.textContent = '+ Afegir targeta';
             }
-        }
-
-        function toggleNoContinua(checkbox) {
-            var row = checkbox.closest('.player-row');
-            row.style.opacity = checkbox.checked ? '0.6' : '1';
         }
 
         function inicialitzarFormulari() {
@@ -476,6 +485,7 @@
         }
 
         function guardarActa() {
+            // Validar que todas las rojas directas tengan motivo
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
             var errorMotiu = false;
             
@@ -527,7 +537,10 @@
                 var dorsal = row.querySelector('.player-dorsal').value;
                 var nom = row.querySelector('.player-nom').value;
                 var gols = parseInt(row.querySelector('.player-gols').value) || 0;
-                var noContinua = row.querySelector('.player-no-continua').checked;
+                var condicio = row.dataset.condicio || '';
+                
+                // Solo incluir si es Titular o Suplent (si no está marcado, no juega)
+                if (condicio !== 'titular' && condicio !== 'suplent') return;
                 
                 var targetes = [];
                 row.querySelectorAll('.targeta-item').forEach(function(t) {
@@ -541,7 +554,7 @@
                 
                 jugadors.push({
                     dni: dni, dorsal: dorsal, nom: nom,
-                    gols: gols, noContinua: noContinua,
+                    gols: gols, condicio: condicio,
                     targetes: targetes
                 });
             });
