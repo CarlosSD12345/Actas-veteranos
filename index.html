@@ -32,6 +32,13 @@
         .legend ol { margin: 10px 0; padding-left: 20px; }
         .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
         
+        /* Login */
+        .login-container { text-align: center; padding: 40px 20px; }
+        .login-container h2 { color: #2ecc71; margin-bottom: 20px; }
+        .login-container input { max-width: 300px; margin: 0 auto 15px auto; display: block; }
+        .login-container button { max-width: 300px; margin: 0 auto; }
+        .error-login { color: #e74c3c; margin-top: 15px; display: none; }
+        
         /* Sección de tarjetas */
         .targetes-section { width: 100%; order: 4; margin-top: 8px; padding: 10px; background-color: #1f4733; border-radius: 6px; }
         .targetes-label { display: block; font-size: 0.8rem; font-weight: bold; color: #f1c40f; margin-bottom: 8px; }
@@ -78,107 +85,155 @@
 </head>
 <body>
     <div class="container">
-        <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
-        
-        <div class="header-info">
-            <div class="form-group">
-                <label>TEMPORADA:</label>
-                <input type="text" value="2026-2027" readonly>
-            </div>
-            <div class="form-group">
-                <label>JORNADA:</label>
-                <select id="jornada" onchange="cargarPartido()">
-                    <option value="">Selecciona...</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>PARTIDO:</label>
-                <select id="partido" onchange="cargarDatosPartido()">
-                    <option value="">Primero selecciona jornada...</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>DIA DEL PARTIT:</label>
-                <input type="text" id="dia" readonly>
-            </div>
-            <div class="form-group">
-                <label>CAMP:</label>
-                <input type="text" id="camp">
-            </div>
-            <div class="form-group">
-                <label>HORA PARTIT:</label>
-                <input type="text" id="hora">
-            </div>
-            <div class="form-group">
-                <label>R. LOCAL:</label>
-                <input type="number" id="resultatLocal" min="0" max="99">
-            </div>
-            <div class="form-group">
-                <label>R. VISITANT:</label>
-                <input type="number" id="resultatVisitant" min="0" max="99">
-            </div>
-            <div class="form-group">
-                <label>ARBITRE:</label>
-                <select id="arbitre">
-                    <option value="">Selecciona...</option>
-                </select>
-            </div>
+        <!-- Pantalla de Login -->
+        <div id="pantalla-login" class="login-container">
+            <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
+            <h2>🔒 Acceso Restringido</h2>
+            <p style="color:#a3b8af; margin-bottom:20px;">Solo árbitros autorizados</p>
+            <input type="password" id="password-arbitro" placeholder="Contraseña...">
+            <button onclick="verificarAccesoArbitro()" class="btn" style="max-width:300px;">Entrar</button>
+            <p id="error-login" class="error-login">❌ Contraseña incorrecta</p>
         </div>
 
-        <!-- Equipo Local -->
-        <div class="team-section">
-            <div class="team-title">🟢 EQUIP LOCAL</div>
-            <div class="player-row header">
-                <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+        <!-- Formulario (oculto hasta login) -->
+        <div id="formulario-acta" style="display:none;">
+            <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
+            
+            <div class="header-info">
+                <div class="form-group">
+                    <label>TEMPORADA:</label>
+                    <input type="text" value="2026-2027" readonly>
+                </div>
+                <div class="form-group">
+                    <label>JORNADA:</label>
+                    <select id="jornada" onchange="cargarPartido()">
+                        <option value="">Selecciona...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>PARTIDO:</label>
+                    <select id="partido" onchange="cargarDatosPartido()">
+                        <option value="">Primero selecciona jornada...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>DIA DEL PARTIT:</label>
+                    <input type="text" id="dia" readonly>
+                </div>
+                <div class="form-group">
+                    <label>CAMP:</label>
+                    <input type="text" id="camp">
+                </div>
+                <div class="form-group">
+                    <label>HORA PARTIT:</label>
+                    <input type="text" id="hora">
+                </div>
+                <div class="form-group">
+                    <label>R. LOCAL:</label>
+                    <input type="number" id="resultatLocal" min="0" max="99">
+                </div>
+                <div class="form-group">
+                    <label>R. VISITANT:</label>
+                    <input type="number" id="resultatVisitant" min="0" max="99">
+                </div>
+                <div class="form-group">
+                    <label>ARBITRE:</label>
+                    <select id="arbitre">
+                        <option value="">Selecciona...</option>
+                    </select>
+                </div>
             </div>
-            <div id="jugadorsLocal"></div>
-            <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
-            <div class="form-group" style="margin-top: 15px;">
-                <label>SUPLENTS:</label>
-                <input type="text" id="suplentsLocal" placeholder="Noms dels suplents...">
+
+            <!-- Equipo Local -->
+            <div class="team-section">
+                <div class="team-title">🟢 EQUIP LOCAL</div>
+                <div class="player-row header">
+                    <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+                </div>
+                <div id="jugadorsLocal"></div>
+                <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>SUPLENTS:</label>
+                    <input type="text" id="suplentsLocal" placeholder="Noms dels suplents...">
+                </div>
             </div>
-        </div>
 
-        <!-- Equipo Visitante -->
-        <div class="team-section visitant">
-            <div class="team-title">🔴 EQUIP VISITANT</div>
-            <div class="player-row header">
-                <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+            <!-- Equipo Visitante -->
+            <div class="team-section visitant">
+                <div class="team-title">🔴 EQUIP VISITANT</div>
+                <div class="player-row header">
+                    <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
+                </div>
+                <div id="jugadorsVisitant"></div>
+                <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>SUPLENTS:</label>
+                    <input type="text" id="suplentsVisitant" placeholder="Noms dels suplents...">
+                </div>
             </div>
-            <div id="jugadorsVisitant"></div>
-            <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
-            <div class="form-group" style="margin-top: 15px;">
-                <label>SUPLENTS:</label>
-                <input type="text" id="suplentsVisitant" placeholder="Noms dels suplents...">
+
+            <div class="observations">
+                <label>OBSERVACIONS:</label>
+                <textarea id="observacions" placeholder="Incidències, lesions, expulsions..."></textarea>
             </div>
-        </div>
 
-        <div class="observations">
-            <label>OBSERVACIONS:</label>
-            <textarea id="observacions" placeholder="Incidències, lesions, expulsions..."></textarea>
-        </div>
+            <div class="legend">
+                <h3>MOTIUS DE TARGETA:</h3>
+                <ol>
+                    <li>Subjectar</li><li>Empentar</li><li>Mans</li><li>Traveta</li><li>Protestar</li>
+                    <li>Desconsiderar</li><li>Distancia</li><li>Perdre temps</li><li>Reincidir faltes</li>
+                </ol>
+            </div>
 
-        <div class="legend">
-            <h3>MOTIUS DE TARGETA:</h3>
-            <ol>
-                <li>Subjectar</li><li>Empentar</li><li>Mans</li><li>Traveta</li><li>Protestar</li>
-                <li>Desconsiderar</li><li>Distancia</li><li>Perdre temps</li><li>Reincidir faltes</li>
-            </ol>
+            <button class="btn" onclick="guardarActa()">💾 GUARDAR ACTA</button>
+            <button class="btn-volver" onclick="volverAWebPrincipal()">← Volver a la web principal</button>
         </div>
-
-        <button class="btn" onclick="guardarActa()">💾 GUARDAR ACTA</button>
-        <button class="btn-volver" onclick="volverAWebPrincipal()">← Volver a la web principal</button>
     </div>
 
     <script>
         var calendario = [];
         var listaArbitros = ["Duran", "Molina", "Humanes", "Portoles", "Utrera", "Julio", "Congost", "Fabregas", "Puibert", "Salva", "Lleixa", "Edu", "Exposito"];
 
-        window.onload = function() {
+        // Funciones de Login
+        function verificarAccesoArbitro() {
+            var pass = document.getElementById('password-arbitro').value;
+            if (pass === 'arbitro2026') {
+                document.getElementById('pantalla-login').style.display = 'none';
+                document.getElementById('formulario-acta').style.display = 'block';
+                sessionStorage.setItem('arbitro_logueado', 'true');
+            } else {
+                document.getElementById('error-login').style.display = 'block';
+                document.getElementById('password-arbitro').value = '';
+            }
+        }
+
+        function volverAWebPrincipal() {
+            var params = new URLSearchParams(window.location.search);
+            var from = params.get('from');
+            if (from === 'valles') {
+                window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
+            } else {
+                window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
+            }
+        }
+
+        // Comprobar sesión al cargar
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('arbitro_logueado') === 'true') {
+                document.getElementById('pantalla-login').style.display = 'none';
+                document.getElementById('formulario-acta').style.display = 'block';
+            }
             carregarCalendari();
             carregarArbitres();
             inicialitzarFormulari();
-        };
+        });
+
+        // Enter para enviar contraseña
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('password-arbitro') === document.activeElement) {
+                verificarAccesoArbitro();
+            }
+        });
 
         function carregarCalendari() {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
@@ -344,7 +399,6 @@
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
             
             if (select.value === 'roja') {
-                // SOLO roja directa pide motivo obligatorio
                 noContinuaCheckbox.checked = true;
                 noContinuaCheckbox.disabled = true;
                 targeta.style.borderLeft = '3px solid #e74c3c';
@@ -470,16 +524,6 @@
             });
             
             return jugadors;
-        }
-
-        function volverAWebPrincipal() {
-            var params = new URLSearchParams(window.location.search);
-            var from = params.get('from');
-            if (from === 'valles') {
-                window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
-            } else {
-                window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
-            }
         }
     </script>
 </body>
