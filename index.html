@@ -17,7 +17,6 @@
         .team-section.visitant { border-left-color: #e74c3c; }
         .team-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 12px; color: #2ecc71; }
         .team-section.visitant .team-title { color: #e74c3c; }
-        .player-row.header { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 8px; background-color: #1f4733; font-weight: bold; font-size: 0.85rem; text-align: center; border-radius: 6px; }
         .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
         .player-row input, .player-row select { padding: 8px; font-size: 0.9rem; }
         .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
@@ -47,16 +46,12 @@
         .targeta-item select, .targeta-item input { flex: 1; min-width: 80px; padding: 8px; font-size: 0.85rem; }
         .targeta-tipus { min-width: 120px !important; font-weight: bold; }
         .targeta-minut { max-width: 70px !important; text-align: center; }
-        .targeta-motiu-text { flex: 1; min-width: 150px; }
+        .targeta-motiu { flex: 1; min-width: 150px; }
         .btn-add-targeta { background-color: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; width: 100%; }
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
-        /* Motiu tarjeta (texto libre) */
-        .motiu-targeta { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
-        .motiu-targeta input { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
-        
-        /* Motiu expulsión (solo roja directa) */
+        /* Motiu expulsión (solo roja directa - texto libre) */
         .motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
@@ -80,17 +75,16 @@
             .header-info { grid-template-columns: 1fr; gap: 10px; padding: 12px; }
             .team-section { padding: 12px; }
             .team-title { font-size: 1.1rem; }
-            .player-row.header { display: none; }
             .player-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px solid #1f4733; margin-bottom: 12px; }
             
-            /* Dorsal pequeño a la izquierda */
+            /* Dorsal pequeño */
             .player-row input[placeholder="NUM"] { width: 70px; order: 1; font-weight: bold; text-align: center; flex-shrink: 0; }
             
-            /* Nombre con foto ocupa todo el ancho */
-            .player-row .player-nom-container { order: 2; width: 100%; }
+            /* DNI al lado del dorsal */
+            .player-row input[placeholder="DNI"] { width: 140px; order: 2; flex-shrink: 0; }
             
-            /* DNI pequeño a la derecha */
-            .player-row input[placeholder="DNI"] { width: 140px; order: 3; flex-shrink: 0; }
+            /* Nombre con foto ocupa todo el ancho abajo */
+            .player-row .player-nom-container { order: 3; width: 100%; }
             
             .targetes-section { order: 4; }
             .targeta-item { flex-direction: column; align-items: stretch; }
@@ -346,11 +340,11 @@
             
             row.innerHTML = `
                 <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
+                <input type="text" placeholder="DNI" class="player-dni">
                 <div class="player-nom-container">
                     ${fotoHtml}
                     <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
                 </div>
-                <input type="text" placeholder="DNI" class="player-dni">
                 
                 <div class="targetes-section">
                     <label class="targetes-label">🟨 AMONESTACIONS:</label>
@@ -388,7 +382,18 @@
                 <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
                 
                 <div class="motiu-targeta">
-                    <input type="text" class="targeta-motiu-text" placeholder="Motiu de la targeta...">
+                    <select class="targeta-motiu">
+                        <option value="">Motiu...</option>
+                        <option value="1">1-Subjectar</option>
+                        <option value="2">2-Empentar</option>
+                        <option value="3">3-Mans</option>
+                        <option value="4">4-Traveta</option>
+                        <option value="5">5-Protestar</option>
+                        <option value="6">6-Desconsiderar</option>
+                        <option value="7">7-Distancia</option>
+                        <option value="8">8-Perdre temps</option>
+                        <option value="9">9-Reincidir faltes</option>
+                    </select>
                 </div>
                 
                 <div class="motiu-expulsio" style="display:none;">
@@ -529,7 +534,7 @@
                     targetes.push({
                         tipus: t.querySelector('.targeta-tipus').value,
                         minut: t.querySelector('.targeta-minut').value,
-                        motiu: t.querySelector('.targeta-motiu-text').value,
+                        motiu: t.querySelector('.targeta-motiu').value,
                         motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
                     });
                 });
