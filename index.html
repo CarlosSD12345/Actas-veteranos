@@ -15,15 +15,13 @@
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; }
         .team-section { margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
         .team-section.visitant { border-left-color: #e74c3c; }
-        .team-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .team-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; flex-wrap: nowrap; }
         .team-title { font-size: 1.2rem; font-weight: bold; color: #2ecc71; white-space: nowrap; }
         .team-section.visitant .team-title { color: #e74c3c; }
-        .team-badge { width: 50px; height: 50px; object-fit: contain; background: white; border-radius: 10px; padding: 3px; }
-        .team-name { font-size: 1.1rem; font-weight: 600; color: white; flex: 1; }
+        .team-badge { width: 45px; height: 45px; object-fit: contain; background: white; border-radius: 10px; padding: 3px; flex-shrink: 0; }
+        .team-name { font-size: 1.1rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin: 0; flex: 1; }
         .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
         .player-row input, .player-row select { padding: 8px; font-size: 0.9rem; }
-        .checkbox-group { display: flex; gap: 10px; align-items: center; justify-content: center; }
-        .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; accent-color: #2ecc71; }
         .btn { background-color: #2ecc71; color: #0b1d15; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
         .btn:hover { background-color: #27ae60; }
         .btn-secondary { background-color: #3498db; margin-top: 10px; color: white; }
@@ -87,7 +85,7 @@
             h1 { font-size: 1.2rem; }
             .header-info { grid-template-columns: 1fr; gap: 10px; padding: 12px; }
             .team-section { padding: 12px; }
-            .team-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .team-header { flex-direction: row; align-items: center; gap: 10px; flex-wrap: nowrap; }
             .team-badge { width: 40px; height: 40px; }
             .team-name { font-size: 1rem; }
             .player-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px solid #1f4733; margin-bottom: 12px; }
@@ -174,8 +172,8 @@
             <div class="team-section">
                 <div class="team-header">
                     <div class="team-title">🟢 EQUIP LOCAL</div>
-                    <img src="escudos/barbera.png" alt="Escudo Local" class="team-badge" id="escudo-local">
-                    <div class="team-name" id="nombre-local">C.F. Barberá</div>
+                    <img src="" alt="Escudo Local" class="team-badge" id="escudo-local">
+                    <div class="team-name" id="nombre-local">-</div>
                 </div>
                 <div id="jugadorsLocal"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
@@ -185,8 +183,8 @@
             <div class="team-section visitant">
                 <div class="team-header">
                     <div class="team-title">🔴 EQUIP VISITANT</div>
-                    <img src="escudos/can_parellada.png" alt="Escudo Visitante" class="team-badge" id="escudo-visitant">
-                    <div class="team-name" id="nombre-visitant">C.F. Can Parellada</div>
+                    <img src="" alt="Escudo Visitante" class="team-badge" id="escudo-visitant">
+                    <div class="team-name" id="nombre-visitant">-</div>
                 </div>
                 <div id="jugadorsVisitant"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
@@ -232,6 +230,7 @@
             "V.C.F. Ripollet": "vcf_ripollet.png",
             "C.E. Bigues i Riells": "bigues.png"
         };
+        var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
 
         function verificarAccesoArbitro() {
             var pass = document.getElementById('password-arbitro').value;
@@ -314,6 +313,10 @@
             document.getElementById('hora').value = '';
             document.getElementById('jugadorsLocal').innerHTML = '';
             document.getElementById('jugadorsVisitant').innerHTML = '';
+            document.getElementById('nombre-local').textContent = '-';
+            document.getElementById('nombre-visitant').textContent = '-';
+            document.getElementById('escudo-local').src = '';
+            document.getElementById('escudo-visitant').src = '';
             
             if (jornada) {
                 jornada.partidos.forEach(function(p, idx) {
@@ -337,11 +340,11 @@
                 document.getElementById('hora').value = p.hora || '';
                 
                 // Actualizar nombres y escudos de los equipos
-                document.getElementById('nombre-local').textContent = p.local;
-                document.getElementById('escudo-local').src = 'escudos/' + (equiposDB[p.local] || 'barbera.png');
+                document.getElementById('nombre-local').textContent = p.local.toUpperCase();
+                document.getElementById('escudo-local').src = escudosBaseURL + (equiposDB[p.local] || 'barbera.png');
                 
-                document.getElementById('nombre-visitant').textContent = p.visitante;
-                document.getElementById('escudo-visitant').src = 'escudos/' + (equiposDB[p.visitante] || 'can_parellada.png');
+                document.getElementById('nombre-visitant').textContent = p.visitante.toUpperCase();
+                document.getElementById('escudo-visitant').src = escudosBaseURL + (equiposDB[p.visitante] || 'can_parellada.png');
                 
                 carregarJugadorsEquip(p.local, 'local');
                 carregarJugadorsEquip(p.visitante, 'visitant');
@@ -395,7 +398,7 @@
                 
                 <div class="player-actions">
                     <div class="gol-group">
-                        <label> Gols:</label>
+                        <label>⚽ Gols:</label>
                         <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
                     </div>
                     <div class="toggle-titular-suplent">
@@ -430,7 +433,7 @@
             targeta.innerHTML = `
                 <select class="targeta-tipus" onchange="canviarTipusTargeta(this)">
                     <option value="groga">🟡 Groga</option>
-                    <option value="roja"> Roja directa</option>
+                    <option value="roja">🔴 Roja directa</option>
                     <option value="segona-groga">🟡🟡 Segona groga</option>
                 </select>
                 <input type="number" placeholder="Min'" class="targeta-minut" min="0" max="120">
@@ -466,6 +469,7 @@
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
             
             if (select.value === 'roja') {
+                // Roja directa: pide motivo obligatorio en texto libre
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'block';
                 
@@ -477,6 +481,7 @@
                     motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
             } else if (select.value === 'segona-groga') {
+                // Doble amarilla: NO pide motivo extra
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'none';
                 
@@ -484,6 +489,7 @@
                 btnAdd.disabled = true;
                 btnAdd.textContent = 'Jugador expulsat';
             } else {
+                // Amarilla normal
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
                 motiuExpulsio.querySelector('input').value = '';
@@ -515,6 +521,7 @@
         }
 
         function guardarActa() {
+            // Validar que todas las rojas directas tengan motivo
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
             var errorMotiu = false;
             
@@ -568,6 +575,7 @@
                 var gols = parseInt(row.querySelector('.player-gols').value) || 0;
                 var condicio = row.dataset.condicio || '';
                 
+                // Solo incluir si es Titular o Suplent (si no está marcado, no juega)
                 if (condicio !== 'titular' && condicio !== 'suplent') return;
                 
                 var targetes = [];
