@@ -47,14 +47,18 @@
         .targeta-item select, .targeta-item input { flex: 1; min-width: 80px; padding: 8px; font-size: 0.85rem; }
         .targeta-tipus { min-width: 120px !important; font-weight: bold; }
         .targeta-minut { max-width: 70px !important; text-align: center; }
+        .targeta-motiu-text { flex: 1; min-width: 150px; }
         .btn-add-targeta { background-color: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; width: 100%; }
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
-        /* Motiu tarjeta */
+        /* Motiu tarjeta (texto libre) */
         .motiu-targeta { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
+        .motiu-targeta input { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
+        
+        /* Motiu expulsión (solo roja directa) */
+        .motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .targeta-motiu { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
         
         /* Acciones del jugador */
@@ -78,9 +82,16 @@
             .team-title { font-size: 1.1rem; }
             .player-row.header { display: none; }
             .player-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px solid #1f4733; margin-bottom: 12px; }
-            .player-row input[placeholder="DNI"] { width: 100%; order: 2; }
-            .player-row input[placeholder="NUM"] { width: 70px; order: 1; font-weight: bold; text-align: center; }
-            .player-row .player-nom-container { order: 3; width: 100%; }
+            
+            /* Dorsal pequeño a la izquierda */
+            .player-row input[placeholder="NUM"] { width: 70px; order: 1; font-weight: bold; text-align: center; flex-shrink: 0; }
+            
+            /* Nombre con foto ocupa todo el ancho */
+            .player-row .player-nom-container { order: 2; width: 100%; }
+            
+            /* DNI pequeño a la derecha */
+            .player-row input[placeholder="DNI"] { width: 140px; order: 3; flex-shrink: 0; }
+            
             .targetes-section { order: 4; }
             .targeta-item { flex-direction: column; align-items: stretch; }
             .targeta-item select, .targeta-item input { width: 100%; min-width: auto; }
@@ -194,7 +205,6 @@
         var calendario = [];
         var listaArbitros = ["Duran", "Molina", "Humanes", "Portoles", "Utrera", "Julio", "Congost", "Fabregas", "Puibert", "Salva", "Lleixa", "Edu", "Exposito"];
 
-        // Funciones de Login
         function verificarAccesoArbitro() {
             var pass = document.getElementById('password-arbitro').value;
             if (pass === 'arbitro2026') {
@@ -217,7 +227,6 @@
             }
         }
 
-        // Comprobar sesión al cargar
         window.addEventListener('load', function() {
             if (sessionStorage.getItem('arbitro_logueado') === 'true') {
                 document.getElementById('pantalla-login').style.display = 'none';
@@ -228,7 +237,6 @@
             inicialitzarFormulari();
         });
 
-        // Enter para enviar contraseña
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && document.getElementById('password-arbitro') === document.activeElement) {
                 verificarAccesoArbitro();
@@ -317,9 +325,7 @@
                     afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto);
                 });
             })
-            .catch(function() {
-                // Si no hay datos, dejar vacío
-            });
+            .catch(function() { });
         }
 
         function afegirJugador(tipus) {
@@ -334,16 +340,17 @@
             
             var fotoHtml = '';
             if (foto) {
-                fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + (tipus === 'local' ? '' : '') + (tipus === 'local' ? 'CF-Cerdanyola' : 'CF-Can-Parellada') + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+                var carpeta = (tipus === 'local') ? 'CF-Cerdanyola' : 'CF-Can-Parellada';
+                fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
             }
             
             row.innerHTML = `
                 <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
-                <input type="text" placeholder="DNI" class="player-dni">
                 <div class="player-nom-container">
                     ${fotoHtml}
                     <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
                 </div>
+                <input type="text" placeholder="DNI" class="player-dni">
                 
                 <div class="targetes-section">
                     <label class="targetes-label">🟨 AMONESTACIONS:</label>
@@ -381,34 +388,12 @@
                 <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
                 
                 <div class="motiu-targeta">
-                    <select class="targeta-motiu">
-                        <option value="">Motiu...</option>
-                        <option value="1">1-Subjectar</option>
-                        <option value="2">2-Empentar</option>
-                        <option value="3">3-Mans</option>
-                        <option value="4">4-Traveta</option>
-                        <option value="5">5-Protestar</option>
-                        <option value="6">6-Desconsiderar</option>
-                        <option value="7">7-Distancia</option>
-                        <option value="8">8-Perdre temps</option>
-                        <option value="9">9-Reincidir faltes</option>
-                    </select>
+                    <input type="text" class="targeta-motiu-text" placeholder="Motiu de la targeta...">
                 </div>
                 
                 <div class="motiu-expulsio" style="display:none;">
                     <label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label>
-                    <select class="targeta-motiu-expulsio">
-                        <option value="">Selecciona el motiu...</option>
-                        <option value="1">1-Subjectar</option>
-                        <option value="2">2-Empentar</option>
-                        <option value="3">3-Mans</option>
-                        <option value="4">4-Traveta</option>
-                        <option value="5">5-Protestar</option>
-                        <option value="6">6-Desconsiderar</option>
-                        <option value="7">7-Distancia</option>
-                        <option value="8">8-Perdre temps</option>
-                        <option value="9">9-Reincidir faltes</option>
-                    </select>
+                    <input type="text" class="targeta-motiu-expulsio" placeholder="Escriu el motiu de l'expulsió...">
                 </div>
             `;
             
@@ -422,7 +407,6 @@
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
             
             if (select.value === 'roja') {
-                // Roja directa: marca no continua y pide motivo obligatorio
                 noContinuaCheckbox.checked = true;
                 noContinuaCheckbox.disabled = true;
                 targeta.style.borderLeft = '3px solid #e74c3c';
@@ -436,7 +420,6 @@
                     motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
             } else if (select.value === 'segona-groga') {
-                // Doble amarilla: marca no continua pero NO pide motivo extra
                 noContinuaCheckbox.checked = true;
                 noContinuaCheckbox.disabled = true;
                 targeta.style.borderLeft = '3px solid #e74c3c';
@@ -446,11 +429,11 @@
                 btnAdd.disabled = true;
                 btnAdd.textContent = 'Jugador expulsat';
             } else {
-                // Amarilla normal
                 noContinuaCheckbox.checked = false;
                 noContinuaCheckbox.disabled = false;
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
+                motiuExpulsio.querySelector('input').value = '';
                 
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = false;
@@ -488,16 +471,16 @@
         }
 
         function guardarActa() {
-            // Validar que todas las rojas directas tengan motivo
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
             var errorMotiu = false;
             
             targetesRoges.forEach(function(select) {
                 var targeta = select.closest('.targeta-item');
-                var selectMotiu = targeta.querySelector('.targeta-motiu-expulsio');
-                if (!selectMotiu.value) {
+                var inputMotiu = targeta.querySelector('.targeta-motiu-expulsio');
+                if (!inputMotiu.value.trim()) {
                     errorMotiu = true;
-                    targeta.style.animation = 'shake 0.5s';
+                    inputMotiu.style.borderColor = '#e74c3c';
+                    inputMotiu.focus();
                 }
             });
             
@@ -546,7 +529,7 @@
                     targetes.push({
                         tipus: t.querySelector('.targeta-tipus').value,
                         minut: t.querySelector('.targeta-minut').value,
-                        motiu: t.querySelector('.targeta-motiu').value,
+                        motiu: t.querySelector('.targeta-motiu-text').value,
                         motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
                     });
                 });
