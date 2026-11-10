@@ -51,16 +51,22 @@
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
-        /* Motiu expulsión */
-        .motiu-expulsio { animation: slideDown 0.3s ease-out; }
+        /* Motiu tarjeta */
+        .motiu-targeta { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .targeta-motiu { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
         
         /* Acciones del jugador */
-        .player-actions { width: 100%; order: 5; display: flex; gap: 15px; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; }
+        .player-actions { width: 100%; order: 5; display: flex; gap: 15px; justify-content: space-around; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; }
         .player-actions .checkbox-group { display: flex; align-items: center; gap: 8px; }
         .player-actions .checkbox-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
         .player-actions .checkbox-group input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; }
+        .player-actions .gol-input { width: 60px; text-align: center; padding: 8px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; font-weight: bold; }
+        
+        /* Foto del jugador */
+        .player-foto { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #2ecc71; flex-shrink: 0; }
+        .player-nom-container { display: flex; align-items: center; flex: 1; min-width: 150px; }
         
         /* 📱 RESPONSIVE MÓVIL */
         @media (max-width: 768px) {
@@ -72,13 +78,13 @@
             .team-title { font-size: 1.1rem; }
             .player-row.header { display: none; }
             .player-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px solid #1f4733; margin-bottom: 12px; }
-            .player-row input[placeholder="DNI"] { width: 100%; order: 1; }
-            .player-row input[placeholder="NUM"] { width: 70px; order: 2; font-weight: bold; text-align: center; }
-            .player-row input[placeholder="NOM"] { flex: 1; min-width: 150px; order: 3; }
+            .player-row input[placeholder="DNI"] { width: 100%; order: 2; }
+            .player-row input[placeholder="NUM"] { width: 70px; order: 1; font-weight: bold; text-align: center; }
+            .player-row .player-nom-container { order: 3; width: 100%; }
             .targetes-section { order: 4; }
             .targeta-item { flex-direction: column; align-items: stretch; }
             .targeta-item select, .targeta-item input { width: 100%; min-width: auto; }
-            .player-actions { order: 5; flex-direction: column; gap: 10px; }
+            .player-actions { order: 5; flex-direction: row; flex-wrap: wrap; gap: 10px; }
             .btn { font-size: 1rem; padding: 14px; }
         }
     </style>
@@ -147,9 +153,6 @@
             <!-- Equipo Local -->
             <div class="team-section">
                 <div class="team-title">🟢 EQUIP LOCAL</div>
-                <div class="player-row header">
-                    <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
-                </div>
                 <div id="jugadorsLocal"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
                 <div class="form-group" style="margin-top: 15px;">
@@ -161,9 +164,6 @@
             <!-- Equipo Visitante -->
             <div class="team-section visitant">
                 <div class="team-title">🔴 EQUIP VISITANT</div>
-                <div class="player-row header">
-                    <div>DNI</div><div>NUM</div><div>NOM</div><div>Min</div><div>Motiu</div><div>Min</div><div>Motiu</div><div>Gols</div>
-                </div>
                 <div id="jugadorsVisitant"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
                 <div class="form-group" style="margin-top: 15px;">
@@ -314,7 +314,7 @@
                 container.innerHTML = '';
                 
                 jugadors.forEach(function(j) {
-                    afegirFilaJugador(tipus, j.dorsal, j.nombre);
+                    afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto);
                 });
             })
             .catch(function() {
@@ -323,19 +323,27 @@
         }
 
         function afegirJugador(tipus) {
-            afegirFilaJugador(tipus, '', '');
+            afegirFilaJugador(tipus, '', '', null);
         }
 
-        function afegirFilaJugador(tipus, dorsal, nom) {
+        function afegirFilaJugador(tipus, dorsal, nom, foto) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             var row = document.createElement('div');
             row.className = 'player-row';
             row.dataset.tipus = tipus;
             
+            var fotoHtml = '';
+            if (foto) {
+                fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + (tipus === 'local' ? '' : '') + (tipus === 'local' ? 'CF-Cerdanyola' : 'CF-Can-Parellada') + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+            }
+            
             row.innerHTML = `
-                <input type="text" placeholder="DNI" class="player-dni">
                 <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
-                <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
+                <input type="text" placeholder="DNI" class="player-dni">
+                <div class="player-nom-container">
+                    ${fotoHtml}
+                    <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
+                </div>
                 
                 <div class="targetes-section">
                     <label class="targetes-label">🟨 AMONESTACIONS:</label>
@@ -345,8 +353,8 @@
                 
                 <div class="player-actions">
                     <div class="checkbox-group">
-                        <label>⚽ Gol:</label>
-                        <input type="checkbox" class="player-gol">
+                        <label>⚽ Gols:</label>
+                        <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
                     </div>
                     <div class="checkbox-group">
                         <label>❌ No continua:</label>
@@ -372,7 +380,22 @@
                 <input type="number" placeholder="Min'" class="targeta-minut" min="0" max="120">
                 <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
                 
-                <div class="motiu-expulsio" style="display:none; margin-top:8px; padding:10px; background-color:#3d1f1f; border-radius:6px; border-left:3px solid #e74c3c; width:100%;">
+                <div class="motiu-targeta">
+                    <select class="targeta-motiu">
+                        <option value="">Motiu...</option>
+                        <option value="1">1-Subjectar</option>
+                        <option value="2">2-Empentar</option>
+                        <option value="3">3-Mans</option>
+                        <option value="4">4-Traveta</option>
+                        <option value="5">5-Protestar</option>
+                        <option value="6">6-Desconsiderar</option>
+                        <option value="7">7-Distancia</option>
+                        <option value="8">8-Perdre temps</option>
+                        <option value="9">9-Reincidir faltes</option>
+                    </select>
+                </div>
+                
+                <div class="motiu-expulsio" style="display:none;">
                     <label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label>
                     <select class="targeta-motiu-expulsio">
                         <option value="">Selecciona el motiu...</option>
@@ -399,6 +422,7 @@
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
             
             if (select.value === 'roja') {
+                // Roja directa: marca no continua y pide motivo obligatorio
                 noContinuaCheckbox.checked = true;
                 noContinuaCheckbox.disabled = true;
                 targeta.style.borderLeft = '3px solid #e74c3c';
@@ -411,12 +435,22 @@
                 setTimeout(function() {
                     motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
+            } else if (select.value === 'segona-groga') {
+                // Doble amarilla: marca no continua pero NO pide motivo extra
+                noContinuaCheckbox.checked = true;
+                noContinuaCheckbox.disabled = true;
+                targeta.style.borderLeft = '3px solid #e74c3c';
+                motiuExpulsio.style.display = 'none';
+                
+                var btnAdd = row.querySelector('.btn-add-targeta');
+                btnAdd.disabled = true;
+                btnAdd.textContent = 'Jugador expulsat';
             } else {
+                // Amarilla normal
                 noContinuaCheckbox.checked = false;
                 noContinuaCheckbox.disabled = false;
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
-                motiuExpulsio.querySelector('select').value = '';
                 
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = false;
@@ -504,7 +538,7 @@
                 var dni = row.querySelector('.player-dni').value;
                 var dorsal = row.querySelector('.player-dorsal').value;
                 var nom = row.querySelector('.player-nom').value;
-                var gol = row.querySelector('.player-gol').checked;
+                var gols = parseInt(row.querySelector('.player-gols').value) || 0;
                 var noContinua = row.querySelector('.player-no-continua').checked;
                 
                 var targetes = [];
@@ -512,13 +546,14 @@
                     targetes.push({
                         tipus: t.querySelector('.targeta-tipus').value,
                         minut: t.querySelector('.targeta-minut').value,
+                        motiu: t.querySelector('.targeta-motiu').value,
                         motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
                     });
                 });
                 
                 jugadors.push({
                     dni: dni, dorsal: dorsal, nom: nom,
-                    gol: gol, noContinua: noContinua,
+                    gols: gols, noContinua: noContinua,
                     targetes: targetes
                 });
             });
