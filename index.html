@@ -1,4 +1,4 @@
-w<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ca">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +45,8 @@ w<!DOCTYPE html>
         
         .login-container { text-align: center; padding: 40px 20px; }
         .login-container h2 { color: #2ecc71; margin-bottom: 20px; }
-        .login-container input { max-width: 300px; margin: 0 auto 15px auto; display: block; }
+        .login-container input[type="password"],
+        .login-container input[type="text"] { max-width: 300px; margin: 0 auto 15px auto; display: block; }
         .login-container button { max-width: 300px; margin: 0 auto; }
         .error-login { color: #e74c3c; margin-top: 15px; display: none; }
         
@@ -137,8 +138,11 @@ w<!DOCTYPE html>
             <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
             <h2>🔒 Acceso Restringido</h2>
             <p style="color:#a3b8af; margin-bottom:20px;">Solo árbitros autorizados</p>
-            <input type="password" id="password-arbitro" placeholder="Contraseña...">
-            <button onclick="verificarAccesoArbitro()" class="btn" style="max-width:300px;">Entrar</button>
+            <div style="display:flex; gap:8px; max-width:300px; margin:0 auto;">
+                <input type="password" id="password-arbitro" placeholder="Contraseña..." style="flex:1;">
+                <button type="button" onclick="togglePassword()" style="background-color:#1f4733; color:white; border:1px solid #2ecc71; padding:0 15px; border-radius:6px; cursor:pointer; font-size:1.2rem; flex-shrink:0;" title="Mostrar/Ocultar contraseña">👁️</button>
+            </div>
+            <button onclick="verificarAccesoArbitro()" class="btn" style="max-width:300px; margin-top:15px;">Entrar</button>
             <p id="error-login" class="error-login">❌ Contraseña incorrecta</p>
         </div>
 
@@ -272,6 +276,15 @@ w<!DOCTYPE html>
             "C.E. Bigues i Riells": "bigues.png"
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
+
+        function togglePassword() {
+            var input = document.getElementById('password-arbitro');
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        }
 
         function verificarAccesoArbitro() {
             var pass = document.getElementById('password-arbitro').value;
@@ -548,7 +561,7 @@ w<!DOCTYPE html>
             var resultatVisitant = document.getElementById('resultatVisitant').value || '0';
             texto += '🏆 *RESULTADO: ' + resultatLocal + ' - ' + resultatVisitant + '*\n\n';
             
-            // Jugadores Local - con camiseta verde
+            // Jugadores Local
             texto += '👕 *LOCAL - ' + partidoData.local + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
@@ -556,12 +569,10 @@ w<!DOCTYPE html>
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'titular') {
                     texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
-                    // Goles en línea separada con sangría
                     if (j.gols > 0) {
                         if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
                         else texto += '   ⚽x' + j.gols + '\n';
                     }
-                    // Tarjetas en línea separada con sangría
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
@@ -595,8 +606,8 @@ w<!DOCTYPE html>
                 }
             });
             
-            // Jugadores Visitante - con camiseta azul
-            texto += '\n👕w *VISITANTE - ' + partidoData.visitante + '*\n';
+            // Jugadores Visitante
+            texto += '\n👕 *VISITANTE - ' + partidoData.visitante + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
             var jugadorsVisitant = recollirJugadors('visitant', true);
@@ -832,15 +843,15 @@ w<!DOCTYPE html>
                 <div class="motiu-targeta">
                     <select class="targeta-motiu">
                         <option value="">Motiu...</option>
-                        <option value="1">1-Subjectar</option>
-                        <option value="2">2-Empentar</option>
-                        <option value="3">3-Mans</option>
-                        <option value="4">4-Traveta</option>
-                        <option value="5">5-Protestar</option>
-                        <option value="6">6-Desconsiderar</option>
-                        <option value="7">7-Distancia</option>
-                        <option value="8">8-Perdre temps</option>
-                        <option value="9">9-Reincidir faltes</option>
+                        <option value="1-Subjectar">1-Subjectar</option>
+                        <option value="2-Empentar">2-Empentar</option>
+                        <option value="3-Mans">3-Mans</option>
+                        <option value="4-Traveta">4-Traveta</option>
+                        <option value="5-Protestar">5-Protestar</option>
+                        <option value="6-Desconsiderar">6-Desconsiderar</option>
+                        <option value="7-Distancia">7-Distancia</option>
+                        <option value="8-Perdre temps">8-Perdre temps</option>
+                        <option value="9-Reincidir faltes">9-Reincidir faltes</option>
                     </select>
                 </div>
                 <div class="motiu-expulsio" style="display:none;">
