@@ -14,10 +14,10 @@
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #a3b8af; font-size: 0.85rem; }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; }
         .team-section { margin-bottom: 25px; padding: 15px; background-color: #173827; border-radius: 8px; border-left: 4px solid #2ecc71; }
-        .team-section.visitant { border-left-color: #e74c3c; }
+        .team-section.visitant { border-left-color: #3498db; }
         .team-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; flex-wrap: nowrap; }
         .team-title { font-size: 1.2rem; font-weight: bold; color: #2ecc71; white-space: nowrap; }
-        .team-section.visitant .team-title { color: #e74c3c; }
+        .team-section.visitant .team-title { color: #3498db; }
         .team-badge { width: 45px; height: 45px; object-fit: contain; background: white; border-radius: 10px; padding: 3px; flex-shrink: 0; }
         .team-name { font-size: 1.1rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin: 0; flex: 1; }
         .player-row { display: grid; grid-template-columns: 60px 60px 1fr 70px 110px 70px 110px 60px; gap: 8px; margin-bottom: 10px; align-items: center; padding: 10px; background-color: #0b1d15; border-radius: 6px; }
@@ -32,7 +32,6 @@
         .legend ol { margin: 10px 0; padding-left: 20px; }
         .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
         
-        /* Botones de acción */
         .accions-acta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
         .accions-acta .btn { flex: 1; min-width: 150px; margin-top: 0; }
         .btn-borrador { background-color: #f39c12 !important; color: #0b1d15 !important; }
@@ -44,14 +43,12 @@
         .info-borrador { background-color: #f39c12; color: #0b1d15; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-align: center; display: none; }
         .info-borrador.visible { display: block; }
         
-        /* Login */
         .login-container { text-align: center; padding: 40px 20px; }
         .login-container h2 { color: #2ecc71; margin-bottom: 20px; }
         .login-container input { max-width: 300px; margin: 0 auto 15px auto; display: block; }
         .login-container button { max-width: 300px; margin: 0 auto; }
         .error-login { color: #e74c3c; margin-top: 15px; display: none; }
         
-        /* Sección de tarjetas */
         .targetes-section { width: 100%; order: 4; margin-top: 8px; padding: 10px; background-color: #1f4733; border-radius: 6px; }
         .targetes-label { display: block; font-size: 0.8rem; font-weight: bold; color: #f1c40f; margin-bottom: 8px; }
         .targetes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
@@ -64,33 +61,26 @@
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
-        /* Motiu tarjeta (desplegable) */
         .motiu-targeta { margin-top: 5px; width: 100%; }
         .motiu-targeta select { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
         
-        /* Motiu expulsión (solo roja directa - texto libre) */
         .motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
         
-        /* Acciones del jugador (Gols + Titular/Suplent) */
         .player-actions { width: 100%; order: 3; display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; flex-wrap: wrap; }
         .player-actions .gol-group { display: flex; align-items: center; gap: 8px; }
         .player-actions .gol-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
-        .player-actions .gol-input { width: 60px; text-align: center; padding: 8px; border: 1px solid #2ecc71; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 1rem; font-weight: bold; }
         
-        /* Toggle Titular/Suplent */
         .toggle-titular-suplent { display: flex; border-radius: 8px; overflow: hidden; border: 2px solid #2ecc71; }
         .toggle-titular-suplent button { flex: 1; padding: 8px 16px; border: none; background-color: #0b1d15; color: #a3b8af; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
         .toggle-titular-suplent button.active-titular { background-color: #2ecc71; color: #0b1d15; }
         .toggle-titular-suplent button.active-suplent { background-color: #3498db; color: white; }
         .toggle-titular-suplent button:hover { opacity: 0.8; }
         
-        /* Foto del jugador */
         .player-foto { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #2ecc71; flex-shrink: 0; }
         .player-nom-container { display: flex; align-items: center; flex: 1; min-width: 150px; }
         
-        /* Modal de aviso personalizado */
         #modal-avis {
             display: none;
             position: fixed;
@@ -119,7 +109,6 @@
         #modal-avis .modal-text { color: white; margin: 0 0 20px 0; font-size: 1rem; }
         #modal-avis .modal-btn { background: #f39c12; color: #0b1d15; border: none; padding: 10px 30px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
         
-        /* 📱 RESPONSIVE MÓVIL */
         @media (max-width: 768px) {
             body { padding: 8px; }
             .container { padding: 12px; }
@@ -144,7 +133,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Pantalla de Login -->
         <div id="pantalla-login" class="login-container">
             <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
             <h2>🔒 Acceso Restringido</h2>
@@ -154,11 +142,9 @@
             <p id="error-login" class="error-login">❌ Contraseña incorrecta</p>
         </div>
 
-        <!-- Formulario (oculto hasta login) -->
         <div id="formulario-acta" style="display:none;">
             <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
             
-            <!-- Aviso de borrador existente -->
             <div id="info-borrador" class="info-borrador">
                 ⚠️ Tienes un borrador guardado del partido: <span id="info-borrador-partit"></span>
                 <br><br>
@@ -211,7 +197,6 @@
                 </div>
             </div>
 
-            <!-- Equipo Local -->
             <div class="team-section">
                 <div class="team-header">
                     <div class="team-title">🟢 EQUIP LOCAL</div>
@@ -222,10 +207,9 @@
                 <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
             </div>
 
-            <!-- Equipo Visitante -->
             <div class="team-section visitant">
                 <div class="team-header">
-                    <div class="team-title">🔴 EQUIP VISITANT</div>
+                    <div class="team-title">🔵 EQUIP VISITANT</div>
                     <img src="" alt="Escudo Visitante" class="team-badge" id="escudo-visitant">
                     <div class="team-name" id="nombre-visitant">-</div>
                 </div>
@@ -246,7 +230,6 @@
                 </ol>
             </div>
 
-            <!-- Botones de acción: Borrador + Enviar -->
             <div class="accions-acta">
                 <button class="btn btn-borrador" onclick="guardarBorrador()">💾 Guardar borrador</button>
                 <button class="btn btn-enviar" onclick="confirmarEnviar()">✅ CONFIRMAR ENVIAR</button>
@@ -257,7 +240,6 @@
         </div>
     </div>
 
-    <!-- Modal de aviso personalizado -->
     <div id="modal-avis">
         <div class="modal-content">
             <div class="modal-icon" id="modal-avis-icon">⚠️</div>
@@ -291,7 +273,6 @@
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
 
-        // ==================== LOGIN ====================
         function verificarAccesoArbitro() {
             var pass = document.getElementById('password-arbitro').value;
             if (pass === 'arbitro2026') {
@@ -332,7 +313,6 @@
             }
         });
 
-        // ==================== MODAL AVISO ====================
         function mostrarAvis(titol, text, icon) {
             document.getElementById('modal-avis-titol').textContent = titol;
             document.getElementById('modal-avis-text').textContent = text;
@@ -348,7 +328,6 @@
             if (e.target === this) tancarModalAvis();
         });
 
-        // ==================== SISTEMA DE BORRADOR ====================
         function getBorradorKey() {
             var arbitre = document.getElementById('arbitre').value;
             if (!arbitre) return null;
@@ -361,10 +340,8 @@
                 document.getElementById('info-borrador').classList.remove('visible');
                 return;
             }
-            
             var key = getBorradorKey();
             if (!key) return;
-            
             var borrador = localStorage.getItem(key);
             if (borrador) {
                 try {
@@ -373,9 +350,7 @@
                     var infoPartit = document.getElementById('info-borrador-partit');
                     infoPartit.textContent = 'Jornada ' + (data.jornada || '?') + ' - ' + (data.equipLocal || '?') + ' vs ' + (data.equipVisitant || '?') + ' (Guardado: ' + (data.dataGuardat || 'reciente') + ')';
                     infoDiv.classList.add('visible');
-                } catch(e) {
-                    console.error('Error al leer borrador:', e);
-                }
+                } catch(e) { console.error('Error al leer borrador:', e); }
             } else {
                 document.getElementById('info-borrador').classList.remove('visible');
             }
@@ -387,15 +362,12 @@
                 mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de guardar el borrador.', '⚠️');
                 return;
             }
-            
             var key = getBorradorKey();
             if (!key) return;
-            
             var acta = recollirDadesActa();
             acta.dataGuardat = new Date().toLocaleString('es-ES');
             acta.tipus = 'borrador';
             acta.arbitre = arbitre;
-            
             try {
                 localStorage.setItem(key, JSON.stringify(acta));
                 mostrarAvis('✅ Borrador guardado', 'Borrador guardado para el árbitro: ' + arbitre + '\n\nPuedes cerrar esta página y volver más tarde. Tus datos no se perderán.', '💾');
@@ -412,15 +384,12 @@
                 mostrarAvis('Sin árbitro', 'Selecciona tu nombre en el desplegable "ARBITRE" primero.', '📂');
                 return;
             }
-            
             var borrador = localStorage.getItem(key);
             if (!borrador) {
                 mostrarAvis('Sin borrador', 'No hay ningún borrador guardado para este árbitro.', '📂');
                 return;
             }
-            
             if (!confirm('¿Recuperar el borrador guardado? Se perderán los cambios actuales no guardados.')) return;
-            
             try {
                 var data = JSON.parse(borrador);
                 aplicarDadesActa(data);
@@ -439,7 +408,6 @@
                 return;
             }
             if (!confirm('¿Seguro que quieres borrar el borrador guardado? Esta acción no se puede deshacer.')) return;
-            
             localStorage.removeItem(key);
             document.getElementById('info-borrador').classList.remove('visible');
             mostrarAvis('🗑️ Borrador eliminado', 'El borrador ha sido eliminado correctamente.', '🗑️');
@@ -475,9 +443,7 @@
                 setTimeout(function() {
                     document.getElementById('partido').value = data.partido;
                     cargarDatosPartido();
-                    setTimeout(function() {
-                        aplicarDadesJugadors(data);
-                    }, 500);
+                    setTimeout(function() { aplicarDadesJugadors(data); }, 500);
                 }, 300);
             }
             if (data.dia) document.getElementById('dia').value = data.dia;
@@ -490,22 +456,16 @@
         }
 
         function aplicarDadesJugadors(data) {
-            if (data.jugadorsLocal && data.jugadorsLocal.length > 0) {
-                aplicarJugadorsEquip('local', data.jugadorsLocal);
-            }
-            if (data.jugadorsVisitant && data.jugadorsVisitant.length > 0) {
-                aplicarJugadorsEquip('visitant', data.jugadorsVisitant);
-            }
+            if (data.jugadorsLocal && data.jugadorsLocal.length > 0) aplicarJugadorsEquip('local', data.jugadorsLocal);
+            if (data.jugadorsVisitant && data.jugadorsVisitant.length > 0) aplicarJugadorsEquip('visitant', data.jugadorsVisitant);
         }
 
         function aplicarJugadorsEquip(tipus, jugadorsGuardats) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             container.innerHTML = '';
-            
             jugadorsGuardats.forEach(function(j) {
                 afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null);
             });
-            
             setTimeout(function() {
                 var rows = container.querySelectorAll('.player-row');
                 rows.forEach(function(row, idx) {
@@ -523,9 +483,7 @@
                         }
                         if (j.targetes && j.targetes.length > 0) {
                             var btnAdd = row.querySelector('.btn-add-targeta');
-                            j.targetes.forEach(function(t) {
-                                if (btnAdd) afegirTargeta(btnAdd);
-                            });
+                            j.targetes.forEach(function(t) { if (btnAdd) afegirTargeta(btnAdd); });
                             setTimeout(function() {
                                 var targetesItems = row.querySelectorAll('.targeta-item');
                                 targetesItems.forEach(function(tItem, tIdx) {
@@ -535,11 +493,7 @@
                                         var inputMinut = tItem.querySelector('.targeta-minut');
                                         var selectMotiu = tItem.querySelector('.targeta-motiu');
                                         var inputMotiuExpulsio = tItem.querySelector('.targeta-motiu-expulsio');
-                                        
-                                        if (selectTipus && t.tipus) {
-                                            selectTipus.value = t.tipus;
-                                            canviarTipusTargeta(selectTipus);
-                                        }
+                                        if (selectTipus && t.tipus) { selectTipus.value = t.tipus; canviarTipusTargeta(selectTipus); }
                                         if (inputMinut && t.minut) inputMinut.value = t.minut;
                                         if (selectMotiu && t.motiu) selectMotiu.value = t.motiu;
                                         if (inputMotiuExpulsio && t.motiuExpulsio) inputMotiuExpulsio.value = t.motiuExpulsio;
@@ -552,18 +506,15 @@
             }, 300);
         }
 
-        // ==================== CONFIRMAR ENVIAR (VÍA WHATSAPP) ====================
         function confirmarEnviar() {
             if (!document.getElementById('jornada').value || !document.getElementById('partido').value) {
                 mostrarAvis('⚠️ Datos incompletos', 'Debes seleccionar jornada y partido antes de enviar.', '⚠️');
                 return;
             }
-            
             if (!document.getElementById('arbitre').value) {
                 mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de enviar.', '⚠️');
                 return;
             }
-            
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
             var errorMotiu = false;
             targetesRoges.forEach(function(select) {
@@ -575,12 +526,10 @@
                     inputMotiu.focus();
                 }
             });
-            
             if (errorMotiu) {
                 mostrarAvis('⚠️ Motiu obligatori', 'Totes les targetes roges directes han de tenir un motiu d\'expulsió!', '⚠️');
                 return;
             }
-            
             if (!confirm('¿Generar mensaje de WhatsApp para enviar el acta?')) return;
             
             var jornada = document.getElementById('jornada').value;
@@ -599,25 +548,26 @@
             var resultatVisitant = document.getElementById('resultatVisitant').value || '0';
             texto += '🏆 *RESULTADO: ' + resultatLocal + ' - ' + resultatVisitant + '*\n\n';
             
-            // Jugadores Local
-            texto += '🟢 *LOCAL - ' + partidoData.local + '*\n';
+            // Jugadores Local - con camiseta verde
+            texto += '👕🟢 *LOCAL - ' + partidoData.local + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
             var jugadorsLocal = recollirJugadors('local', true);
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'titular') {
-                    texto += '• ' + j.dorsal + ' ' + j.nom;
+                    texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
+                    // Goles en línea separada con sangría
                     if (j.gols > 0) {
-                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
-                        else texto += ' ⚽x' + j.gols;
+                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
+                        else texto += '   ⚽x' + j.gols + '\n';
                     }
-                    texto += '\n';
+                    // Tarjetas en línea separada con sangría
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
-                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
-                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -627,18 +577,17 @@
             texto += '\n*SUPLENTS:*\n';
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'suplent') {
-                    texto += '• ' + j.dorsal + ' ' + j.nom;
+                    texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
                     if (j.gols > 0) {
-                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
-                        else texto += ' ⚽x' + j.gols;
+                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
+                        else texto += '   ⚽x' + j.gols + '\n';
                     }
-                    texto += '\n';
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
-                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
-                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -646,25 +595,24 @@
                 }
             });
             
-            // Jugadores Visitante
-            texto += '\n🔴 *VISITANTE - ' + partidoData.visitante + '*\n';
+            // Jugadores Visitante - con camiseta azul
+            texto += '\n👕🔵 *VISITANTE - ' + partidoData.visitante + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
             var jugadorsVisitant = recollirJugadors('visitant', true);
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'titular') {
-                    texto += '• ' + j.dorsal + ' ' + j.nom;
+                    texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
                     if (j.gols > 0) {
-                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
-                        else texto += ' ⚽x' + j.gols;
+                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
+                        else texto += '   ⚽x' + j.gols + '\n';
                     }
-                    texto += '\n';
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
-                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
-                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -674,18 +622,17 @@
             texto += '\n*SUPLENTS:*\n';
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'suplent') {
-                    texto += '• ' + j.dorsal + ' ' + j.nom;
+                    texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
                     if (j.gols > 0) {
-                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
-                        else texto += ' ⚽x' + j.gols;
+                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
+                        else texto += '   ⚽x' + j.gols + '\n';
                     }
-                    texto += '\n';
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
-                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
-                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -711,7 +658,6 @@
             mostrarAvis('✅ Mensaje generado', 'Se ha abierto WhatsApp con el acta lista para enviar. Una vez enviada, yo la procesaré desde el panel admin.', '✅');
         }
 
-        // ==================== CALENDARIO Y DATOS ====================
         function carregarCalendari() {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
             .then(r => r.json())
@@ -733,10 +679,7 @@
                 opt.text = arb;
                 select.appendChild(opt);
             });
-            
-            select.addEventListener('change', function() {
-                comprobarBorrador();
-            });
+            select.addEventListener('change', function() { comprobarBorrador(); });
         }
 
         function omplirJornades() {
@@ -763,7 +706,6 @@
             document.getElementById('nombre-visitant').textContent = '-';
             document.getElementById('escudo-local').src = '';
             document.getElementById('escudo-visitant').src = '';
-            
             if (jornada) {
                 jornada.partidos.forEach(function(p, idx) {
                     var opt = document.createElement('option');
@@ -778,19 +720,15 @@
             var jornadaNum = parseInt(document.getElementById('jornada').value);
             var partidoIdx = parseInt(document.getElementById('partido').value);
             var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
-            
             if (jornada && !isNaN(partidoIdx) && jornada.partidos[partidoIdx]) {
                 var p = jornada.partidos[partidoIdx];
                 document.getElementById('dia').value = jornada.fecha || '';
                 document.getElementById('camp').value = p.campo || '';
                 document.getElementById('hora').value = p.hora || '';
-                
                 document.getElementById('nombre-local').textContent = p.local.toUpperCase();
                 document.getElementById('escudo-local').src = escudosBaseURL + (equiposDB[p.local] || 'barbera.png');
-                
                 document.getElementById('nombre-visitant').textContent = p.visitante.toUpperCase();
                 document.getElementById('escudo-visitant').src = escudosBaseURL + (equiposDB[p.visitante] || 'can_parellada.png');
-                
                 carregarJugadorsEquip(p.local, 'local');
                 carregarJugadorsEquip(p.visitante, 'visitant');
             }
@@ -803,30 +741,23 @@
                 var jugadors = data[equip] || [];
                 var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
                 container.innerHTML = '';
-                
-                jugadors.forEach(function(j) {
-                    afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto);
-                });
+                jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto); });
             })
             .catch(function() { });
         }
 
-        function afegirJugador(tipus) {
-            afegirFilaJugador(tipus, '', '', null);
-        }
+        function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
 
         function afegirFilaJugador(tipus, dorsal, nom, foto) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             var row = document.createElement('div');
             row.className = 'player-row';
             row.dataset.tipus = tipus;
-            
             var fotoHtml = '';
             if (foto) {
                 var carpeta = (tipus === 'local') ? 'CF-Cerdanyola' : 'CF-Can-Parellada';
                 fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
             }
-            
             row.innerHTML = `
                 <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
                 <input type="text" placeholder="DNI" class="player-dni">
@@ -834,7 +765,6 @@
                     ${fotoHtml}
                     <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
                 </div>
-                
                 <div class="player-actions">
                     <div class="gol-group">
                         <label>⚽ Gols:</label>
@@ -845,39 +775,31 @@
                         <button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button>
                     </div>
                 </div>
-                
                 <div class="targetes-section">
                     <label class="targetes-label">🟨 AMONESTACIONS:</label>
                     <div class="targetes-list"></div>
                     <button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button>
                 </div>
             `;
-            
             container.appendChild(row);
         }
 
         function marcarTitular(btn) {
             var row = btn.closest('.player-row');
             var tipus = row.dataset.tipus;
-            
             if (row.dataset.condicio === 'titular') {
                 btn.classList.remove('active-titular');
                 row.dataset.condicio = '';
                 return;
             }
-            
             var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
             var titulars = 0;
-            rows.forEach(function(r) {
-                if (r.dataset.condicio === 'titular') titulars++;
-            });
-            
+            rows.forEach(function(r) { if (r.dataset.condicio === 'titular') titulars++; });
             if (titulars >= 11) {
                 mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️');
                 marcarSuplent(btn);
                 return;
             }
-            
             row.querySelector('.btn-titular').classList.add('active-titular');
             row.querySelector('.btn-suplent').classList.remove('active-suplent');
             row.dataset.condicio = 'titular';
@@ -885,14 +807,11 @@
 
         function marcarSuplent(btn) {
             var row = btn.closest('.player-row');
-            var tipus = row.dataset.tipus;
-            
             if (row.dataset.condicio === 'suplent') {
                 btn.classList.remove('active-suplent');
                 row.dataset.condicio = '';
                 return;
             }
-            
             row.querySelector('.btn-suplent').classList.add('active-suplent');
             row.querySelector('.btn-titular').classList.remove('active-titular');
             row.dataset.condicio = 'suplent';
@@ -902,16 +821,14 @@
             var targetesList = btn.previousElementSibling;
             var targeta = document.createElement('div');
             targeta.className = 'targeta-item';
-            
             targeta.innerHTML = `
                 <select class="targeta-tipus" onchange="canviarTipusTargeta(this)">
-                    <option value="groga">🟡 Groga</option>
-                    <option value="roja">🔴 Roja directa</option>
-                    <option value="segona-groga">🟡🟡 Segona groga</option>
+                    <option value="groga">🟨 Groga</option>
+                    <option value="roja">🟥 Roja directa</option>
+                    <option value="segona-groga">🟨🟨 Segona groga</option>
                 </select>
                 <input type="number" placeholder="Min'" class="targeta-minut" min="0" max="120">
                 <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
-                
                 <div class="motiu-targeta">
                     <select class="targeta-motiu">
                         <option value="">Motiu...</option>
@@ -926,13 +843,11 @@
                         <option value="9">9-Reincidir faltes</option>
                     </select>
                 </div>
-                
                 <div class="motiu-expulsio" style="display:none;">
                     <label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label>
                     <input type="text" class="targeta-motiu-expulsio" placeholder="Escriu el motiu de l'expulsió...">
                 </div>
             `;
-            
             targetesList.appendChild(targeta);
         }
 
@@ -940,22 +855,16 @@
             var targeta = select.closest('.targeta-item');
             var row = targeta.closest('.player-row');
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
-            
             if (select.value === 'roja') {
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'block';
-                
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = true;
                 btnAdd.textContent = 'Jugador expulsat';
-                
-                setTimeout(function() {
-                    motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
+                setTimeout(function() { motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             } else if (select.value === 'segona-groga') {
                 targeta.style.borderLeft = '3px solid #e74c3c';
                 motiuExpulsio.style.display = 'none';
-                
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = true;
                 btnAdd.textContent = 'Jugador expulsat';
@@ -963,7 +872,6 @@
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
                 motiuExpulsio.querySelector('input').value = '';
-                
                 var btnAdd = row.querySelector('.btn-add-targeta');
                 btnAdd.disabled = false;
                 btnAdd.textContent = '+ Afegir targeta';
@@ -974,7 +882,6 @@
             var targeta = btn.closest('.targeta-item');
             var row = targeta.closest('.player-row');
             targeta.remove();
-            
             var targetesRoges = row.querySelectorAll('.targeta-tipus[value="roja"]');
             if (targetesRoges.length === 0) {
                 var btnAdd = row.querySelector('.btn-add-targeta');
@@ -993,16 +900,13 @@
         function recollirJugadors(tipus, incluirNoConvocats) {
             var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
             var jugadors = [];
-            
             rows.forEach(function(row) {
                 var dni = row.querySelector('.player-dni').value;
                 var dorsal = row.querySelector('.player-dorsal').value;
                 var nom = row.querySelector('.player-nom').value;
                 var gols = parseInt(row.querySelector('.player-gols').value) || 0;
                 var condicio = row.dataset.condicio || '';
-                
                 if (!incluirNoConvocats && condicio !== 'titular' && condicio !== 'suplent') return;
-                
                 var targetes = [];
                 row.querySelectorAll('.targeta-item').forEach(function(t) {
                     targetes.push({
@@ -1012,14 +916,12 @@
                         motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
                     });
                 });
-                
                 jugadors.push({
                     dni: dni, dorsal: dorsal, nom: nom,
                     gols: gols, condicio: condicio,
                     targetes: targetes
                 });
             });
-            
             return jugadors;
         }
     </script>
