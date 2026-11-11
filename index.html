@@ -829,7 +829,7 @@
         }
 
         function afegirTargeta(btn) {
-            var targetesList = btn.previousElementSibling;
+            var targetesList = btn.parentElement.querySelector('.targetes-list');
             var targeta = document.createElement('div');
             targeta.className = 'targeta-item';
             targeta.innerHTML = `
@@ -883,9 +883,15 @@
                 targeta.style.borderLeft = '3px solid #f1c40f';
                 motiuExpulsio.style.display = 'none';
                 motiuExpulsio.querySelector('input').value = '';
+                var hayRoja = row.querySelectorAll('.targeta-tipus[value="roja"]').length > 0;
                 var btnAdd = row.querySelector('.btn-add-targeta');
-                btnAdd.disabled = false;
-                btnAdd.textContent = '+ Afegir targeta';
+                if (hayRoja) {
+                    btnAdd.disabled = true;
+                    btnAdd.textContent = 'Jugador expulsat';
+                } else {
+                    btnAdd.disabled = false;
+                    btnAdd.textContent = '+ Afegir targeta';
+                }
             }
         }
 
@@ -893,9 +899,12 @@
             var targeta = btn.closest('.targeta-item');
             var row = targeta.closest('.player-row');
             targeta.remove();
-            var targetesRoges = row.querySelectorAll('.targeta-tipus[value="roja"]');
-            if (targetesRoges.length === 0) {
-                var btnAdd = row.querySelector('.btn-add-targeta');
+            var hayRoja = row.querySelectorAll('.targeta-tipus[value="roja"]').length > 0;
+            var btnAdd = row.querySelector('.btn-add-targeta');
+            if (hayRoja) {
+                btnAdd.disabled = true;
+                btnAdd.textContent = 'Jugador expulsat';
+            } else {
                 btnAdd.disabled = false;
                 btnAdd.textContent = '+ Afegir targeta';
             }
