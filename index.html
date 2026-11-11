@@ -727,30 +727,30 @@
             }
             
             row.innerHTML = `
-                <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
-                <input type="text" placeholder="DNI" class="player-dni">
-                <div class="player-nom-container">
-                    ${fotoHtml}
-                    <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
-                </div>
-                
-                <div class="targetes-section">
-                    <label class="targetes-label">🟨 AMONESTACIONS:</label>
-                    <div class="targetes-list"></div>
-                    <button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button>
-                </div>
-                
-                <div class="player-actions">
-                    <div class="gol-group">
-                        <label>⚽ Gols:</label>
-                        <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
-                    </div>
-                    <div class="toggle-titular-suplent">
-                        <button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button>
-                        <button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button>
-                    </div>
-                </div>
-            `;
+    <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
+    <input type="text" placeholder="DNI" class="player-dni">
+    <div class="player-nom-container">
+        ${fotoHtml}
+        <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
+    </div>
+    
+    <div class="player-actions">
+        <div class="gol-group">
+            <label>⚽ Gols:</label>
+            <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
+        </div>
+        <div class="toggle-titular-suplent">
+            <button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button>
+            <button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button>
+        </div>
+    </div>
+    
+    <div class="targetes-section">
+        <label class="targetes-label">🟨 AMONESTACIONS:</label>
+        <div class="targetes-list"></div>
+        <button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button>
+    </div>
+`;
             
             container.appendChild(row);
         }
