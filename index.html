@@ -32,7 +32,7 @@
         .legend ol { margin: 10px 0; padding-left: 20px; }
         .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
         
-        /* Botones de acción (borrador + enviar) */
+        /* Botones de acción */
         .accions-acta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
         .accions-acta .btn { flex: 1; min-width: 150px; margin-top: 0; }
         .btn-borrador { background-color: #f39c12 !important; color: #0b1d15 !important; }
@@ -290,7 +290,6 @@
             "C.E. Bigues i Riells": "bigues.png"
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
-        var BORRADOR_KEY = 'acta_borrador_veterans';
 
         // ==================== LOGIN ====================
         function verificarAccesoArbitro() {
@@ -555,19 +554,16 @@
 
         // ==================== CONFIRMAR ENVIAR (VÍA WHATSAPP) ====================
         function confirmarEnviar() {
-            // Validar que hay partido seleccionado
             if (!document.getElementById('jornada').value || !document.getElementById('partido').value) {
                 mostrarAvis('⚠️ Datos incompletos', 'Debes seleccionar jornada y partido antes de enviar.', '⚠️');
                 return;
             }
             
-            // Validar que hay árbitro seleccionado
             if (!document.getElementById('arbitre').value) {
                 mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de enviar.', '⚠️');
                 return;
             }
             
-            // Validar rojas directas con motivo
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"]');
             var errorMotiu = false;
             targetesRoges.forEach(function(select) {
@@ -587,7 +583,6 @@
             
             if (!confirm('¿Generar mensaje de WhatsApp para enviar el acta?')) return;
             
-            // Generar mensaje de WhatsApp
             var jornada = document.getElementById('jornada').value;
             var partido = document.getElementById('partido').value;
             var jornadaData = calendario.find(function(j) { return j.jornada == jornada; });
@@ -612,30 +607,42 @@
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'titular') {
                     texto += '• ' + j.dorsal + ' ' + j.nom;
-                    if (j.gols > 0) texto += ' ⚽'.repeat(j.gols);
-                    if (j.targetes && j.targetes.length > 0) {
-                        j.targetes.forEach(function(t) {
-                            if (t.tipus === 'groga') texto += ' 🟡' + (t.minut ? t.minut + '\'' : '');
-                            else if (t.tipus === 'roja') texto += ' 🔴' + (t.minut ? t.minut + '\'' : '') + (t.motiuExpulsio ? ' - ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') texto += ' 🟡🟡' + (t.minut ? t.minut + '\'' : '');
-                        });
+                    if (j.gols > 0) {
+                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
+                        else texto += ' ⚽x' + j.gols;
                     }
                     texto += '\n';
+                    if (j.targetes && j.targetes.length > 0) {
+                        j.targetes.forEach(function(t) {
+                            var lineaTarjeta = '   ';
+                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
+                            texto += lineaTarjeta + '\n';
+                        });
+                    }
                 }
             });
             texto += '\n*SUPLENTS:*\n';
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'suplent') {
                     texto += '• ' + j.dorsal + ' ' + j.nom;
-                    if (j.gols > 0) texto += ' ⚽'.repeat(j.gols);
-                    if (j.targetes && j.targetes.length > 0) {
-                        j.targetes.forEach(function(t) {
-                            if (t.tipus === 'groga') texto += ' 🟡' + (t.minut ? t.minut + '\'' : '');
-                            else if (t.tipus === 'roja') texto += ' 🔴' + (t.minut ? t.minut + '\'' : '') + (t.motiuExpulsio ? ' - ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') texto += ' 🟡🟡' + (t.minut ? t.minut + '\'' : '');
-                        });
+                    if (j.gols > 0) {
+                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
+                        else texto += ' ⚽x' + j.gols;
                     }
                     texto += '\n';
+                    if (j.targetes && j.targetes.length > 0) {
+                        j.targetes.forEach(function(t) {
+                            var lineaTarjeta = '   ';
+                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
+                            texto += lineaTarjeta + '\n';
+                        });
+                    }
                 }
             });
             
@@ -647,34 +654,45 @@
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'titular') {
                     texto += '• ' + j.dorsal + ' ' + j.nom;
-                    if (j.gols > 0) texto += ' ⚽'.repeat(j.gols);
-                    if (j.targetes && j.targetes.length > 0) {
-                        j.targetes.forEach(function(t) {
-                            if (t.tipus === 'groga') texto += ' 🟡' + (t.minut ? t.minut + '\'' : '');
-                            else if (t.tipus === 'roja') texto += ' 🔴' + (t.minut ? t.minut + '\'' : '') + (t.motiuExpulsio ? ' - ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') texto += ' 🟡🟡' + (t.minut ? t.minut + '\'' : '');
-                        });
+                    if (j.gols > 0) {
+                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
+                        else texto += ' ⚽x' + j.gols;
                     }
                     texto += '\n';
+                    if (j.targetes && j.targetes.length > 0) {
+                        j.targetes.forEach(function(t) {
+                            var lineaTarjeta = '   ';
+                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
+                            texto += lineaTarjeta + '\n';
+                        });
+                    }
                 }
             });
             texto += '\n*SUPLENTS:*\n';
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'suplent') {
                     texto += '• ' + j.dorsal + ' ' + j.nom;
-                    if (j.gols > 0) texto += ' ⚽'.repeat(j.gols);
-                    if (j.targetes && j.targetes.length > 0) {
-                        j.targetes.forEach(function(t) {
-                            if (t.tipus === 'groga') texto += ' 🟡' + (t.minut ? t.minut + '\'' : '');
-                            else if (t.tipus === 'roja') texto += ' 🔴' + (t.minut ? t.minut + '\'' : '') + (t.motiuExpulsio ? ' - ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') texto += ' 🟡🟡' + (t.minut ? t.minut + '\'' : '');
-                        });
+                    if (j.gols > 0) {
+                        if (j.gols <= 3) texto += ' ⚽'.repeat(j.gols);
+                        else texto += ' ⚽x' + j.gols;
                     }
                     texto += '\n';
+                    if (j.targetes && j.targetes.length > 0) {
+                        j.targetes.forEach(function(t) {
+                            var lineaTarjeta = '   ';
+                            if (t.tipus === 'groga') lineaTarjeta += '🟡 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') lineaTarjeta += '🔴 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟡🟡 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
+                            texto += lineaTarjeta + '\n';
+                        });
+                    }
                 }
             });
             
-            // Observaciones
             var observacions = document.getElementById('observacions').value;
             if (observacions) {
                 texto += '\n📝 *OBSERVACIONES:*\n' + observacions + '\n';
@@ -682,12 +700,10 @@
             
             texto += '\nPor favor, valida esta acta. ¡Gracias!';
             
-            // Abrir WhatsApp
             var numeroAdmin = '34617417827';
             var url = 'https://wa.me/' + numeroAdmin + '?text=' + encodeURIComponent(texto);
             window.open(url, '_blank');
             
-            // Borrar el borrador del árbitro
             var key = getBorradorKey();
             if (key) localStorage.removeItem(key);
             document.getElementById('info-borrador').classList.remove('visible');
@@ -718,7 +734,6 @@
                 select.appendChild(opt);
             });
             
-            // Cuando el árbitro cambia, buscar su borrador
             select.addEventListener('change', function() {
                 comprobarBorrador();
             });
@@ -842,39 +857,36 @@
         }
 
         function marcarTitular(btn) {
-    var row = btn.closest('.player-row');
-    var tipus = row.dataset.tipus;
-    
-    // Si ya está marcado como titular → DESELECCIONAR
-    if (row.dataset.condicio === 'titular') {
-        btn.classList.remove('active-titular');
-        row.dataset.condicio = '';
-        return;
-    }
-    
-    // Validar que no haya ya 11 titulares
-    var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
-    var titulars = 0;
-    rows.forEach(function(r) {
-        if (r.dataset.condicio === 'titular') titulars++;
-    });
-    
-    if (titulars >= 11) {
-        mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️');
-        marcarSuplent(btn);
-        return;
-    }
-    
-    row.querySelector('.btn-titular').classList.add('active-titular');
-    row.querySelector('.btn-suplent').classList.remove('active-suplent');
-    row.dataset.condicio = 'titular';
-}
+            var row = btn.closest('.player-row');
+            var tipus = row.dataset.tipus;
+            
+            if (row.dataset.condicio === 'titular') {
+                btn.classList.remove('active-titular');
+                row.dataset.condicio = '';
+                return;
+            }
+            
+            var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
+            var titulars = 0;
+            rows.forEach(function(r) {
+                if (r.dataset.condicio === 'titular') titulars++;
+            });
+            
+            if (titulars >= 11) {
+                mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️');
+                marcarSuplent(btn);
+                return;
+            }
+            
+            row.querySelector('.btn-titular').classList.add('active-titular');
+            row.querySelector('.btn-suplent').classList.remove('active-suplent');
+            row.dataset.condicio = 'titular';
+        }
 
         function marcarSuplent(btn) {
             var row = btn.closest('.player-row');
             var tipus = row.dataset.tipus;
             
-            // Si ya está marcado como suplent → DESELECCIONAR
             if (row.dataset.condicio === 'suplent') {
                 btn.classList.remove('active-suplent');
                 row.dataset.condicio = '';
