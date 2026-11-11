@@ -842,20 +842,33 @@
         }
 
         function marcarTitular(btn) {
-            var row = btn.closest('.player-row');
-            var tipus = row.dataset.tipus;
-            
-            // Si ya está marcado como titular → DESELECCIONAR
-            if (row.dataset.condicio === 'titular') {
-                btn.classList.remove('active-titular');
-                row.dataset.condicio = '';
-                return;
-            }
-            
-            row.querySelector('.btn-titular').classList.add('active-titular');
-            row.querySelector('.btn-suplent').classList.remove('active-suplent');
-            row.dataset.condicio = 'titular';
-        }
+    var row = btn.closest('.player-row');
+    var tipus = row.dataset.tipus;
+    
+    // Si ya está marcado como titular → DESELECCIONAR
+    if (row.dataset.condicio === 'titular') {
+        btn.classList.remove('active-titular');
+        row.dataset.condicio = '';
+        return;
+    }
+    
+    // Validar que no haya ya 11 titulares
+    var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
+    var titulars = 0;
+    rows.forEach(function(r) {
+        if (r.dataset.condicio === 'titular') titulars++;
+    });
+    
+    if (titulars >= 11) {
+        mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️');
+        marcarSuplent(btn);
+        return;
+    }
+    
+    row.querySelector('.btn-titular').classList.add('active-titular');
+    row.querySelector('.btn-suplent').classList.remove('active-suplent');
+    row.dataset.condicio = 'titular';
+}
 
         function marcarSuplent(btn) {
             var row = btn.closest('.player-row');
