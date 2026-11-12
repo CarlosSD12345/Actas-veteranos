@@ -82,6 +82,14 @@
         .player-foto { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #2ecc71; flex-shrink: 0; }
         .player-nom-container { display: flex; align-items: center; flex: 1; min-width: 150px; }
         
+        /* Cuerpo Técnico */
+        .cuerpo-tecnico { margin-top: 15px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px dashed #2ecc71; }
+        .cuerpo-tecnico h4 { color: #2ecc71; margin: 0 0 10px 0; font-size: 0.95rem; }
+        .cuerpo-tecnico .ct-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap; }
+        .cuerpo-tecnico .ct-row label { margin: 0; min-width: 100px; font-size: 0.85rem; color: #a3b8af; }
+        .cuerpo-tecnico .ct-row select { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
+        .cuerpo-tecnico .ct-row input { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
+        
         #modal-avis {
             display: none;
             position: fixed;
@@ -129,6 +137,8 @@
             .targeta-item select, .targeta-item input { width: 100%; min-width: auto; }
             .btn { font-size: 1rem; padding: 14px; }
             .accions-acta { flex-direction: column; }
+            .cuerpo-tecnico .ct-row { flex-direction: column; align-items: stretch; }
+            .cuerpo-tecnico .ct-row label { min-width: auto; }
         }
     </style>
 </head>
@@ -201,21 +211,71 @@
                 </div>
             </div>
 
+            <!-- Equipo Local -->
             <div class="team-section">
                 <div class="team-header">
                     <div class="team-title">🟢 EQUIP LOCAL</div>
                     <img src="" alt="Escudo Local" class="team-badge" id="escudo-local">
                     <div class="team-name" id="nombre-local">-</div>
                 </div>
+                <!-- Cuerpo Técnico Local -->
+                <div class="cuerpo-tecnico" id="ct-local" style="display:none;">
+                    <h4>👥 CUERPO TÉCNICO</h4>
+                    <div class="ct-row">
+                        <label>🧑‍💼 Entrenador:</label>
+                        <select id="ct-local-entrenador-select" onchange="onSelectCT('local','entrenador')">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div class="ct-row">
+                        <label style="visibility:hidden;">Entrenador:</label>
+                        <input type="text" id="ct-local-entrenador-input" placeholder="O escribe nombre nuevo...">
+                    </div>
+                    <div class="ct-row" style="margin-top:10px;">
+                        <label>👔 Delegado:</label>
+                        <select id="ct-local-delegado-select" onchange="onSelectCT('local','delegado')">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div class="ct-row">
+                        <label style="visibility:hidden;">Delegado:</label>
+                        <input type="text" id="ct-local-delegado-input" placeholder="O escribe nombre nuevo...">
+                    </div>
+                </div>
                 <div id="jugadorsLocal"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
             </div>
 
+            <!-- Equipo Visitante -->
             <div class="team-section visitant">
                 <div class="team-header">
                     <div class="team-title">🔵 EQUIP VISITANT</div>
                     <img src="" alt="Escudo Visitante" class="team-badge" id="escudo-visitant">
                     <div class="team-name" id="nombre-visitant">-</div>
+                </div>
+                <!-- Cuerpo Técnico Visitante -->
+                <div class="cuerpo-tecnico" id="ct-visitant" style="display:none;">
+                    <h4>👥 CUERPO TÉCNICO</h4>
+                    <div class="ct-row">
+                        <label>🧑‍💼 Entrenador:</label>
+                        <select id="ct-visitant-entrenador-select" onchange="onSelectCT('visitant','entrenador')">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div class="ct-row">
+                        <label style="visibility:hidden;">Entrenador:</label>
+                        <input type="text" id="ct-visitant-entrenador-input" placeholder="O escribe nombre nuevo...">
+                    </div>
+                    <div class="ct-row" style="margin-top:10px;">
+                        <label>👔 Delegado:</label>
+                        <select id="ct-visitant-delegado-select" onchange="onSelectCT('visitant','delegado')">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div class="ct-row">
+                        <label style="visibility:hidden;">Delegado:</label>
+                        <input type="text" id="ct-visitant-delegado-input" placeholder="O escribe nombre nuevo...">
+                    </div>
                 </div>
                 <div id="jugadorsVisitant"></div>
                 <button class="btn btn-secondary" onclick="afegirJugador('visitant')">+ Afegir jugador</button>
@@ -276,14 +336,11 @@
             "C.E. Bigues i Riells": "bigues.png"
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
+        var cuerpoTecnicoDB = {};
 
         function togglePassword() {
             var input = document.getElementById('password-arbitro');
-            if (input.type === 'password') {
-                input.type = 'text';
-            } else {
-                input.type = 'password';
-            }
+            if (input.type === 'password') { input.type = 'text'; } else { input.type = 'password'; }
         }
 
         function verificarAccesoArbitro() {
@@ -317,6 +374,7 @@
             }
             carregarCalendari();
             carregarArbitres();
+            cargarCuerpoTecnicoDB();
             inicialitzarFormulari();
         });
 
@@ -326,6 +384,97 @@
             }
         });
 
+        // ==================== CUERPO TÉCNICO DB ====================
+        function cargarCuerpoTecnicoDB() {
+            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/cuerpoTecnico.json?t=' + Date.now())
+            .then(function(r) {
+                if (r.status === 404) { cuerpoTecnicoDB = {}; return; }
+                return r.json();
+            })
+            .then(function(data) {
+                if (data && typeof data === 'object') {
+                    cuerpoTecnicoDB = data;
+                } else {
+                    cuerpoTecnicoDB = {};
+                }
+            })
+            .catch(function() { cuerpoTecnicoDB = {}; });
+        }
+
+        function actualizarSelectsCT(equipoNombre, tipus) {
+            var ct = cuerpoTecnicoDB[equipoNombre] || { entrenador: [], delegado: [] };
+            var selectEnt = document.getElementById('ct-' + tipus + '-entrenador-select');
+            var selectDel = document.getElementById('ct-' + tipus + '-delegado-select');
+            
+            var valEnt = selectEnt.value;
+            var valDel = selectDel.value;
+            
+            selectEnt.innerHTML = '<option value="">-- Seleccionar --</option>';
+            selectDel.innerHTML = '<option value="">-- Seleccionar --</option>';
+            
+            ct.entrenador.forEach(function(n) {
+                var opt = document.createElement('option');
+                opt.value = n;
+                opt.text = n;
+                selectEnt.appendChild(opt);
+            });
+            ct.delegado.forEach(function(n) {
+                var opt = document.createElement('option');
+                opt.value = n;
+                opt.text = n;
+                selectDel.appendChild(opt);
+            });
+            
+            selectEnt.value = valEnt;
+            selectDel.value = valDel;
+        }
+
+        function onSelectCT(tipus, rol) {
+            var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
+            var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
+            if (select.value !== '') {
+                input.value = '';
+                input.style.opacity = '0.4';
+                input.disabled = true;
+            } else {
+                input.style.opacity = '1';
+                input.disabled = false;
+                input.focus();
+            }
+        }
+
+        function getCTValor(tipus, rol) {
+            var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
+            var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
+            if (select && select.value !== '') return select.value.trim();
+            if (input && input.value.trim() !== '') return input.value.trim();
+            return '';
+        }
+
+        function setCTValor(tipus, rol, valor) {
+            var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
+            var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
+            if (!select || !input) return;
+            var encontrado = false;
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === valor) {
+                    select.value = valor;
+                    input.value = '';
+                    input.disabled = true;
+                    input.style.opacity = '0.4';
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) {
+                select.value = '';
+                input.value = valor;
+                input.disabled = false;
+                input.style.opacity = '1';
+            }
+        }
+
+        // ==================== MODAL AVISO ====================
         function mostrarAvis(titol, text, icon) {
             document.getElementById('modal-avis-titol').textContent = titol;
             document.getElementById('modal-avis-text').textContent = text;
@@ -341,6 +490,7 @@
             if (e.target === this) tancarModalAvis();
         });
 
+        // ==================== SISTEMA DE BORRADOR ====================
         function getBorradorKey() {
             var arbitre = document.getElementById('arbitre').value;
             if (!arbitre) return null;
@@ -443,6 +593,14 @@
                 arbitre: document.getElementById('arbitre').value,
                 equipLocal: document.getElementById('nombre-local').textContent,
                 equipVisitant: document.getElementById('nombre-visitant').textContent,
+                cuerpoTecnicoLocal: {
+                    entrenador: getCTValor('local', 'entrenador'),
+                    delegado: getCTValor('local', 'delegado')
+                },
+                cuerpoTecnicoVisitant: {
+                    entrenador: getCTValor('visitant', 'entrenador'),
+                    delegado: getCTValor('visitant', 'delegado')
+                },
                 jugadorsLocal: recollirJugadors('local', true),
                 jugadorsVisitant: recollirJugadors('visitant', true),
                 observacions: document.getElementById('observacions').value
@@ -456,7 +614,17 @@
                 setTimeout(function() {
                     document.getElementById('partido').value = data.partido;
                     cargarDatosPartido();
-                    setTimeout(function() { aplicarDadesJugadors(data); }, 500);
+                    setTimeout(function() {
+                        aplicarDadesJugadors(data);
+                        if (data.cuerpoTecnicoLocal) {
+                            if (data.cuerpoTecnicoLocal.entrenador) setCTValor('local', 'entrenador', data.cuerpoTecnicoLocal.entrenador);
+                            if (data.cuerpoTecnicoLocal.delegado) setCTValor('local', 'delegado', data.cuerpoTecnicoLocal.delegado);
+                        }
+                        if (data.cuerpoTecnicoVisitant) {
+                            if (data.cuerpoTecnicoVisitant.entrenador) setCTValor('visitant', 'entrenador', data.cuerpoTecnicoVisitant.entrenador);
+                            if (data.cuerpoTecnicoVisitant.delegado) setCTValor('visitant', 'delegado', data.cuerpoTecnicoVisitant.delegado);
+                        }
+                    }, 500);
                 }, 300);
             }
             if (data.dia) document.getElementById('dia').value = data.dia;
@@ -519,6 +687,7 @@
             }, 300);
         }
 
+        // ==================== CONFIRMAR ENVIAR (VÍA WHATSAPP) ====================
         function confirmarEnviar() {
             if (!document.getElementById('jornada').value || !document.getElementById('partido').value) {
                 mostrarAvis('⚠️ Datos incompletos', 'Debes seleccionar jornada y partido antes de enviar.', '⚠️');
@@ -560,6 +729,16 @@
             var resultatLocal = document.getElementById('resultatLocal').value || '0';
             var resultatVisitant = document.getElementById('resultatVisitant').value || '0';
             texto += '🏆 *RESULTADO: ' + resultatLocal + ' - ' + resultatVisitant + '*\n\n';
+            
+            // Cuerpo Técnico Local
+            var ctLocalEnt = getCTValor('local', 'entrenador');
+            var ctLocalDel = getCTValor('local', 'delegado');
+            if (ctLocalEnt || ctLocalDel) {
+                texto += '👥 *CUERPO TÉCNICO LOCAL:*\n';
+                if (ctLocalEnt) texto += '   🧑‍💼 Entrenador: ' + ctLocalEnt + '\n';
+                if (ctLocalDel) texto += '   👔 Delegado: ' + ctLocalDel + '\n';
+                texto += '\n';
+            }
             
             // Jugadores Local
             texto += '👕 *LOCAL - ' + partidoData.local + '*\n';
@@ -605,6 +784,15 @@
                     }
                 }
             });
+            
+            // Cuerpo Técnico Visitante
+            var ctVisitEnt = getCTValor('visitant', 'entrenador');
+            var ctVisitDel = getCTValor('visitant', 'delegado');
+            if (ctVisitEnt || ctVisitDel) {
+                texto += '\n👥 *CUERPO TÉCNICO VISITANTE:*\n';
+                if (ctVisitEnt) texto += '   🧑‍💼 Entrenador: ' + ctVisitEnt + '\n';
+                if (ctVisitDel) texto += '   👔 Delegado: ' + ctVisitDel + '\n';
+            }
             
             // Jugadores Visitante
             texto += '\n👕 *VISITANTE - ' + partidoData.visitante + '*\n';
@@ -669,6 +857,7 @@
             mostrarAvis('✅ Mensaje generado', 'Se ha abierto WhatsApp con el acta lista para enviar. Una vez enviada, yo la procesaré desde el panel admin.', '✅');
         }
 
+        // ==================== CALENDARIO Y DATOS ====================
         function carregarCalendari() {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
             .then(r => r.json())
@@ -717,6 +906,8 @@
             document.getElementById('nombre-visitant').textContent = '-';
             document.getElementById('escudo-local').src = '';
             document.getElementById('escudo-visitant').src = '';
+            document.getElementById('ct-local').style.display = 'none';
+            document.getElementById('ct-visitant').style.display = 'none';
             if (jornada) {
                 jornada.partidos.forEach(function(p, idx) {
                     var opt = document.createElement('option');
@@ -740,6 +931,13 @@
                 document.getElementById('escudo-local').src = escudosBaseURL + (equiposDB[p.local] || 'barbera.png');
                 document.getElementById('nombre-visitant').textContent = p.visitante.toUpperCase();
                 document.getElementById('escudo-visitant').src = escudosBaseURL + (equiposDB[p.visitante] || 'can_parellada.png');
+                
+                // Mostrar cuerpo técnico y cargar nombres conocidos
+                document.getElementById('ct-local').style.display = 'block';
+                document.getElementById('ct-visitant').style.display = 'block';
+                actualizarSelectsCT(p.local, 'local');
+                actualizarSelectsCT(p.visitante, 'visitant');
+                
                 carregarJugadorsEquip(p.local, 'local');
                 carregarJugadorsEquip(p.visitante, 'visitant');
             }
