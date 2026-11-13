@@ -90,7 +90,7 @@
         .cuerpo-tecnico .ct-row select { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
         .cuerpo-tecnico .ct-row input { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
         
-        /* Tarjetas Cuerpo Técnico */
+        /* Tarjetas Cuerpo Técnico separadas por rol */
         .ct-targetes { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #2ecc71; }
         .ct-targetes h4 { color: #f1c40f; margin: 0 0 8px 0; font-size: 0.9rem; }
         .ct-targetes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
@@ -254,10 +254,18 @@
                         <label style="visibility:hidden;">Delegado:</label>
                         <input type="text" id="ct-local-delegado-input" placeholder="O escribe nombre nuevo...">
                     </div>
+                    
+                    <!-- Tarjetas Entrenador -->
                     <div class="ct-targetes">
-                        <h4>🟨🟥 TARJETAS DEL CUERPO TÉCNICO</h4>
-                        <div class="ct-targetes-list" id="ct-local-targetes-list"></div>
-                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('local')" style="margin-top:8px;">+ Añadir tarjeta CT</button>
+                        <h4>🟨🟥 TARJETAS DEL ENTRENADOR</h4>
+                        <div class="ct-targetes-list" id="ct-local-entrenador-targetes-list"></div>
+                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('local', 'entrenador')" style="margin-top:8px;">+ Añadir tarjeta Entrenador</button>
+                    </div>
+                    <!-- Tarjetas Delegado -->
+                    <div class="ct-targetes" style="margin-top: 15px;">
+                        <h4>🟨🟥 TARJETAS DEL DELEGADO</h4>
+                        <div class="ct-targetes-list" id="ct-local-delegado-targetes-list"></div>
+                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('local', 'delegado')" style="margin-top:8px;">+ Añadir tarjeta Delegado</button>
                     </div>
                 </div>
                 <div id="jugadorsLocal"></div>
@@ -294,10 +302,18 @@
                         <label style="visibility:hidden;">Delegado:</label>
                         <input type="text" id="ct-visitant-delegado-input" placeholder="O escribe nombre nuevo...">
                     </div>
+                    
+                    <!-- Tarjetas Entrenador -->
                     <div class="ct-targetes">
-                        <h4>🟨🟥 TARJETAS DEL CUERPO TÉCNICO</h4>
-                        <div class="ct-targetes-list" id="ct-visitant-targetes-list"></div>
-                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('visitant')" style="margin-top:8px;">+ Añadir tarjeta CT</button>
+                        <h4>🟨🟥 TARJETAS DEL ENTRENADOR</h4>
+                        <div class="ct-targetes-list" id="ct-visitant-entrenador-targetes-list"></div>
+                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('visitant', 'entrenador')" style="margin-top:8px;">+ Añadir tarjeta Entrenador</button>
+                    </div>
+                    <!-- Tarjetas Delegado -->
+                    <div class="ct-targetes" style="margin-top: 15px;">
+                        <h4>🟨🟥 TARJETAS DEL DELEGADO</h4>
+                        <div class="ct-targetes-list" id="ct-visitant-delegado-targetes-list"></div>
+                        <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('visitant', 'delegado')" style="margin-top:8px;">+ Añadir tarjeta Delegado</button>
                     </div>
                 </div>
                 <div id="jugadorsVisitant"></div>
@@ -498,12 +514,15 @@
         }
 
         // ==================== TARJETAS CUERPO TÉCNICO ====================
-        function afegirTargetaCT(tipus) {
-            var lista = document.getElementById('ct-' + tipus + '-targetes-list');
+        function afegirTargetaCT(tipus, rol) {
+            var listaId = 'ct-' + tipus + '-' + rol + '-targetes-list';
+            var lista = document.getElementById(listaId);
+            if (!lista) return;
+            
             var targeta = document.createElement('div');
             targeta.className = 'ct-targeta-item';
             targeta.innerHTML = `
-                <select class="ct-targeta-tipus" onchange="canviarTipusTargetaCT(this, '${tipus}')">
+                <select class="ct-targeta-tipus" onchange="canviarTipusTargetaCT(this)">
                     <option value="groga">🟨 Amarilla</option>
                     <option value="roja">🟥 Roja directa</option>
                     <option value="segona-groga">🟨🟨 Doble amarilla</option>
@@ -532,7 +551,7 @@
             lista.appendChild(targeta);
         }
 
-        function canviarTipusTargetaCT(select, tipus) {
+        function canviarTipusTargetaCT(select) {
             var targeta = select.closest('.ct-targeta-item');
             var motiuExpulsio = targeta.querySelector('.ct-motiu-expulsio');
             if (select.value === 'roja') {
@@ -554,35 +573,39 @@
         }
 
         function recollirTargetesCT(tipus) {
-            var lista = document.getElementById('ct-' + tipus + '-targetes-list');
-            if (!lista) return [];
-            var targetes = [];
-            lista.querySelectorAll('.ct-targeta-item').forEach(function(t) {
-                targetes.push({
-                    tipus: t.querySelector('.ct-targeta-tipus').value,
-                    minut: t.querySelector('.ct-targeta-minut').value,
-                    motiu: t.querySelector('.ct-targeta-motiu-select').value,
-                    motiuExpulsio: t.querySelector('.ct-targeta-motiu-expulsio').value
+            var targetes = { entrenador: [], delegado: [] };
+            ['entrenador', 'delegado'].forEach(function(rol) {
+                var lista = document.getElementById('ct-' + tipus + '-' + rol + '-targetes-list');
+                if (!lista) return;
+                lista.querySelectorAll('.ct-targeta-item').forEach(function(t) {
+                    targetes[rol].push({
+                        tipus: t.querySelector('.ct-targeta-tipus').value,
+                        minut: t.querySelector('.ct-targeta-minut').value,
+                        motiu: t.querySelector('.ct-targeta-motiu-select').value,
+                        motiuExpulsio: t.querySelector('.ct-targeta-motiu-expulsio').value
+                    });
                 });
             });
             return targetes;
         }
 
-        function aplicarTargetesCT(tipus, targetes) {
-            var lista = document.getElementById('ct-' + tipus + '-targetes-list');
-            if (!lista) return;
-            lista.innerHTML = '';
-            targetes.forEach(function(t) {
-                afegirTargetaCT(tipus);
-                var items = lista.querySelectorAll('.ct-targeta-item');
-                var lastItem = items[items.length - 1];
-                if (lastItem) {
-                    lastItem.querySelector('.ct-targeta-tipus').value = t.tipus || 'groga';
-                    lastItem.querySelector('.ct-targeta-minut').value = t.minut || '';
-                    lastItem.querySelector('.ct-targeta-motiu-select').value = t.motiu || '';
-                    if (t.motiuExpulsio) lastItem.querySelector('.ct-targeta-motiu-expulsio').value = t.motiuExpulsio;
-                    canviarTipusTargetaCT(lastItem.querySelector('.ct-targeta-tipus'), tipus);
-                }
+        function aplicarTargetesCT(tipus, targetesObj) {
+            ['entrenador', 'delegado'].forEach(function(rol) {
+                var lista = document.getElementById('ct-' + tipus + '-' + rol + '-targetes-list');
+                if (!lista || !targetesObj || !targetesObj[rol]) return;
+                lista.innerHTML = '';
+                targetesObj[rol].forEach(function(t) {
+                    afegirTargetaCT(tipus, rol);
+                    var items = lista.querySelectorAll('.ct-targeta-item');
+                    var lastItem = items[items.length - 1];
+                    if (lastItem) {
+                        lastItem.querySelector('.ct-targeta-tipus').value = t.tipus || 'groga';
+                        lastItem.querySelector('.ct-targeta-minut').value = t.minut || '';
+                        lastItem.querySelector('.ct-targeta-motiu-select').value = t.motiu || '';
+                        if (t.motiuExpulsio) lastItem.querySelector('.ct-targeta-motiu-expulsio').value = t.motiuExpulsio;
+                        canviarTipusTargetaCT(lastItem.querySelector('.ct-targeta-tipus'));
+                    }
+                });
             });
         }
 
@@ -850,13 +873,24 @@
             var ctLocalEnt = getCTValor('local', 'entrenador');
             var ctLocalDel = getCTValor('local', 'delegado');
             var ctLocalTargetes = recollirTargetesCT('local');
-            if (ctLocalEnt || ctLocalDel || ctLocalTargetes.length > 0) {
+            if (ctLocalEnt || ctLocalDel || (ctLocalTargetes.entrenador && ctLocalTargetes.entrenador.length > 0) || (ctLocalTargetes.delegado && ctLocalTargetes.delegado.length > 0)) {
                 texto += '👥 *CUERPO TÉCNICO LOCAL:*\n';
                 if (ctLocalEnt) texto += '   🧑‍💼 Entrenador: ' + ctLocalEnt + '\n';
                 if (ctLocalDel) texto += '   👔 Delegado: ' + ctLocalDel + '\n';
-                if (ctLocalTargetes.length > 0) {
-                    ctLocalTargetes.forEach(function(t) {
-                        var linea = '   ';
+                
+                if (ctLocalTargetes.entrenador && ctLocalTargetes.entrenador.length > 0) {
+                    ctLocalTargetes.entrenador.forEach(function(t) {
+                        var linea = '      ';
+                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                        texto += linea + '\n';
+                    });
+                }
+                if (ctLocalTargetes.delegado && ctLocalTargetes.delegado.length > 0) {
+                    ctLocalTargetes.delegado.forEach(function(t) {
+                        var linea = '      ';
                         if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
                         else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
                         else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
@@ -916,13 +950,24 @@
             var ctVisitEnt = getCTValor('visitant', 'entrenador');
             var ctVisitDel = getCTValor('visitant', 'delegado');
             var ctVisitTargetes = recollirTargetesCT('visitant');
-            if (ctVisitEnt || ctVisitDel || ctVisitTargetes.length > 0) {
+            if (ctVisitEnt || ctVisitDel || (ctVisitTargetes.entrenador && ctVisitTargetes.entrenador.length > 0) || (ctVisitTargetes.delegado && ctVisitTargetes.delegado.length > 0)) {
                 texto += '\n👥 *CUERPO TÉCNICO VISITANTE:*\n';
                 if (ctVisitEnt) texto += '   🧑‍💼 Entrenador: ' + ctVisitEnt + '\n';
                 if (ctVisitDel) texto += '   👔 Delegado: ' + ctVisitDel + '\n';
-                if (ctVisitTargetes.length > 0) {
-                    ctVisitTargetes.forEach(function(t) {
-                        var linea = '   ';
+                
+                if (ctVisitTargetes.entrenador && ctVisitTargetes.entrenador.length > 0) {
+                    ctVisitTargetes.entrenador.forEach(function(t) {
+                        var linea = '      ';
+                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                        texto += linea + '\n';
+                    });
+                }
+                if (ctVisitTargetes.delegado && ctVisitTargetes.delegado.length > 0) {
+                    ctVisitTargetes.delegado.forEach(function(t) {
+                        var linea = '      ';
                         if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
                         else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
                         else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
