@@ -31,7 +31,6 @@
         .legend h3 { margin-top: 0; color: #2ecc71; }
         .legend ol { margin: 10px 0; padding-left: 20px; }
         .btn-volver { background-color: #e74c3c; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; }
-        
         .accions-acta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
         .accions-acta .btn { flex: 1; min-width: 150px; margin-top: 0; }
         .btn-borrador { background-color: #f39c12 !important; color: #0b1d15 !important; }
@@ -42,14 +41,11 @@
         .btn-esborrar:hover { background-color: #6c757d !important; }
         .info-borrador { background-color: #f39c12; color: #0b1d15; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-align: center; display: none; }
         .info-borrador.visible { display: block; }
-        
         .login-container { text-align: center; padding: 40px 20px; }
         .login-container h2 { color: #2ecc71; margin-bottom: 20px; }
-        .login-container input[type="password"],
-        .login-container input[type="text"] { max-width: 300px; margin: 0 auto 15px auto; display: block; }
+        .login-container input[type="password"], .login-container input[type="text"] { max-width: 300px; margin: 0 auto 15px auto; display: block; }
         .login-container button { max-width: 300px; margin: 0 auto; }
         .error-login { color: #e74c3c; margin-top: 15px; display: none; }
-        
         .targetes-section { width: 100%; order: 4; margin-top: 8px; padding: 10px; background-color: #1f4733; border-radius: 6px; }
         .targetes-label { display: block; font-size: 0.8rem; font-weight: bold; color: #f1c40f; margin-bottom: 8px; }
         .targetes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
@@ -61,36 +57,27 @@
         .btn-add-targeta { background-color: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; width: 100%; }
         .btn-add-targeta:disabled { background-color: #e74c3c; cursor: not-allowed; }
         .btn-remove-targeta { background-color: #e74c3c; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
-        
         .motiu-targeta { margin-top: 5px; width: 100%; }
         .motiu-targeta select { width: 100%; padding: 8px; border: 1px solid #f1c40f; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.85rem; }
-        
         .motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .targeta-motiu-expulsio { width: 100%; padding: 10px; border: 1px solid #e74c3c; border-radius: 6px; background-color: #0b1d15; color: white; font-size: 0.9rem; font-weight: bold; margin-top: 5px; }
-        
         .player-actions { width: 100%; order: 3; display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f4733; flex-wrap: wrap; }
         .player-actions .gol-group { display: flex; align-items: center; gap: 8px; }
         .player-actions .gol-group label { font-size: 0.85rem; font-weight: bold; margin: 0; }
-        
         .toggle-titular-suplent { display: flex; border-radius: 8px; overflow: hidden; border: 2px solid #2ecc71; }
         .toggle-titular-suplent button { flex: 1; padding: 8px 16px; border: none; background-color: #0b1d15; color: #a3b8af; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
         .toggle-titular-suplent button.active-titular { background-color: #2ecc71; color: #0b1d15; }
         .toggle-titular-suplent button.active-suplent { background-color: #3498db; color: white; }
         .toggle-titular-suplent button:hover { opacity: 0.8; }
-        
         .player-foto { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #2ecc71; flex-shrink: 0; }
         .player-nom-container { display: flex; align-items: center; flex: 1; min-width: 150px; }
-        
-        /* Cuerpo Técnico */
         .cuerpo-tecnico { margin-top: 15px; padding: 12px; background-color: #0b1d15; border-radius: 8px; border: 1px dashed #2ecc71; }
         .cuerpo-tecnico h4 { color: #2ecc71; margin: 0 0 10px 0; font-size: 0.95rem; }
         .cuerpo-tecnico .ct-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap; }
         .cuerpo-tecnico .ct-row label { margin: 0; min-width: 100px; font-size: 0.85rem; color: #a3b8af; }
         .cuerpo-tecnico .ct-row select { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
         .cuerpo-tecnico .ct-row input { flex: 1; min-width: 120px; padding: 8px; font-size: 0.9rem; }
-        
-        /* Tarjetas Cuerpo Técnico separadas por rol */
         .ct-targetes { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #2ecc71; }
         .ct-targetes h4 { color: #f1c40f; margin: 0 0 8px 0; font-size: 0.9rem; }
         .ct-targetes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
@@ -102,35 +89,14 @@
         .ct-targeta-motiu-expulsio { width: 100%; padding: 8px; border: 1px solid #e74c3c; border-radius: 4px; background-color: #0b1d15; color: white; font-size: 0.85rem; margin-top: 5px; }
         .ct-btn-remove { background-color: #e74c3c; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         .ct-motiu-expulsio { animation: slideDown 0.3s ease-out; margin-top: 5px; width: 100%; }
-        
-        #modal-avis {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 99999;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.2s ease-out;
-        }
+        #modal-avis { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99999; justify-content: center; align-items: center; animation: fadeIn 0.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        #modal-avis .modal-content {
-            background: #11291e;
-            border: 2px solid #f39c12;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 350px;
-            width: 90%;
-            text-align: center;
-            animation: slideDownModal 0.3s ease-out;
-        }
+        #modal-avis .modal-content { background: #11291e; border: 2px solid #f39c12; border-radius: 16px; padding: 30px; max-width: 350px; width: 90%; text-align: center; animation: slideDownModal 0.3s ease-out; }
         @keyframes slideDownModal { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         #modal-avis .modal-icon { font-size: 3rem; margin-bottom: 10px; }
         #modal-avis .modal-titol { color: #f39c12; margin: 0 0 10px 0; font-size: 1.3rem; }
         #modal-avis .modal-text { color: white; margin: 0 0 20px 0; font-size: 1rem; }
         #modal-avis .modal-btn { background: #f39c12; color: #0b1d15; border: none; padding: 10px 30px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
-        
         @media (max-width: 768px) {
             body { padding: 8px; }
             .container { padding: 12px; }
@@ -171,97 +137,41 @@
 
         <div id="formulario-acta" style="display:none;">
             <h1>📋 ACTA DIGITAL - VETERANS DEL VALLÈS</h1>
-            
             <div id="info-borrador" class="info-borrador">
                 ⚠️ Tienes un borrador guardado del partido: <span id="info-borrador-partit"></span>
                 <br><br>
                 <button onclick="recuperarBorrador()" style="background-color:#2ecc71; color:#0b1d15; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer; margin-right:10px;">📂 Recuperar borrador</button>
                 <button onclick="descartarBorrador()" style="background-color:#e74c3c; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer;">🗑️ Descartar</button>
             </div>
-            
             <div class="header-info">
-                <div class="form-group">
-                    <label>TEMPORADA:</label>
-                    <input type="text" value="2026-2027" readonly>
-                </div>
-                <div class="form-group">
-                    <label>JORNADA:</label>
-                    <select id="jornada" onchange="cargarPartido()">
-                        <option value="">Selecciona...</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>PARTIDO:</label>
-                    <select id="partido" onchange="cargarDatosPartido()">
-                        <option value="">Primero selecciona jornada...</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>DIA DEL PARTIT:</label>
-                    <input type="text" id="dia" readonly>
-                </div>
-                <div class="form-group">
-                    <label>CAMP:</label>
-                    <input type="text" id="camp">
-                </div>
-                <div class="form-group">
-                    <label>HORA PARTIT:</label>
-                    <input type="text" id="hora">
-                </div>
-                <div class="form-group">
-                    <label>R. LOCAL:</label>
-                    <input type="number" id="resultatLocal" min="0" max="99">
-                </div>
-                <div class="form-group">
-                    <label>R. VISITANT:</label>
-                    <input type="number" id="resultatVisitant" min="0" max="99">
-                </div>
-                <div class="form-group">
-                    <label>ARBITRE:</label>
-                    <select id="arbitre">
-                        <option value="">Selecciona...</option>
-                    </select>
-                </div>
+                <div class="form-group"><label>TEMPORADA:</label><input type="text" value="2026-2027" readonly></div>
+                <div class="form-group"><label>JORNADA:</label><select id="jornada" onchange="cargarPartido()"><option value="">Selecciona...</option></select></div>
+                <div class="form-group"><label>PARTIDO:</label><select id="partido" onchange="cargarDatosPartido()"><option value="">Primero selecciona jornada...</option></select></div>
+                <div class="form-group"><label>DIA DEL PARTIT:</label><input type="text" id="dia" readonly></div>
+                <div class="form-group"><label>CAMP:</label><input type="text" id="camp"></div>
+                <div class="form-group"><label>HORA PARTIT:</label><input type="text" id="hora"></div>
+                <div class="form-group"><label>R. LOCAL:</label><input type="number" id="resultatLocal" min="0" max="99"></div>
+                <div class="form-group"><label>R. VISITANT:</label><input type="number" id="resultatVisitant" min="0" max="99"></div>
+                <div class="form-group"><label>ARBITRE:</label><select id="arbitre"><option value="">Selecciona...</option></select></div>
             </div>
 
-            <!-- Equipo Local -->
             <div class="team-section">
                 <div class="team-header">
                     <div class="team-title">🟢 EQUIP LOCAL</div>
                     <img src="" alt="Escudo Local" class="team-badge" id="escudo-local">
                     <div class="team-name" id="nombre-local">-</div>
                 </div>
-                <!-- Cuerpo Técnico Local -->
                 <div class="cuerpo-tecnico" id="ct-local" style="display:none;">
                     <h4>👥 CUERPO TÉCNICO</h4>
-                    <div class="ct-row">
-                        <label>🧑‍💼 Entrenador:</label>
-                        <select id="ct-local-entrenador-select" onchange="onSelectCT('local','entrenador')">
-                            <option value="">-- Seleccionar --</option>
-                        </select>
-                    </div>
-                    <div class="ct-row">
-                        <label style="visibility:hidden;">Entrenador:</label>
-                        <input type="text" id="ct-local-entrenador-input" placeholder="O escribe nombre nuevo...">
-                    </div>
-                    <div class="ct-row" style="margin-top:10px;">
-                        <label>👔 Delegado:</label>
-                        <select id="ct-local-delegado-select" onchange="onSelectCT('local','delegado')">
-                            <option value="">-- Seleccionar --</option>
-                        </select>
-                    </div>
-                    <div class="ct-row">
-                        <label style="visibility:hidden;">Delegado:</label>
-                        <input type="text" id="ct-local-delegado-input" placeholder="O escribe nombre nuevo...">
-                    </div>
-                    
-                    <!-- Tarjetas Entrenador -->
+                    <div class="ct-row"><label>🧑‍💼 Entrenador:</label><select id="ct-local-entrenador-select" onchange="onSelectCT('local','entrenador')"><option value="">-- Seleccionar --</option></select></div>
+                    <div class="ct-row"><label style="visibility:hidden;">Entrenador:</label><input type="text" id="ct-local-entrenador-input" placeholder="O escribe nombre nuevo..."></div>
+                    <div class="ct-row" style="margin-top:10px;"><label>👔 Delegado:</label><select id="ct-local-delegado-select" onchange="onSelectCT('local','delegado')"><option value="">-- Seleccionar --</option></select></div>
+                    <div class="ct-row"><label style="visibility:hidden;">Delegado:</label><input type="text" id="ct-local-delegado-input" placeholder="O escribe nombre nuevo..."></div>
                     <div class="ct-targetes">
                         <h4>🟨🟥 TARJETAS DEL ENTRENADOR</h4>
                         <div class="ct-targetes-list" id="ct-local-entrenador-targetes-list"></div>
                         <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('local', 'entrenador')" style="margin-top:8px;">+ Añadir tarjeta Entrenador</button>
                     </div>
-                    <!-- Tarjetas Delegado -->
                     <div class="ct-targetes" style="margin-top: 15px;">
                         <h4>🟨🟥 TARJETAS DEL DELEGADO</h4>
                         <div class="ct-targetes-list" id="ct-local-delegado-targetes-list"></div>
@@ -272,44 +182,23 @@
                 <button class="btn btn-secondary" onclick="afegirJugador('local')">+ Afegir jugador</button>
             </div>
 
-            <!-- Equipo Visitante -->
             <div class="team-section visitant">
                 <div class="team-header">
                     <div class="team-title">🔵 EQUIP VISITANT</div>
                     <img src="" alt="Escudo Visitante" class="team-badge" id="escudo-visitant">
                     <div class="team-name" id="nombre-visitant">-</div>
                 </div>
-                <!-- Cuerpo Técnico Visitante -->
                 <div class="cuerpo-tecnico" id="ct-visitant" style="display:none;">
                     <h4>👥 CUERPO TÉCNICO</h4>
-                    <div class="ct-row">
-                        <label>🧑‍💼 Entrenador:</label>
-                        <select id="ct-visitant-entrenador-select" onchange="onSelectCT('visitant','entrenador')">
-                            <option value="">-- Seleccionar --</option>
-                        </select>
-                    </div>
-                    <div class="ct-row">
-                        <label style="visibility:hidden;">Entrenador:</label>
-                        <input type="text" id="ct-visitant-entrenador-input" placeholder="O escribe nombre nuevo...">
-                    </div>
-                    <div class="ct-row" style="margin-top:10px;">
-                        <label>👔 Delegado:</label>
-                        <select id="ct-visitant-delegado-select" onchange="onSelectCT('visitant','delegado')">
-                            <option value="">-- Seleccionar --</option>
-                        </select>
-                    </div>
-                    <div class="ct-row">
-                        <label style="visibility:hidden;">Delegado:</label>
-                        <input type="text" id="ct-visitant-delegado-input" placeholder="O escribe nombre nuevo...">
-                    </div>
-                    
-                    <!-- Tarjetas Entrenador -->
+                    <div class="ct-row"><label>🧑‍💼 Entrenador:</label><select id="ct-visitant-entrenador-select" onchange="onSelectCT('visitant','entrenador')"><option value="">-- Seleccionar --</option></select></div>
+                    <div class="ct-row"><label style="visibility:hidden;">Entrenador:</label><input type="text" id="ct-visitant-entrenador-input" placeholder="O escribe nombre nuevo..."></div>
+                    <div class="ct-row" style="margin-top:10px;"><label>👔 Delegado:</label><select id="ct-visitant-delegado-select" onchange="onSelectCT('visitant','delegado')"><option value="">-- Seleccionar --</option></select></div>
+                    <div class="ct-row"><label style="visibility:hidden;">Delegado:</label><input type="text" id="ct-visitant-delegado-input" placeholder="O escribe nombre nuevo..."></div>
                     <div class="ct-targetes">
                         <h4>🟨🟥 TARJETAS DEL ENTRENADOR</h4>
                         <div class="ct-targetes-list" id="ct-visitant-entrenador-targetes-list"></div>
                         <button type="button" class="btn-add-targeta" onclick="afegirTargetaCT('visitant', 'entrenador')" style="margin-top:8px;">+ Añadir tarjeta Entrenador</button>
                     </div>
-                    <!-- Tarjetas Delegado -->
                     <div class="ct-targetes" style="margin-top: 15px;">
                         <h4>🟨🟥 TARJETAS DEL DELEGADO</h4>
                         <div class="ct-targetes-list" id="ct-visitant-delegado-targetes-list"></div>
@@ -338,7 +227,6 @@
                 <button class="btn btn-enviar" onclick="confirmarEnviar()">✅ CONFIRMAR ENVIAR</button>
                 <button class="btn btn-esborrar" onclick="esborrarBorrador()">🗑️ Borrar borrador</button>
             </div>
-            
             <button class="btn-volver" onclick="volverAWebPrincipal()">← Volver a la web principal</button>
         </div>
     </div>
@@ -356,23 +244,13 @@
         var calendario = [];
         var listaArbitros = ["Duran", "Molina", "Humanes", "Portoles", "Utrera", "Julio", "Congost", "Fabregas", "Puibert", "Salva", "Lleixa", "Edu", "Exposito"];
         var equiposDB = {
-            "C.F. Barberá": "barbera.png",
-            "C.F. Can Parellada": "can_parellada.png",
-            "U.E. Castellar": "castellar.png",
-            "C.E. Santa Eulàlia de Ronçana": "sta_eulalia.png",
-            "A.V. L'Ametlla del Vallés": "l_ametlla.png",
-            "U.E. Sabadellenca": "sabadellenca.png",
-            "C.F. Cerdanyola": "cerdanyola.png",
-            "Penya Decano": "decano.png",
-            "A.V. Pallejá": "palleja.png",
-            "A.V. Ripollet": "agrup_ripollet.png",
-            "U.D.A. Gramanet": "gramanet.png",
-            "C.E. Sentmenat": "sentmenat.png",
-            "C.F. Sant Feliu de Codines": "st_feliu_codines.png",
-            "E.F.B Palau Solitá i Plegamans": "palau_plegamans.png",
-            "U.E. Canovelles": "canovelles.png",
-            "V.C.F. Ripollet": "vcf_ripollet.png",
-            "C.E. Bigues i Riells": "bigues.png"
+            "C.F. Barberá": "barbera.png", "C.F. Can Parellada": "can_parellada.png", "U.E. Castellar": "castellar.png",
+            "C.E. Santa Eulàlia de Ronçana": "sta_eulalia.png", "A.V. L'Ametlla del Vallés": "l_ametlla.png",
+            "U.E. Sabadellenca": "sabadellenca.png", "C.F. Cerdanyola": "cerdanyola.png", "Penya Decano": "decano.png",
+            "A.V. Pallejá": "palleja.png", "A.V. Ripollet": "agrup_ripollet.png", "U.D.A. Gramanet": "gramanet.png",
+            "C.E. Sentmenat": "sentmenat.png", "C.F. Sant Feliu de Codines": "st_feliu_codines.png",
+            "E.F.B Palau Solitá i Plegamans": "palau_plegamans.png", "U.E. Canovelles": "canovelles.png",
+            "V.C.F. Ripollet": "vcf_ripollet.png", "C.E. Bigues i Riells": "bigues.png"
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
         var cuerpoTecnicoDB = {};
@@ -381,7 +259,6 @@
             var input = document.getElementById('password-arbitro');
             if (input.type === 'password') { input.type = 'text'; } else { input.type = 'password'; }
         }
-
         function verificarAccesoArbitro() {
             var pass = document.getElementById('password-arbitro').value;
             if (pass === 'arbitro2026') {
@@ -394,94 +271,47 @@
                 document.getElementById('password-arbitro').value = '';
             }
         }
-
         function volverAWebPrincipal() {
             var params = new URLSearchParams(window.location.search);
             var from = params.get('from');
-            if (from === 'valles') {
-                window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/';
-            } else {
-                window.location.href = 'https://carlossd12345.github.io/liga-pruebas/';
-            }
+            if (from === 'valles') { window.location.href = 'https://carlossd12345.github.io/liga-veteranos-valles/'; }
+            else { window.location.href = 'https://carlossd12345.github.io/liga-pruebas/'; }
         }
-
         window.addEventListener('load', function() {
             if (sessionStorage.getItem('arbitro_logueado') === 'true') {
                 document.getElementById('pantalla-login').style.display = 'none';
                 document.getElementById('formulario-acta').style.display = 'block';
                 comprobarBorrador();
             }
-            carregarCalendari();
-            carregarArbitres();
-            cargarCuerpoTecnicoDB();
-            inicialitzarFormulari();
+            carregarCalendari(); carregarArbitres(); cargarCuerpoTecnicoDB(); inicialitzarFormulari();
         });
-
         document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && document.getElementById('password-arbitro') === document.activeElement) {
-                verificarAccesoArbitro();
-            }
+            if (e.key === 'Enter' && document.getElementById('password-arbitro') === document.activeElement) { verificarAccesoArbitro(); }
         });
 
-        // ==================== CUERPO TÉCNICO DB ====================
         function cargarCuerpoTecnicoDB() {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/cuerpoTecnico.json?t=' + Date.now())
-            .then(function(r) {
-                if (r.status === 404) { cuerpoTecnicoDB = {}; return; }
-                return r.json();
-            })
-            .then(function(data) {
-                if (data && typeof data === 'object') {
-                    cuerpoTecnicoDB = data;
-                } else {
-                    cuerpoTecnicoDB = {};
-                }
-            })
+            .then(function(r) { if (r.status === 404) { cuerpoTecnicoDB = {}; return; } return r.json(); })
+            .then(function(data) { if (data && typeof data === 'object') cuerpoTecnicoDB = data; else cuerpoTecnicoDB = {}; })
             .catch(function() { cuerpoTecnicoDB = {}; });
         }
-
         function actualizarSelectsCT(equipoNombre, tipus) {
             var ct = cuerpoTecnicoDB[equipoNombre] || { entrenador: [], delegado: [] };
             var selectEnt = document.getElementById('ct-' + tipus + '-entrenador-select');
             var selectDel = document.getElementById('ct-' + tipus + '-delegado-select');
-            
-            var valEnt = selectEnt.value;
-            var valDel = selectDel.value;
-            
+            var valEnt = selectEnt.value; var valDel = selectDel.value;
             selectEnt.innerHTML = '<option value="">-- Seleccionar --</option>';
             selectDel.innerHTML = '<option value="">-- Seleccionar --</option>';
-            
-            ct.entrenador.forEach(function(n) {
-                var opt = document.createElement('option');
-                opt.value = n;
-                opt.text = n;
-                selectEnt.appendChild(opt);
-            });
-            ct.delegado.forEach(function(n) {
-                var opt = document.createElement('option');
-                opt.value = n;
-                opt.text = n;
-                selectDel.appendChild(opt);
-            });
-            
-            selectEnt.value = valEnt;
-            selectDel.value = valDel;
+            ct.entrenador.forEach(function(n) { var opt = document.createElement('option'); opt.value = n; opt.text = n; selectEnt.appendChild(opt); });
+            ct.delegado.forEach(function(n) { var opt = document.createElement('option'); opt.value = n; opt.text = n; selectDel.appendChild(opt); });
+            selectEnt.value = valEnt; selectDel.value = valDel;
         }
-
         function onSelectCT(tipus, rol) {
             var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
             var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
-            if (select.value !== '') {
-                input.value = '';
-                input.style.opacity = '0.4';
-                input.disabled = true;
-            } else {
-                input.style.opacity = '1';
-                input.disabled = false;
-                input.focus();
-            }
+            if (select.value !== '') { input.value = ''; input.style.opacity = '0.4'; input.disabled = true; }
+            else { input.style.opacity = '1'; input.disabled = false; input.focus(); }
         }
-
         function getCTValor(tipus, rol) {
             var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
             var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
@@ -489,106 +319,45 @@
             if (input && input.value.trim() !== '') return input.value.trim();
             return '';
         }
-
         function setCTValor(tipus, rol, valor) {
             var select = document.getElementById('ct-' + tipus + '-' + rol + '-select');
             var input = document.getElementById('ct-' + tipus + '-' + rol + '-input');
             if (!select || !input) return;
             var encontrado = false;
             for (var i = 0; i < select.options.length; i++) {
-                if (select.options[i].value === valor) {
-                    select.value = valor;
-                    input.value = '';
-                    input.disabled = true;
-                    input.style.opacity = '0.4';
-                    encontrado = true;
-                    break;
-                }
+                if (select.options[i].value === valor) { select.value = valor; input.value = ''; input.disabled = true; input.style.opacity = '0.4'; encontrado = true; break; }
             }
-            if (!encontrado) {
-                select.value = '';
-                input.value = valor;
-                input.disabled = false;
-                input.style.opacity = '1';
-            }
+            if (!encontrado) { select.value = ''; input.value = valor; input.disabled = false; input.style.opacity = '1'; }
         }
 
-        // ==================== TARJETAS CUERPO TÉCNICO ====================
         function afegirTargetaCT(tipus, rol) {
             var listaId = 'ct-' + tipus + '-' + rol + '-targetes-list';
             var lista = document.getElementById(listaId);
             if (!lista) return;
-            
             var targeta = document.createElement('div');
             targeta.className = 'ct-targeta-item';
-            targeta.innerHTML = `
-                <select class="ct-targeta-tipus" onchange="canviarTipusTargetaCT(this)">
-                    <option value="groga">🟨 Amarilla</option>
-                    <option value="roja">🟥 Roja directa</option>
-                    <option value="segona-groga">🟨🟨 Doble amarilla</option>
-                </select>
-                <input type="number" placeholder="Min'" class="ct-targeta-minut" min="0" max="120">
-                <button type="button" class="ct-btn-remove" onclick="eliminarTargetaCT(this)">✕</button>
-                <div class="ct-targeta-motiu">
-                    <select class="ct-targeta-motiu-select">
-                        <option value="">Motivo...</option>
-                        <option value="1-Subjectar">1-Subjectar</option>
-                        <option value="2-Empentar">2-Empentar</option>
-                        <option value="3-Mans">3-Mans</option>
-                        <option value="4-Traveta">4-Traveta</option>
-                        <option value="5-Protestar">5-Protestar</option>
-                        <option value="6-Desconsiderar">6-Desconsiderar</option>
-                        <option value="7-Distancia">7-Distancia</option>
-                        <option value="8-Perdre temps">8-Perdre temps</option>
-                        <option value="9-Reincidir faltes">9-Reincidir faltes</option>
-                    </select>
-                </div>
-                <div class="ct-motiu-expulsio" style="display:none;">
-                    <label style="color:#e74c3c; font-weight:bold; font-size:0.8rem; margin-bottom:4px; display:block;">⚠️ MOTIVO EXPULSIÓN (obligatorio):</label>
-                    <input type="text" class="ct-targeta-motiu-expulsio" placeholder="Escribe el motivo de la expulsión...">
-                </div>
-            `;
+            targeta.innerHTML = '<select class="ct-targeta-tipus" onchange="canviarTipusTargetaCT(this)"><option value="groga">🟨 Amarilla</option><option value="roja">🟥 Roja directa</option><option value="segona-groga">🟨 Doble amarilla</option></select><input type="number" placeholder="Min\'" class="ct-targeta-minut" min="0" max="120"><button type="button" class="ct-btn-remove" onclick="eliminarTargetaCT(this)">✕</button><div class="ct-targeta-motiu"><select class="ct-targeta-motiu-select"><option value="">Motivo...</option><option value="1-Subjectar">1-Subjectar</option><option value="2-Empentar">2-Empentar</option><option value="3-Mans">3-Mans</option><option value="4-Traveta">4-Traveta</option><option value="5-Protestar">5-Protestar</option><option value="6-Desconsiderar">6-Desconsiderar</option><option value="7-Distancia">7-Distancia</option><option value="8-Perdre temps">8-Perdre temps</option><option value="9-Reincidir faltes">9-Reincidir faltes</option></select></div><div class="ct-motiu-expulsio" style="display:none;"><label style="color:#e74c3c; font-weight:bold; font-size:0.8rem; margin-bottom:4px; display:block;">⚠️ MOTIVO EXPULSIÓN (obligatorio):</label><input type="text" class="ct-targeta-motiu-expulsio" placeholder="Escribe el motivo de la expulsión..."></div>';
             lista.appendChild(targeta);
         }
-
         function canviarTipusTargetaCT(select) {
             var targeta = select.closest('.ct-targeta-item');
             var motiuExpulsio = targeta.querySelector('.ct-motiu-expulsio');
-            if (select.value === 'roja') {
-                targeta.style.borderLeft = '3px solid #e74c3c';
-                motiuExpulsio.style.display = 'block';
-            } else if (select.value === 'segona-groga') {
-                targeta.style.borderLeft = '3px solid #e74c3c';
-                motiuExpulsio.style.display = 'none';
-            } else {
-                targeta.style.borderLeft = '3px solid #f1c40f';
-                motiuExpulsio.style.display = 'none';
-                motiuExpulsio.querySelector('input').value = '';
-            }
+            if (select.value === 'roja') { targeta.style.borderLeft = '3px solid #e74c3c'; motiuExpulsio.style.display = 'block'; }
+            else if (select.value === 'segona-groga') { targeta.style.borderLeft = '3px solid #e74c3c'; motiuExpulsio.style.display = 'none'; }
+            else { targeta.style.borderLeft = '3px solid #f1c40f'; motiuExpulsio.style.display = 'none'; motiuExpulsio.querySelector('input').value = ''; }
         }
-
-        function eliminarTargetaCT(btn) {
-            var targeta = btn.closest('.ct-targeta-item');
-            targeta.remove();
-        }
-
+        function eliminarTargetaCT(btn) { var targeta = btn.closest('.ct-targeta-item'); targeta.remove(); }
         function recollirTargetesCT(tipus) {
             var targetes = { entrenador: [], delegado: [] };
             ['entrenador', 'delegado'].forEach(function(rol) {
                 var lista = document.getElementById('ct-' + tipus + '-' + rol + '-targetes-list');
                 if (!lista) return;
                 lista.querySelectorAll('.ct-targeta-item').forEach(function(t) {
-                    targetes[rol].push({
-                        tipus: t.querySelector('.ct-targeta-tipus').value,
-                        minut: t.querySelector('.ct-targeta-minut').value,
-                        motiu: t.querySelector('.ct-targeta-motiu-select').value,
-                        motiuExpulsio: t.querySelector('.ct-targeta-motiu-expulsio').value
-                    });
+                    targetes[rol].push({ tipus: t.querySelector('.ct-targeta-tipus').value, minut: t.querySelector('.ct-targeta-minut').value, motiu: t.querySelector('.ct-targeta-motiu-select').value, motiuExpulsio: t.querySelector('.ct-targeta-motiu-expulsio').value });
                 });
             });
             return targetes;
         }
-
         function aplicarTargetesCT(tipus, targetesObj) {
             ['entrenador', 'delegado'].forEach(function(rol) {
                 var lista = document.getElementById('ct-' + tipus + '-' + rol + '-targetes-list');
@@ -609,37 +378,20 @@
             });
         }
 
-        // ==================== MODAL AVISO ====================
         function mostrarAvis(titol, text, icon) {
             document.getElementById('modal-avis-titol').textContent = titol;
             document.getElementById('modal-avis-text').textContent = text;
             document.getElementById('modal-avis-icon').textContent = icon || '⚠️';
             document.getElementById('modal-avis').style.display = 'flex';
         }
+        function tancarModalAvis() { document.getElementById('modal-avis').style.display = 'none'; }
+        document.getElementById('modal-avis').addEventListener('click', function(e) { if (e.target === this) tancarModalAvis(); });
 
-        function tancarModalAvis() {
-            document.getElementById('modal-avis').style.display = 'none';
-        }
-
-        document.getElementById('modal-avis').addEventListener('click', function(e) {
-            if (e.target === this) tancarModalAvis();
-        });
-
-        // ==================== SISTEMA DE BORRADOR ====================
-        function getBorradorKey() {
-            var arbitre = document.getElementById('arbitre').value;
-            if (!arbitre) return null;
-            return 'acta_borrador_' + arbitre.replace(/\s+/g, '_');
-        }
-
+        function getBorradorKey() { var arbitre = document.getElementById('arbitre').value; if (!arbitre) return null; return 'acta_borrador_' + arbitre.replace(/\s+/g, '_'); }
         function comprobarBorrador() {
             var arbitre = document.getElementById('arbitre').value;
-            if (!arbitre) {
-                document.getElementById('info-borrador').classList.remove('visible');
-                return;
-            }
-            var key = getBorradorKey();
-            if (!key) return;
+            if (!arbitre) { document.getElementById('info-borrador').classList.remove('visible'); return; }
+            var key = getBorradorKey(); if (!key) return;
             var borrador = localStorage.getItem(key);
             if (borrador) {
                 try {
@@ -649,44 +401,26 @@
                     infoPartit.textContent = 'Jornada ' + (data.jornada || '?') + ' - ' + (data.equipLocal || '?') + ' vs ' + (data.equipVisitant || '?') + ' (Guardado: ' + (data.dataGuardat || 'reciente') + ')';
                     infoDiv.classList.add('visible');
                 } catch(e) { console.error('Error al leer borrador:', e); }
-            } else {
-                document.getElementById('info-borrador').classList.remove('visible');
-            }
+            } else { document.getElementById('info-borrador').classList.remove('visible'); }
         }
-
         function guardarBorrador() {
             var arbitre = document.getElementById('arbitre').value;
-            if (!arbitre) {
-                mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de guardar el borrador.', '⚠️');
-                return;
-            }
-            var key = getBorradorKey();
-            if (!key) return;
+            if (!arbitre) { mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de guardar el borrador.', '⚠️'); return; }
+            var key = getBorradorKey(); if (!key) return;
             var acta = recollirDadesActa();
-            acta.dataGuardat = new Date().toLocaleString('es-ES');
-            acta.tipus = 'borrador';
-            acta.arbitre = arbitre;
+            acta.dataGuardat = new Date().toLocaleString('es-ES'); acta.tipus = 'borrador'; acta.arbitre = arbitre;
             try {
                 localStorage.setItem(key, JSON.stringify(acta));
                 mostrarAvis('✅ Borrador guardado', 'Borrador guardado para el árbitro: ' + arbitre + '\n\nPuedes cerrar esta página y volver más tarde. Tus datos no se perderán.', '💾');
                 document.getElementById('info-borrador').classList.add('visible');
                 document.getElementById('info-borrador-partit').textContent = 'Jornada ' + (acta.jornada || '?') + ' - ' + (acta.equipLocal || '?') + ' vs ' + (acta.equipVisitant || '?') + ' (Guardado: ' + acta.dataGuardat + ')';
-            } catch(e) {
-                mostrarAvis('❌ Error', 'No se pudo guardar el borrador: ' + e.message, '❌');
-            }
+            } catch(e) { mostrarAvis('❌ Error', 'No se pudo guardar el borrador: ' + e.message, '❌'); }
         }
-
         function recuperarBorrador() {
             var key = getBorradorKey();
-            if (!key) {
-                mostrarAvis('Sin árbitro', 'Selecciona tu nombre en el desplegable "ARBITRE" primero.', '📂');
-                return;
-            }
+            if (!key) { mostrarAvis('Sin árbitro', 'Selecciona tu nombre en el desplegable "ARBITRE" primero.', '📂'); return; }
             var borrador = localStorage.getItem(key);
-            if (!borrador) {
-                mostrarAvis('Sin borrador', 'No hay ningún borrador guardado para este árbitro.', '📂');
-                return;
-            }
+            if (!borrador) { mostrarAvis('Sin borrador', 'No hay ningún borrador guardado para este árbitro.', '📂'); return; }
             if (!confirm('¿Recuperar el borrador guardado? Se perderán los cambios actuales no guardados.')) return;
             try {
                 var data = JSON.parse(borrador);
@@ -694,56 +428,31 @@
                 document.getElementById('arbitre').value = data.arbitre || '';
                 document.getElementById('info-borrador').classList.remove('visible');
                 mostrarAvis('✅ Borrador recuperado', 'Se han cargado todos los datos guardados para el árbitro: ' + (data.arbitre || ''), '📂');
-            } catch(e) {
-                mostrarAvis('❌ Error', 'No se pudo recuperar el borrador: ' + e.message, '❌');
-            }
+            } catch(e) { mostrarAvis('❌ Error', 'No se pudo recuperar el borrador: ' + e.message, '❌'); }
         }
-
         function esborrarBorrador() {
             var key = getBorradorKey();
-            if (!key || !localStorage.getItem(key)) {
-                mostrarAvis('Sin borrador', 'No hay ningún borrador guardado para este árbitro.', '🗑️');
-                return;
-            }
+            if (!key || !localStorage.getItem(key)) { mostrarAvis('Sin borrador', 'No hay ningún borrador guardado para este árbitro.', '🗑️'); return; }
             if (!confirm('¿Seguro que quieres borrar el borrador guardado? Esta acción no se puede deshacer.')) return;
             localStorage.removeItem(key);
             document.getElementById('info-borrador').classList.remove('visible');
             mostrarAvis('🗑️ Borrador eliminado', 'El borrador ha sido eliminado correctamente.', '🗑️');
         }
-
-        function descartarBorrador() {
-            document.getElementById('info-borrador').classList.remove('visible');
-        }
+        function descartarBorrador() { document.getElementById('info-borrador').classList.remove('visible'); }
 
         function recollirDadesActa() {
             return {
-                temporada: '2026-2027',
-                jornada: document.getElementById('jornada').value,
-                partido: document.getElementById('partido').value,
-                dia: document.getElementById('dia').value,
-                camp: document.getElementById('camp').value,
-                hora: document.getElementById('hora').value,
-                resultatLocal: document.getElementById('resultatLocal').value,
-                resultatVisitant: document.getElementById('resultatVisitant').value,
+                temporada: '2026-2027', jornada: document.getElementById('jornada').value, partido: document.getElementById('partido').value,
+                dia: document.getElementById('dia').value, camp: document.getElementById('camp').value, hora: document.getElementById('hora').value,
+                resultatLocal: document.getElementById('resultatLocal').value, resultatVisitant: document.getElementById('resultatVisitant').value,
                 arbitre: document.getElementById('arbitre').value,
-                equipLocal: document.getElementById('nombre-local').textContent,
-                equipVisitant: document.getElementById('nombre-visitant').textContent,
-                cuerpoTecnicoLocal: {
-                    entrenador: getCTValor('local', 'entrenador'),
-                    delegado: getCTValor('local', 'delegado'),
-                    targetes: recollirTargetesCT('local')
-                },
-                cuerpoTecnicoVisitant: {
-                    entrenador: getCTValor('visitant', 'entrenador'),
-                    delegado: getCTValor('visitant', 'delegado'),
-                    targetes: recollirTargetesCT('visitant')
-                },
-                jugadorsLocal: recollirJugadors('local', true),
-                jugadorsVisitant: recollirJugadors('visitant', true),
+                equipLocal: document.getElementById('nombre-local').textContent, equipVisitant: document.getElementById('nombre-visitant').textContent,
+                cuerpoTecnicoLocal: { entrenador: getCTValor('local', 'entrenador'), delegado: getCTValor('local', 'delegado'), targetes: recollirTargetesCT('local') },
+                cuerpoTecnicoVisitant: { entrenador: getCTValor('visitant', 'entrenador'), delegado: getCTValor('visitant', 'delegado'), targetes: recollirTargetesCT('visitant') },
+                jugadorsLocal: recollirJugadors('local', true), jugadorsVisitant: recollirJugadors('visitant', true),
                 observacions: document.getElementById('observacions').value
             };
         }
-
         function aplicarDadesActa(data) {
             if (data.jornada) document.getElementById('jornada').value = data.jornada;
             if (data.partido) {
@@ -774,18 +483,14 @@
             if (data.arbitre) document.getElementById('arbitre').value = data.arbitre;
             if (data.observacions) document.getElementById('observacions').value = data.observacions;
         }
-
         function aplicarDadesJugadors(data) {
             if (data.jugadorsLocal && data.jugadorsLocal.length > 0) aplicarJugadorsEquip('local', data.jugadorsLocal);
             if (data.jugadorsVisitant && data.jugadorsVisitant.length > 0) aplicarJugadorsEquip('visitant', data.jugadorsVisitant);
         }
-
         function aplicarJugadorsEquip(tipus, jugadorsGuardats) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             container.innerHTML = '';
-            jugadorsGuardats.forEach(function(j) {
-                afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null);
-            });
+            jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null); });
             setTimeout(function() {
                 var rows = container.querySelectorAll('.player-row');
                 rows.forEach(function(row, idx) {
@@ -794,13 +499,8 @@
                         if (j.dni) row.querySelector('.player-dni').value = j.dni;
                         if (j.nom) row.querySelector('.player-nom').value = j.nom;
                         if (j.gols !== undefined) row.querySelector('.player-gols').value = j.gols;
-                        if (j.condicio === 'titular') {
-                            var btnTitular = row.querySelector('.btn-titular');
-                            if (btnTitular) marcarTitular(btnTitular);
-                        } else if (j.condicio === 'suplent') {
-                            var btnSuplent = row.querySelector('.btn-suplent');
-                            if (btnSuplent) marcarSuplent(btnSuplent);
-                        }
+                        if (j.condicio === 'titular') { var btnTitular = row.querySelector('.btn-titular'); if (btnTitular) marcarTitular(btnTitular); }
+                        else if (j.condicio === 'suplent') { var btnSuplent = row.querySelector('.btn-suplent'); if (btnSuplent) marcarSuplent(btnSuplent); }
                         if (j.targetes && j.targetes.length > 0) {
                             var btnAdd = row.querySelector('.btn-add-targeta');
                             j.targetes.forEach(function(t) { if (btnAdd) afegirTargeta(btnAdd); });
@@ -826,82 +526,64 @@
             }, 300);
         }
 
-        // ==================== CONFIRMAR ENVIAR (VÍA WHATSAPP) ====================
         function confirmarEnviar() {
-            if (!document.getElementById('jornada').value || !document.getElementById('partido').value) {
-                mostrarAvis('⚠️ Datos incompletos', 'Debes seleccionar jornada y partido antes de enviar.', '⚠️');
-                return;
-            }
-            if (!document.getElementById('arbitre').value) {
-                mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de enviar.', '⚠️');
-                return;
-            }
+            if (!document.getElementById('jornada').value || !document.getElementById('partido').value) { mostrarAvis('⚠️ Datos incompletos', 'Debes seleccionar jornada y partido antes de enviar.', '⚠️'); return; }
+            if (!document.getElementById('arbitre').value) { mostrarAvis('⚠️ Árbitro no seleccionado', 'Debes seleccionar tu nombre en el desplegable "ARBITRE" antes de enviar.', '⚠️'); return; }
             var targetesRoges = document.querySelectorAll('.targeta-tipus[value="roja"], .ct-targeta-tipus[value="roja"]');
             var errorMotiu = false;
             targetesRoges.forEach(function(select) {
                 var targeta = select.closest('.targeta-item') || select.closest('.ct-targeta-item');
                 var inputMotiu = targeta.querySelector('.targeta-motiu-expulsio') || targeta.querySelector('.ct-targeta-motiu-expulsio');
-                if (!inputMotiu.value.trim()) {
-                    errorMotiu = true;
-                    inputMotiu.style.borderColor = '#e74c3c';
-                    inputMotiu.focus();
-                }
+                if (!inputMotiu.value.trim()) { errorMotiu = true; inputMotiu.style.borderColor = '#e74c3c'; inputMotiu.focus(); }
             });
-            if (errorMotiu) {
-                mostrarAvis('⚠️ Motiu obligatori', 'Totes les targetes roges directes han de tenir un motiu d\'expulsió!', '⚠️');
-                return;
-            }
+            if (errorMotiu) { mostrarAvis('⚠️ Motivo obligatorio', 'Todas las tarjetas rojas directas deben tener un motivo de expulsión.', '⚠️'); return; }
             if (!confirm('¿Generar mensaje de WhatsApp para enviar el acta?')) return;
-            
             var jornada = document.getElementById('jornada').value;
             var partido = document.getElementById('partido').value;
             var jornadaData = calendario.find(function(j) { return j.jornada == jornada; });
             var partidoData = jornadaData.partidos[partido];
-            
             var texto = '📋 *ACTA DIGITAL - VETERANS DEL VALLÈS*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '📅 Jornada ' + jornada + ' · ' + jornadaData.fecha + '\n';
             texto += '⚽ ' + partidoData.local + ' vs ' + partidoData.visitante + '\n';
             texto += '📍 ' + (document.getElementById('camp').value || partidoData.campo) + ' · 🕒 ' + (document.getElementById('hora').value || partidoData.hora) + '\n';
             texto += '👤 Árbitro: ' + (document.getElementById('arbitre').value || 'No especificado') + '\n\n';
-            
             var resultatLocal = document.getElementById('resultatLocal').value || '0';
             var resultatVisitant = document.getElementById('resultatVisitant').value || '0';
             texto += '🏆 *RESULTADO: ' + resultatLocal + ' - ' + resultatVisitant + '*\n\n';
-            
-            // Cuerpo Técnico Local
             var ctLocalEnt = getCTValor('local', 'entrenador');
             var ctLocalDel = getCTValor('local', 'delegado');
             var ctLocalTargetes = recollirTargetesCT('local');
             if (ctLocalEnt || ctLocalDel || (ctLocalTargetes.entrenador && ctLocalTargetes.entrenador.length > 0) || (ctLocalTargetes.delegado && ctLocalTargetes.delegado.length > 0)) {
                 texto += '👥 *CUERPO TÉCNICO LOCAL:*\n';
-                if (ctLocalEnt) texto += '   🧑‍💼 Entrenador: ' + ctLocalEnt + '\n';
-                if (ctLocalDel) texto += '   👔 Delegado: ' + ctLocalDel + '\n';
-                
-                if (ctLocalTargetes.entrenador && ctLocalTargetes.entrenador.length > 0) {
-                    ctLocalTargetes.entrenador.forEach(function(t) {
-                        var linea = '      ';
-                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
-                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
-                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
-                        texto += linea + '\n';
-                    });
+                if (ctLocalEnt) {
+                    texto += '   🧑‍💼 Entrenador: ' + ctLocalEnt + '\n';
+                    if (ctLocalTargetes.entrenador && ctLocalTargetes.entrenador.length > 0) {
+                        ctLocalTargetes.entrenador.forEach(function(t) {
+                            var linea = '      ';
+                            if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                            texto += linea + '\n';
+                        });
+                    }
                 }
-                if (ctLocalTargetes.delegado && ctLocalTargetes.delegado.length > 0) {
-                    ctLocalTargetes.delegado.forEach(function(t) {
-                        var linea = '      ';
-                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
-                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
-                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
-                        texto += linea + '\n';
-                    });
+                if (ctLocalDel) {
+                    texto += '   👔 Delegado: ' + ctLocalDel + '\n';
+                    if (ctLocalTargetes.delegado && ctLocalTargetes.delegado.length > 0) {
+                        ctLocalTargetes.delegado.forEach(function(t) {
+                            var linea = '      ';
+                            if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                            texto += linea + '\n';
+                        });
+                    }
                 }
                 texto += '\n';
             }
-            
-            // Jugadores Local
             texto += '👕 *LOCAL - ' + partidoData.local + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
@@ -909,16 +591,13 @@
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'titular') {
                     texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
-                    if (j.gols > 0) {
-                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
-                        else texto += '   ⚽x' + j.gols + '\n';
-                    }
+                    if (j.gols > 0) { if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n'; else texto += '   ⚽x' + j.gols + '\n'; }
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
                             if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -929,55 +608,51 @@
             jugadorsLocal.forEach(function(j) {
                 if (j.condicio === 'suplent') {
                     texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
-                    if (j.gols > 0) {
-                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
-                        else texto += '   ⚽x' + j.gols + '\n';
-                    }
+                    if (j.gols > 0) { if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n'; else texto += '   ⚽x' + j.gols + '\n'; }
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
                             if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
                     }
                 }
             });
-            
-            // Cuerpo Técnico Visitante
             var ctVisitEnt = getCTValor('visitant', 'entrenador');
             var ctVisitDel = getCTValor('visitant', 'delegado');
             var ctVisitTargetes = recollirTargetesCT('visitant');
             if (ctVisitEnt || ctVisitDel || (ctVisitTargetes.entrenador && ctVisitTargetes.entrenador.length > 0) || (ctVisitTargetes.delegado && ctVisitTargetes.delegado.length > 0)) {
                 texto += '\n👥 *CUERPO TÉCNICO VISITANTE:*\n';
-                if (ctVisitEnt) texto += '   🧑‍💼 Entrenador: ' + ctVisitEnt + '\n';
-                if (ctVisitDel) texto += '   👔 Delegado: ' + ctVisitDel + '\n';
-                
-                if (ctVisitTargetes.entrenador && ctVisitTargetes.entrenador.length > 0) {
-                    ctVisitTargetes.entrenador.forEach(function(t) {
-                        var linea = '      ';
-                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
-                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
-                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
-                        texto += linea + '\n';
-                    });
+                if (ctVisitEnt) {
+                    texto += '   🧑‍💼 Entrenador: ' + ctVisitEnt + '\n';
+                    if (ctVisitTargetes.entrenador && ctVisitTargetes.entrenador.length > 0) {
+                        ctVisitTargetes.entrenador.forEach(function(t) {
+                            var linea = '      ';
+                            if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                            texto += linea + '\n';
+                        });
+                    }
                 }
-                if (ctVisitTargetes.delegado && ctVisitTargetes.delegado.length > 0) {
-                    ctVisitTargetes.delegado.forEach(function(t) {
-                        var linea = '      ';
-                        if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
-                        else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                        else if (t.tipus === 'segona-groga') linea += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
-                        if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
-                        texto += linea + '\n';
-                    });
+                if (ctVisitDel) {
+                    texto += '   👔 Delegado: ' + ctVisitDel + '\n';
+                    if (ctVisitTargetes.delegado && ctVisitTargetes.delegado.length > 0) {
+                        ctVisitTargetes.delegado.forEach(function(t) {
+                            var linea = '      ';
+                            if (t.tipus === 'groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'roja') linea += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
+                            else if (t.tipus === 'segona-groga') linea += '🟨 ' + (t.minut ? t.minut + "' " : '');
+                            if (t.motiu && t.tipus !== 'roja') linea += '- ' + t.motiu;
+                            texto += linea + '\n';
+                        });
+                    }
                 }
             }
-            
-            // Jugadores Visitante
             texto += '\n👕 *VISITANTE - ' + partidoData.visitante + '*\n';
             texto += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
             texto += '*TITULARES:*\n';
@@ -985,16 +660,13 @@
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'titular') {
                     texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
-                    if (j.gols > 0) {
-                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
-                        else texto += '   ⚽x' + j.gols + '\n';
-                    }
+                    if (j.gols > 0) { if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n'; else texto += '   ⚽x' + j.gols + '\n'; }
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
                             if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
@@ -1005,323 +677,136 @@
             jugadorsVisitant.forEach(function(j) {
                 if (j.condicio === 'suplent') {
                     texto += '• ' + j.dorsal + ' ' + j.nom + '\n';
-                    if (j.gols > 0) {
-                        if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n';
-                        else texto += '   ⚽x' + j.gols + '\n';
-                    }
+                    if (j.gols > 0) { if (j.gols <= 3) texto += '   ⚽'.repeat(j.gols) + '\n'; else texto += '   ⚽x' + j.gols + '\n'; }
                     if (j.targetes && j.targetes.length > 0) {
                         j.targetes.forEach(function(t) {
                             var lineaTarjeta = '   ';
                             if (t.tipus === 'groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             else if (t.tipus === 'roja') lineaTarjeta += '🟥 ' + (t.minut ? t.minut + "' " : '') + (t.motiuExpulsio ? '- ' + t.motiuExpulsio : '');
-                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨🟨 ' + (t.minut ? t.minut + "' " : '');
+                            else if (t.tipus === 'segona-groga') lineaTarjeta += '🟨 ' + (t.minut ? t.minut + "' " : '');
                             if (t.motiu && t.tipus !== 'roja') lineaTarjeta += '- ' + t.motiu;
                             texto += lineaTarjeta + '\n';
                         });
                     }
                 }
             });
-            
             var observacions = document.getElementById('observacions').value;
-            if (observacions) {
-                texto += '\n📝 *OBSERVACIONES:*\n' + observacions + '\n';
-            }
-            
+            if (observacions) texto += '\n📝 *OBSERVACIONES:*\n' + observacions + '\n';
             texto += '\nPor favor, valida esta acta. ¡Gracias!';
-            
             var numeroAdmin = '34617417827';
             var url = 'https://wa.me/' + numeroAdmin + '?text=' + encodeURIComponent(texto);
             window.open(url, '_blank');
-            
-            var key = getBorradorKey();
-            if (key) localStorage.removeItem(key);
+            var key = getBorradorKey(); if (key) localStorage.removeItem(key);
             document.getElementById('info-borrador').classList.remove('visible');
-            
             mostrarAvis('✅ Mensaje generado', 'Se ha abierto WhatsApp con el acta lista para enviar. Una vez enviada, yo la procesaré desde el panel admin.', '✅');
         }
 
-        // ==================== CALENDARIO Y DATOS ====================
         function carregarCalendari() {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/calendario.json?t=' + Date.now())
-            .then(r => r.json())
-            .then(data => {
-                calendario = data;
-                omplirJornades();
-            })
-            .catch(function(error) {
-                console.error('Error cargando calendario:', error);
-                mostrarAvis('❌ Error', 'Error al cargar el calendario. Recarga la página.', '❌');
-            });
+            .then(r => r.json()).then(data => { calendario = data; omplirJornades(); })
+            .catch(function(error) { console.error('Error cargando calendario:', error); mostrarAvis('❌ Error', 'Error al cargar el calendario. Recarga la página.', '❌'); });
         }
-
         function carregarArbitres() {
             var select = document.getElementById('arbitre');
-            listaArbitros.forEach(function(arb) {
-                var opt = document.createElement('option');
-                opt.value = arb;
-                opt.text = arb;
-                select.appendChild(opt);
-            });
+            listaArbitros.forEach(function(arb) { var opt = document.createElement('option'); opt.value = arb; opt.text = arb; select.appendChild(opt); });
             select.addEventListener('change', function() { comprobarBorrador(); });
         }
-
         function omplirJornades() {
             var select = document.getElementById('jornada');
-            calendario.forEach(function(j) {
-                var opt = document.createElement('option');
-                opt.value = j.jornada;
-                opt.text = 'Jornada ' + j.jornada;
-                select.appendChild(opt);
-            });
+            calendario.forEach(function(j) { var opt = document.createElement('option'); opt.value = j.jornada; opt.text = 'Jornada ' + j.jornada; select.appendChild(opt); });
         }
-
         function cargarPartido() {
             var jornadaNum = parseInt(document.getElementById('jornada').value);
             var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
             var selectPartido = document.getElementById('partido');
             selectPartido.innerHTML = '<option value="">Selecciona...</option>';
-            document.getElementById('dia').value = '';
-            document.getElementById('camp').value = '';
-            document.getElementById('hora').value = '';
-            document.getElementById('jugadorsLocal').innerHTML = '';
-            document.getElementById('jugadorsVisitant').innerHTML = '';
-            document.getElementById('nombre-local').textContent = '-';
-            document.getElementById('nombre-visitant').textContent = '-';
-            document.getElementById('escudo-local').src = '';
-            document.getElementById('escudo-visitant').src = '';
-            document.getElementById('ct-local').style.display = 'none';
-            document.getElementById('ct-visitant').style.display = 'none';
-            if (jornada) {
-                jornada.partidos.forEach(function(p, idx) {
-                    var opt = document.createElement('option');
-                    opt.value = idx;
-                    opt.text = p.local + ' vs ' + p.visitante;
-                    selectPartido.appendChild(opt);
-                });
-            }
+            document.getElementById('dia').value = ''; document.getElementById('camp').value = ''; document.getElementById('hora').value = '';
+            document.getElementById('jugadorsLocal').innerHTML = ''; document.getElementById('jugadorsVisitant').innerHTML = '';
+            document.getElementById('nombre-local').textContent = '-'; document.getElementById('nombre-visitant').textContent = '-';
+            document.getElementById('escudo-local').src = ''; document.getElementById('escudo-visitant').src = '';
+            document.getElementById('ct-local').style.display = 'none'; document.getElementById('ct-visitant').style.display = 'none';
+            if (jornada) { jornada.partidos.forEach(function(p, idx) { var opt = document.createElement('option'); opt.value = idx; opt.text = p.local + ' vs ' + p.visitante; selectPartido.appendChild(opt); }); }
         }
-
         function cargarDatosPartido() {
             var jornadaNum = parseInt(document.getElementById('jornada').value);
             var partidoIdx = parseInt(document.getElementById('partido').value);
             var jornada = calendario.find(function(j) { return j.jornada === jornadaNum; });
             if (jornada && !isNaN(partidoIdx) && jornada.partidos[partidoIdx]) {
                 var p = jornada.partidos[partidoIdx];
-                document.getElementById('dia').value = jornada.fecha || '';
-                document.getElementById('camp').value = p.campo || '';
-                document.getElementById('hora').value = p.hora || '';
+                document.getElementById('dia').value = jornada.fecha || ''; document.getElementById('camp').value = p.campo || ''; document.getElementById('hora').value = p.hora || '';
                 document.getElementById('nombre-local').textContent = p.local.toUpperCase();
                 document.getElementById('escudo-local').src = escudosBaseURL + (equiposDB[p.local] || 'barbera.png');
                 document.getElementById('nombre-visitant').textContent = p.visitante.toUpperCase();
                 document.getElementById('escudo-visitant').src = escudosBaseURL + (equiposDB[p.visitante] || 'can_parellada.png');
-                
-                // Mostrar cuerpo técnico y cargar nombres conocidos
-                document.getElementById('ct-local').style.display = 'block';
-                document.getElementById('ct-visitant').style.display = 'block';
-                actualizarSelectsCT(p.local, 'local');
-                actualizarSelectsCT(p.visitante, 'visitant');
-                
-                carregarJugadorsEquip(p.local, 'local');
-                carregarJugadorsEquip(p.visitante, 'visitant');
+                document.getElementById('ct-local').style.display = 'block'; document.getElementById('ct-visitant').style.display = 'block';
+                actualizarSelectsCT(p.local, 'local'); actualizarSelectsCT(p.visitante, 'visitant');
+                carregarJugadorsEquip(p.local, 'local'); carregarJugadorsEquip(p.visitante, 'visitant');
             }
         }
-
         function carregarJugadorsEquip(equip, tipus) {
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
-            .then(r => r.json())
-            .then(data => {
+            .then(r => r.json()).then(data => {
                 var jugadors = data[equip] || [];
                 var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
                 container.innerHTML = '';
                 jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto); });
-            })
-            .catch(function() { });
+            }).catch(function() { });
         }
-
         function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
-
         function afegirFilaJugador(tipus, dorsal, nom, foto) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
-            var row = document.createElement('div');
-            row.className = 'player-row';
-            row.dataset.tipus = tipus;
+            var row = document.createElement('div'); row.className = 'player-row'; row.dataset.tipus = tipus;
             var fotoHtml = '';
             if (foto) {
                 var carpeta = (tipus === 'local') ? 'CF-Cerdanyola' : 'CF-Can-Parellada';
                 fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
             }
-            row.innerHTML = `
-                <input type="number" placeholder="NUM" value="${dorsal || ''}" class="player-dorsal">
-                <input type="text" placeholder="DNI" class="player-dni">
-                <div class="player-nom-container">
-                    ${fotoHtml}
-                    <input type="text" placeholder="NOM" value="${nom || ''}" class="player-nom">
-                </div>
-                <div class="player-actions">
-                    <div class="gol-group">
-                        <label>⚽ Gols:</label>
-                        <input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0">
-                    </div>
-                    <div class="toggle-titular-suplent">
-                        <button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button>
-                        <button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button>
-                    </div>
-                </div>
-                <div class="targetes-section">
-                    <label class="targetes-label">🟨 AMONESTACIONS:</label>
-                    <div class="targetes-list"></div>
-                    <button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button>
-                </div>
-            `;
+            row.innerHTML = '<input type="number" placeholder="NUM" value="' + (dorsal || '') + '" class="player-dorsal"><input type="text" placeholder="DNI" class="player-dni"><div class="player-nom-container">' + fotoHtml + '<input type="text" placeholder="NOM" value="' + (nom || '') + '" class="player-nom"></div><div class="player-actions"><div class="gol-group"><label>⚽ Gols:</label><input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0"></div><div class="toggle-titular-suplent"><button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button><button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button></div></div><div class="targetes-section"><label class="targetes-label">🟨 AMONESTACIONS:</label><div class="targetes-list"></div><button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button></div>';
             container.appendChild(row);
         }
-
         function marcarTitular(btn) {
-            var row = btn.closest('.player-row');
-            var tipus = row.dataset.tipus;
-            if (row.dataset.condicio === 'titular') {
-                btn.classList.remove('active-titular');
-                row.dataset.condicio = '';
-                return;
-            }
+            var row = btn.closest('.player-row'); var tipus = row.dataset.tipus;
+            if (row.dataset.condicio === 'titular') { btn.classList.remove('active-titular'); row.dataset.condicio = ''; return; }
             var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
-            var titulars = 0;
-            rows.forEach(function(r) { if (r.dataset.condicio === 'titular') titulars++; });
-            if (titulars >= 11) {
-                mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️');
-                marcarSuplent(btn);
-                return;
-            }
-            row.querySelector('.btn-titular').classList.add('active-titular');
-            row.querySelector('.btn-suplent').classList.remove('active-suplent');
-            row.dataset.condicio = 'titular';
+            var titulars = 0; rows.forEach(function(r) { if (r.dataset.condicio === 'titular') titulars++; });
+            if (titulars >= 11) { mostrarAvis('⚠️ Ja hi ha 11 titulars!', 'Els següents jugadors han de ser SUPLENTS.', '⚠️'); marcarSuplent(btn); return; }
+            row.querySelector('.btn-titular').classList.add('active-titular'); row.querySelector('.btn-suplent').classList.remove('active-suplent'); row.dataset.condicio = 'titular';
         }
-
         function marcarSuplent(btn) {
             var row = btn.closest('.player-row');
-            if (row.dataset.condicio === 'suplent') {
-                btn.classList.remove('active-suplent');
-                row.dataset.condicio = '';
-                return;
-            }
-            row.querySelector('.btn-suplent').classList.add('active-suplent');
-            row.querySelector('.btn-titular').classList.remove('active-titular');
-            row.dataset.condicio = 'suplent';
+            if (row.dataset.condicio === 'suplent') { btn.classList.remove('active-suplent'); row.dataset.condicio = ''; return; }
+            row.querySelector('.btn-suplent').classList.add('active-suplent'); row.querySelector('.btn-titular').classList.remove('active-titular'); row.dataset.condicio = 'suplent';
         }
-
         function afegirTargeta(btn) {
             var targetesList = btn.parentElement.querySelector('.targetes-list');
-            var targeta = document.createElement('div');
-            targeta.className = 'targeta-item';
-            targeta.innerHTML = `
-                <select class="targeta-tipus" onchange="canviarTipusTargeta(this)">
-                    <option value="groga">🟨 Groga</option>
-                    <option value="roja">🟥 Roja directa</option>
-                    <option value="segona-groga">🟨🟨 Segona groga</option>
-                </select>
-                <input type="number" placeholder="Min'" class="targeta-minut" min="0" max="120">
-                <button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button>
-                <div class="motiu-targeta">
-                    <select class="targeta-motiu">
-                        <option value="">Motiu...</option>
-                        <option value="1-Subjectar">1-Subjectar</option>
-                        <option value="2-Empentar">2-Empentar</option>
-                        <option value="3-Mans">3-Mans</option>
-                        <option value="4-Traveta">4-Traveta</option>
-                        <option value="5-Protestar">5-Protestar</option>
-                        <option value="6-Desconsiderar">6-Desconsiderar</option>
-                        <option value="7-Distancia">7-Distancia</option>
-                        <option value="8-Perdre temps">8-Perdre temps</option>
-                        <option value="9-Reincidir faltes">9-Reincidir faltes</option>
-                    </select>
-                </div>
-                <div class="motiu-expulsio" style="display:none;">
-                    <label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label>
-                    <input type="text" class="targeta-motiu-expulsio" placeholder="Escriu el motiu de l'expulsió...">
-                </div>
-            `;
+            var targeta = document.createElement('div'); targeta.className = 'targeta-item';
+            targeta.innerHTML = '<select class="targeta-tipus" onchange="canviarTipusTargeta(this)"><option value="groga">🟨 Groga</option><option value="roja">🟥 Roja directa</option><option value="segona-groga">🟨 Doble groga</option></select><input type="number" placeholder="Min\'" class="targeta-minut" min="0" max="120"><button type="button" class="btn-remove-targeta" onclick="eliminarTargeta(this)">✕</button><div class="motiu-targeta"><select class="targeta-motiu"><option value="">Motiu...</option><option value="1-Subjectar">1-Subjectar</option><option value="2-Empentar">2-Empentar</option><option value="3-Mans">3-Mans</option><option value="4-Traveta">4-Traveta</option><option value="5-Protestar">5-Protestar</option><option value="6-Desconsiderar">6-Desconsiderar</option><option value="7-Distancia">7-Distancia</option><option value="8-Perdre temps">8-Perdre temps</option><option value="9-Reincidir faltes">9-Reincidir faltes</option></select></div><div class="motiu-expulsio" style="display:none;"><label style="color:#e74c3c; font-weight:bold; font-size:0.85rem; margin-bottom:5px; display:block;">⚠️ MOTIU EXPULSIÓ (obligatori):</label><input type="text" class="targeta-motiu-expulsio" placeholder="Escriu el motiu de l\'expulsió..."></div>';
             targetesList.appendChild(targeta);
         }
-
         function canviarTipusTargeta(select) {
-            var targeta = select.closest('.targeta-item');
-            var row = targeta.closest('.player-row');
+            var targeta = select.closest('.targeta-item'); var row = targeta.closest('.player-row');
             var motiuExpulsio = targeta.querySelector('.motiu-expulsio');
-            if (select.value === 'roja') {
-                targeta.style.borderLeft = '3px solid #e74c3c';
-                motiuExpulsio.style.display = 'block';
-                var btnAdd = row.querySelector('.btn-add-targeta');
-                btnAdd.disabled = true;
-                btnAdd.textContent = 'Jugador expulsat';
-                setTimeout(function() { motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
-            } else if (select.value === 'segona-groga') {
-                targeta.style.borderLeft = '3px solid #e74c3c';
-                motiuExpulsio.style.display = 'none';
-                var btnAdd = row.querySelector('.btn-add-targeta');
-                btnAdd.disabled = true;
-                btnAdd.textContent = 'Jugador expulsat';
-            } else {
-                targeta.style.borderLeft = '3px solid #f1c40f';
-                motiuExpulsio.style.display = 'none';
-                motiuExpulsio.querySelector('input').value = '';
-                var hayRoja = row.querySelectorAll('.targeta-tipus[value="roja"]').length > 0;
-                var btnAdd = row.querySelector('.btn-add-targeta');
-                if (hayRoja) {
-                    btnAdd.disabled = true;
-                    btnAdd.textContent = 'Jugador expulsat';
-                } else {
-                    btnAdd.disabled = false;
-                    btnAdd.textContent = '+ Afegir targeta';
-                }
-            }
+            if (select.value === 'roja') { targeta.style.borderLeft = '3px solid #e74c3c'; motiuExpulsio.style.display = 'block'; var btnAdd = row.querySelector('.btn-add-targeta'); btnAdd.disabled = true; btnAdd.textContent = 'Jugador expulsat'; setTimeout(function() { motiuExpulsio.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100); }
+            else if (select.value === 'segona-groga') { targeta.style.borderLeft = '3px solid #e74c3c'; motiuExpulsio.style.display = 'none'; var btnAdd = row.querySelector('.btn-add-targeta'); btnAdd.disabled = true; btnAdd.textContent = 'Jugador expulsat'; }
+            else { targeta.style.borderLeft = '3px solid #f1c40f'; motiuExpulsio.style.display = 'none'; motiuExpulsio.querySelector('input').value = ''; var hayRoja = row.querySelectorAll('.targeta-tipus[value="roja"]').length > 0; var btnAdd = row.querySelector('.btn-add-targeta'); if (hayRoja) { btnAdd.disabled = true; btnAdd.textContent = 'Jugador expulsat'; } else { btnAdd.disabled = false; btnAdd.textContent = '+ Afegir targeta'; } }
         }
-
         function eliminarTargeta(btn) {
-            var targeta = btn.closest('.targeta-item');
-            var row = targeta.closest('.player-row');
-            targeta.remove();
+            var targeta = btn.closest('.targeta-item'); var row = targeta.closest('.player-row'); targeta.remove();
             var hayRoja = row.querySelectorAll('.targeta-tipus[value="roja"]').length > 0;
             var btnAdd = row.querySelector('.btn-add-targeta');
-            if (hayRoja) {
-                btnAdd.disabled = true;
-                btnAdd.textContent = 'Jugador expulsat';
-            } else {
-                btnAdd.disabled = false;
-                btnAdd.textContent = '+ Afegir targeta';
-            }
+            if (hayRoja) { btnAdd.disabled = true; btnAdd.textContent = 'Jugador expulsat'; } else { btnAdd.disabled = false; btnAdd.textContent = '+ Afegir targeta'; }
         }
-
-        function inicialitzarFormulari() {
-            for (var i = 0; i < 3; i++) {
-                afegirFilaJugador('local');
-                afegirFilaJugador('visitant');
-            }
-        }
-
+        function inicialitzarFormulari() { for (var i = 0; i < 3; i++) { afegirFilaJugador('local'); afegirFilaJugador('visitant'); } }
         function recollirJugadors(tipus, incluirNoConvocats) {
             var rows = document.querySelectorAll('#jugadors' + (tipus === 'local' ? 'Local' : 'Visitant') + ' .player-row');
             var jugadors = [];
             rows.forEach(function(row) {
-                var dni = row.querySelector('.player-dni').value;
-                var dorsal = row.querySelector('.player-dorsal').value;
-                var nom = row.querySelector('.player-nom').value;
-                var gols = parseInt(row.querySelector('.player-gols').value) || 0;
-                var condicio = row.dataset.condicio || '';
+                var dni = row.querySelector('.player-dni').value; var dorsal = row.querySelector('.player-dorsal').value; var nom = row.querySelector('.player-nom').value;
+                var gols = parseInt(row.querySelector('.player-gols').value) || 0; var condicio = row.dataset.condicio || '';
                 if (!incluirNoConvocats && condicio !== 'titular' && condicio !== 'suplent') return;
                 var targetes = [];
-                row.querySelectorAll('.targeta-item').forEach(function(t) {
-                    targetes.push({
-                        tipus: t.querySelector('.targeta-tipus').value,
-                        minut: t.querySelector('.targeta-minut').value,
-                        motiu: t.querySelector('.targeta-motiu').value,
-                        motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value
-                    });
-                });
-                jugadors.push({
-                    dni: dni, dorsal: dorsal, nom: nom,
-                    gols: gols, condicio: condicio,
-                    targetes: targetes
-                });
+                row.querySelectorAll('.targeta-item').forEach(function(t) { targetes.push({ tipus: t.querySelector('.targeta-tipus').value, minut: t.querySelector('.targeta-minut').value, motiu: t.querySelector('.targeta-motiu').value, motiuExpulsio: t.querySelector('.targeta-motiu-expulsio').value }); });
+                jugadors.push({ dni: dni, dorsal: dorsal, nom: nom, gols: gols, condicio: condicio, targetes: targetes });
             });
             return jugadors;
         }
