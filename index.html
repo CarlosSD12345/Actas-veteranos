@@ -770,7 +770,7 @@
     var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
     var row = document.createElement('div'); row.className = 'player-row'; row.dataset.tipus = tipus;
     
-    // Si no nos pasan el nombre, lo cogemos de la variable global o dejamos vacío para evitar errores
+    // Si no nos pasan el equipo, usamos la global (para borradores) o vacío (para filas nuevas)
     var equipoNombre = equipoNombreOpcional || (tipus === 'local' ? equipoActualLocal : equipoActualVisitant) || '';
     
     var fotoHtml = '';
