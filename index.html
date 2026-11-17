@@ -490,7 +490,10 @@
         function aplicarJugadorsEquip(tipus, jugadorsGuardats) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             container.innerHTML = '';
-            jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null); });
+            // Necesitamos saber el equipo aquí. Podemos obtenerlo del DOM o pasarlo.
+// Lo más fácil es leerlo del título del equipo en el DOM
+var equipoNombre = document.getElementById('nombre-' + (tipus === 'local' ? 'local' : 'visitant')).textContent;
+jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null, equipoNombre); });
             setTimeout(function() {
                 var rows = container.querySelectorAll('.player-row');
                 rows.forEach(function(row, idx) {
