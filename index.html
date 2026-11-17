@@ -750,19 +750,19 @@
             }
         }
         function carregarJugadorsEquip(equip, tipus) {
-            // Guardamos el nombre del equipo en la variable global correspondiente
-            if (tipus === 'local') equipoActualLocal = equip;
-            else equipoActualVisitant = equip;
+    // Guardamos el nombre del equipo EN SÍNCRONO antes de hacer el fetch
+    if (tipus === 'local') equipoActualLocal = equip;
+    else equipoActualVisitant = equip;
 
-            fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
-            .then(r => r.json()).then(data => {
-                var jugadors = data[equip] || [];
-                var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
-                container.innerHTML = '';
-                // Pasamos el nombre del equipo como 5º parámetro
-                jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equip); });
-            }).catch(function() { });
-        }
+    fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
+    .then(r => r.json()).then(data => {
+        var jugadors = data[equip] || [];
+        var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+        container.innerHTML = '';
+        // Ahora sí podemos pasar el equipo porque ya está guardado en la global
+        jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equip); });
+    }).catch(function() { });
+}
         function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
         
         // FUNCIÓN MEJORADA PARA SOPORTAR LAS NUEVAS CARPETAS DE FOTOS
