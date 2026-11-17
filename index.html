@@ -254,6 +254,10 @@
         };
         var escudosBaseURL = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/escudos/';
         var cuerpoTecnicoDB = {};
+        
+        // NUEVO: Variables para guardar el equipo actual y que las fotos carguen bien
+        var equipoActualLocal = '';
+        var equipoActualVisitant = '';
 
         function togglePassword() {
             var input = document.getElementById('password-arbitro');
@@ -490,10 +494,9 @@
         function aplicarJugadorsEquip(tipus, jugadorsGuardats) {
             var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
             container.innerHTML = '';
-            // Necesitamos saber el equipo aquí. Podemos obtenerlo del DOM o pasarlo.
-// Lo más fácil es leerlo del título del equipo en el DOM
-var equipoNombre = document.getElementById('nombre-' + (tipus === 'local' ? 'local' : 'visitant')).textContent;
-jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null, equipoNombre); });
+            // Usamos las variables globales para saber de qué equipo son los jugadores al recuperar borrador
+            var equipoNombre = (tipus === 'local') ? equipoActualLocal : equipoActualVisitant;
+            jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom, j.foto || null, equipoNombre); });
             setTimeout(function() {
                 var rows = container.querySelectorAll('.player-row');
                 rows.forEach(function(row, idx) {
@@ -747,34 +750,46 @@ jugadorsGuardats.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nom,
             }
         }
         function carregarJugadorsEquip(equip, tipus) {
+            // Guardamos el nombre del equipo en la variable global correspondiente
+            if (tipus === 'local') equipoActualLocal = equip;
+            else equipoActualVisitant = equip;
+
             fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
             .then(r => r.json()).then(data => {
                 var jugadors = data[equip] || [];
                 var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
                 container.innerHTML = '';
+                // Pasamos el nombre del equipo como 5º parámetro
                 jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equip); });
             }).catch(function() { });
         }
         function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
-        function afegirFilaJugador(tipus, dorsal, nom, foto, equipoNombre) {
-    var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
-    var row = document.createElement('div'); row.className = 'player-row'; row.dataset.tipus = tipus;
-    var fotoHtml = '';
-    if (foto && equipoNombre) {
-        // Determinar carpeta según el nombre exacto del equipo
-        var carpeta = '';
-        if (equipoNombre === 'C.F. Cerdanyola') carpeta = 'CF-Cerdanyola';
-        else if (equipoNombre === 'C.F. Can Parellada') carpeta = 'CF-Can-Parellada';
-        else if (equipoNombre === 'A.V. Ripollet') carpeta = 'AV-Ripollet';
-        else if (equipoNombre === 'C.E. Bigues i Riells') carpeta = 'CE-Bigues';
         
-        if (carpeta) {
-            fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+        // FUNCIÓN MEJORADA PARA SOPORTAR LAS NUEVAS CARPETAS DE FOTOS
+        function afegirFilaJugador(tipus, dorsal, nom, foto, equipoNombreOpcional) {
+            var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
+            var row = document.createElement('div'); row.className = 'player-row'; row.dataset.tipus = tipus;
+            
+            // Si no nos pasan el nombre, lo cogemos de la variable global
+            var equipoNombre = equipoNombreOpcional || (tipus === 'local' ? equipoActualLocal : equipoActualVisitant);
+            
+            var fotoHtml = '';
+            if (foto && equipoNombre) {
+                var carpeta = '';
+                if (equipoNombre === 'C.F. Cerdanyola') carpeta = 'CF-Cerdanyola';
+                else if (equipoNombre === 'C.F. Can Parellada') carpeta = 'CF-Can-Parellada';
+                else if (equipoNombre === 'A.V. Ripollet') carpeta = 'AV-Ripollet';
+                else if (equipoNombre === 'C.E. Bigues i Riells') carpeta = 'CE-Bigues';
+                
+                if (carpeta) {
+                    fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+                }
+            }
+            
+            row.innerHTML = '<input type="number" placeholder="NUM" value="' + (dorsal || '') + '" class="player-dorsal"><input type="text" placeholder="DNI" class="player-dni"><div class="player-nom-container">' + fotoHtml + '<input type="text" placeholder="NOM" value="' + (nom || '') + '" class="player-nom"></div><div class="player-actions"><div class="gol-group"><label>⚽ Gols:</label><input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0"></div><div class="toggle-titular-suplent"><button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button><button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button></div></div><div class="targetes-section"><label class="targetes-label">🟨 AMONESTACIONS:</label><div class="targetes-list"></div><button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button></div>';
+            container.appendChild(row);
         }
-    }
-    row.innerHTML = '<input type="number" placeholder="NUM" value="' + (dorsal || '') + '" class="player-dorsal"><input type="text" placeholder="DNI" class="player-dni"><div class="player-nom-container">' + fotoHtml + '<input type="text" placeholder="NOM" value="' + (nom || '') + '" class="player-nom"></div><div class="player-actions"><div class="gol-group"><label>⚽ Gols:</label><input type="number" class="player-gols" min="0" max="20" value="0" placeholder="0"></div><div class="toggle-titular-suplent"><button type="button" class="btn-titular" onclick="marcarTitular(this)">Titular</button><button type="button" class="btn-suplent" onclick="marcarSuplent(this)">Suplent</button></div></div><div class="targetes-section"><label class="targetes-label">🟨 AMONESTACIONS:</label><div class="targetes-list"></div><button type="button" class="btn-add-targeta" onclick="afegirTargeta(this)">+ Afegir targeta</button></div>';
-    container.appendChild(row);
-}
+
         function marcarTitular(btn) {
             var row = btn.closest('.player-row'); var tipus = row.dataset.tipus;
             if (row.dataset.condicio === 'titular') { btn.classList.remove('active-titular'); row.dataset.condicio = ''; return; }
