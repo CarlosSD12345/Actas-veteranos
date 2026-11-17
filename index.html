@@ -749,7 +749,7 @@
                 var jugadors = data[equip] || [];
                 var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
                 container.innerHTML = '';
-                jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto); });
+                jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equip); });
             }).catch(function() { });
         }
         function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
