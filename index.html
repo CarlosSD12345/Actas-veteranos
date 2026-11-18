@@ -783,6 +783,9 @@
         
         if (carpeta) {
             fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+        // Construimos la URL completa primero y luego la codificamos suavemente
+var urlFoto = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + foto;
+fotoHtml = '<img src="' + encodeURI(urlFoto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
         }
     }
     
