@@ -783,17 +783,27 @@
     
     var fotoHtml = '';
     if (foto && equipoNombre) {
-    var carpeta = '';
-    if (equipoNombre === 'C.F. Cerdanyola') carpeta = 'CF-Cerdanyola';
-    else if (equipoNombre === 'C.F. Can Parellada') carpeta = 'CF-Can-Parellada';
-    else if (equipoNombre === 'A.V. Ripollet') carpeta = 'AV-Ripollet';
-    else if (equipoNombre === 'C.E. Bigues i Riells') carpeta = 'CE-Bigues';
+    // Mapeo robusto: normalizamos el nombre para comparar sin importar mayúsculas/acentos
+    var nombreNormalizado = equipoNombre.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // quita tildes
+        .replace(/[^a-z0-9]/g, '');  // quita todo lo que no sea letra o número
+    
+    var mapaCarpetas = {
+        'cfcerdanyola': 'CF-Cerdanyola',
+        'cfcanparellada': 'CF-Can-Parellada',
+        'avripollet': 'AV-Ripollet',
+        'cebiguesiriells': 'CE-Bigues'
+    };
+    
+    var carpeta = mapaCarpetas[nombreNormalizado];
+    
+    // DEBUG: para ver qué está llegando (puedes borrarlo después)
+    console.log('Equipo:', equipoNombre, '| Normalizado:', nombreNormalizado, '| Carpeta:', carpeta);
     
     if (carpeta) {
         fotoHtml = '<img src="https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + encodeURIComponent(foto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
-        // Construimos la URL completa primero y luego la codificamos suavemente
-        var urlFoto = 'https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/fotos-jugadores/' + carpeta + '/' + foto;
-        fotoHtml = '<img src="' + encodeURI(urlfoto) + '" class="player-foto" onerror="this.style.display=\'none\'">';
+    } else {
+        console.error('❌ No se encontró carpeta para el equipo:', equipoNombre);
     }
 }
     
