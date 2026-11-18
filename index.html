@@ -750,17 +750,25 @@
             }
         }
         function carregarJugadorsEquip(equip, tipus) {
-    // Guardamos el nombre del equipo EN SÍNCRONO antes de hacer el fetch
+    // 1. Guardamos el equipo en la global SIEMPRE
     if (tipus === 'local') equipoActualLocal = equip;
     else equipoActualVisitant = equip;
 
+    // 2. Hacemos el fetch
     fetch('https://raw.githubusercontent.com/CarlosSD12345/liga-pruebas/main/actasJugadores.json?t=' + Date.now())
     .then(r => r.json()).then(data => {
         var jugadors = data[equip] || [];
         var container = document.getElementById('jugadors' + (tipus === 'local' ? 'Local' : 'Visitant'));
         container.innerHTML = '';
-        // Ahora sí podemos pasar el equipo porque ya está guardado en la global
-        jugadors.forEach(function(j) { afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equip); });
+        
+        // 3. Usamos la variable GLOBAL para asegurar que llega el nombre correcto
+        // Esto evita problemas si 'equip' llegara vacío por alguna razón asíncrona
+        var equipoSeguro = (tipus === 'local') ? equipoActualLocal : equipoActualVisitant;
+        
+        jugadors.forEach(function(j) { 
+            // Pasamos explícitamente el equipo seguro como 5º parámetro
+            afegirFilaJugador(tipus, j.dorsal, j.nombre, j.foto, equipoSeguro); 
+        });
     }).catch(function() { });
 }
         function afegirJugador(tipus) { afegirFilaJugador(tipus, '', '', null); }
